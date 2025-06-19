@@ -1,0 +1,79 @@
+@use '../mixins/mixins' as mixin;
+@use '../theme/theme' as theme;
+
+.contact-page {
+    & > div {
+        padding: 2em;
+        max-width: 1600px;
+        margin: 0 auto;
+    }
+
+    .contact-header {
+        width: 50%;
+        margin: auto;
+        text-align: center;
+    }
+
+    .contact-content {
+        width: 100%;
+        max-width: 1300px;
+        margin: auto;   
+        display: grid;
+        grid-template-columns: 1fr 1fr; 
+        align-items: center;
+
+        .contact-image {
+            width: 95%;;
+            overflow: hidden;
+            height: 600px;
+            filter: drop-shadow(2px 1px 6px rgba(50, 50, 0, 0.5));
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%);
+            }
+        }
+
+        .contact-form {
+            form {
+                border-radius: theme.elements(--border-radius-xl);
+                background-color: theme.colours(--bg-lt-grey);
+                box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+            }
+
+            fieldset {
+                display: flex;
+                flex-direction: column;
+                border-radius: theme.elements(--border-radius-xl);
+
+                button {
+                    width: 200px;
+                }
+            }
+        }
+        
+        @include mixin.breakpoint(xl_1) {
+            max-width: 600px;
+            gap: 20px;
+            grid-template-columns: 1fr;
+            
+            .contact-image {
+                width: 100%;
+                height: 400px;
+
+                img {
+                    clip-path: polygon(0% 0%, 100% 0, 100% 74%, 51% 100%, 0 75%);
+                }
+            }
+        }
+        
+        @include mixin.breakpoint(sm) {
+            .contact-image {
+                width: 100%;
+                height: 300px;
+            }
+        }
+    }
+}

@@ -1,0 +1,691 @@
+@use '../mixins/mixins' as mixin;
+@use '../theme/theme' as theme;
+
+.admin-section {
+    max-width: 1400px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: theme.colours(--green);
+    
+    .admin-header {
+        margin: 0 0 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        border-bottom: 1px solid black;
+
+        span:first-child {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        span:last-child a{
+            display: flex;
+
+            svg {
+                height: 15px;
+                width: 15px;
+                margin: 0 10px;
+            }
+        }
+    }
+
+    .admin-buttons {
+        padding: 0 0 20px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        border-bottom: 1px solid black;
+
+        &.admin-login-form {
+            grid-template-columns: 1fr;
+
+            form.login-form {
+                width: 50%;
+                margin: auto;
+
+                legend {
+                    font-size: 1.5rem;
+                    font-weight: bold;
+                    text-align: center;
+                }
+
+                .login-form-footer {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                }
+            }
+
+            label[for="remember"] {
+                cursor: pointer;
+            }
+        }
+
+        .admin-button {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid black;
+            border-radius: 5px;
+            background-color: theme.colours(--bg-lt-grey);
+            cursor: pointer;
+            margin: 0 50px;
+            transition: background-color 0.3s ease;
+
+            &:hover {
+                background-color: theme.colours(--bg-grey);
+            }
+
+            svg {
+                width: 100px;
+                height: 100px;
+            }
+
+            .section-name {
+                font-size: 1.5rem;
+                font-weight: bold;
+                color: theme.colours(--black);
+            }
+        }
+
+        @include mixin.breakpoint(md) {
+            .admin-button {
+                margin: 0 20px;
+
+                svg {
+                    width: 30px;
+                    height: 30px;
+                }
+
+                .section-name {
+                    font-size: 1rem;
+                }
+            }
+        }
+    }
+
+    #admin-content {
+        max-width: 1000px;
+        margin: auto;
+        height: 115vh;
+    }
+
+    #admin-classes-section {
+        height: 90%;
+    }
+
+    #admin-settings-section {
+        height: 90%;
+        
+        @include mixin.breakpoint(lg) {
+            .content {
+                gap: unset;
+            }
+        }
+    }
+
+    .content {
+        display: grid;
+        grid-template-columns: 30% auto;
+        gap: 20px;
+        height: 100%;
+
+        @include mixin.breakpoint(lg) {
+            grid-template-columns: auto 90%;
+            gap: 0;
+        }
+    }
+
+    .content-list {
+        padding: 0 20px;
+        max-height: 100%;
+        z-index: 9;
+        border-right: 1px solid black;
+
+        .mobile-list-expand {
+            opacity: 0;
+            visibility: hidden;
+            border-top: 1px solid black;
+            border-right: 1px solid black;
+            border-bottom: 1px solid black;
+            border-left: none;
+            background-color: theme.colours(--bg-dk-green);
+            width: 30px;
+            height: 30px;
+            position: absolute;
+            left: 0;
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+            transition: left 0.3s ease-in-out; 
+            
+            @include mixin.breakpoint(lg) {
+                opacity: 1;
+                visibility: visible;
+
+                &.active {
+                    left: 186px;
+                    z-index: 11;
+                }
+            }
+        }
+
+        .content-list-inner {
+            display: block;
+            min-height: 20px;
+
+            .content-list-item {
+                cursor: pointer;
+                padding: 10px;
+                margin: 5px 0;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-radius: 5px;
+                border: 1px solid black;
+                background-color: theme.colours(--bg-lt-grey);
+                transition: background-color 0.3s ease;
+
+                .svg-icon, svg {
+                    height: 20px;
+                    width: 20px;
+                }
+                
+                &:hover {
+                    background-color: theme.colours(--bg-grey);
+                }
+            }
+
+            @include mixin.breakpoint(lg) {
+                position: absolute;
+                left: -186px;
+                width: 175px;
+                padding: 5px;
+                background-color: theme.colours(--bg-dk-green);
+                border: 1px solid black;
+                border-bottom-right-radius: 5px;
+                transition: left 0.3s ease-in-out;
+                
+                &.active {
+                    left: 0;
+                    z-index: 10;
+                }
+            }
+        }
+        
+        @include mixin.breakpoint(lg) {
+            border-right: unset;
+        }
+    }
+
+    //class admin form
+    .classes-content {
+        position: relative;
+
+        .section-content-item {
+            .content-heading {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-bottom: 1px solid black;
+                padding: 10px;
+                margin: 0 0 20px;
+            }
+
+            .class-content {
+                margin: auto;
+                display: block;
+
+                &.hide {
+                    display: none;
+                }
+            }
+            
+            .content-list-item {
+                padding: 10px;
+                margin: 5px 0;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-radius: 5px;
+                border: 1px solid black;
+                background-color: theme.colours(--bg-lt-grey);
+                transition: background-color 0.3s ease;
+
+                .item-buttons {
+                    display: flex;
+                    gap: 10px;
+
+                    .edit,
+                    .delete {
+                        cursor: pointer;
+                        padding: 0;
+                        margin: 0;
+                        width: 20px;
+                        height: 20px;
+                        display: flex;
+                        justify-content: center;
+
+                        .svg-icon {
+                            width: 30px;
+                            height: 30px;
+                            margin: 1px;
+                        }
+
+                        svg {
+                            height: 20px;
+                            width: 20px;
+                        }
+                    }
+
+                    .delete {
+                        fill: theme.colours(--danger);
+                    }
+                }
+            }
+        }
+        
+        .section {
+            top: 0;
+            left: 0;
+            width: 100%;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+
+            &.active {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            & > div {
+                margin-bottom: 50px;
+            }
+
+            button {
+                cursor: pointer;
+                float: right;
+            }
+        }
+        
+        .form {
+            top: -50px;
+            left: 0;
+            width: 100%;
+            display: none;
+            position: relative;
+            
+            &.active {
+                display: block;
+            }
+
+            > div {
+                margin: auto;
+                display: grid;
+                max-width: 600px;
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .jp-image-preview {
+                width: 50px;
+                height: 50px;
+                // margin: 10px auto;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                }
+            }
+
+            .classes-input {
+                width: 100%;
+                margin: 10px auto;
+                grid-column: 1 / span 2;
+
+                &:nth-child(2) {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                }
+            }
+        }
+
+        .section--password {
+            .form {
+                display: block;
+                top: 60px;
+            }
+        }
+    }
+
+    .settings-content {
+        position: relative;
+
+        .section-content-item {
+            .content-heading {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-bottom: 1px solid black;
+                padding: 10px;
+                margin: 0 0 20px;
+                
+                @include mixin.breakpoint(lg) {
+                    margin: 0 0 10px;
+                }
+            }
+
+            .content-list {
+                margin: auto;
+                display: block;
+                max-width: 600px;
+                z-index: 1;
+                border: none;
+
+                &.hide {
+                    display: none;
+                }
+
+                
+                @include mixin.breakpoint(lg) {
+                    padding: 0;
+                }
+            }
+            
+            .content-list-item {
+                padding: 10px;
+                margin: 5px 0;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-radius: 5px;
+                border: 1px solid black;
+                background-color: theme.colours(--bg-lt-grey);
+                transition: background-color 0.3s ease;
+
+                .item-buttons {
+                    display: flex;
+                    gap: 10px;
+
+                    .edit,
+                    .delete {
+                        cursor: pointer;
+                        padding: 0;
+                        margin: 0;
+                        width: 20px;
+                        height: 20px;
+                        display: flex;
+                        justify-content: center;
+
+                        .svg-icon {
+                            width: 30px;
+                            height: 30px;
+                            margin: 1px;
+                        }
+
+                        svg {
+                            height: 20px;
+                            width: 20px;
+                        }
+                    }
+
+                    .delete {
+                        fill: theme.colours(--danger);
+                    }
+                }
+
+                &--prices {
+                    > div {
+                        display: grid;
+                        grid-template-columns: repeat(2, 50px) auto;
+                        gap: 5px;
+                    }
+
+                    .payg {
+                        span:first-of-type {
+                            text-transform: uppercase;
+                            font-weight: bold;
+                        }
+                    }
+
+                    .term {
+                        span:first-of-type {
+                            text-transform: capitalize;
+                            font-weight: bold;
+                        }
+                    }
+                }
+            }
+        }
+        
+        .section {
+            top: 0;
+            left: 0;
+            width: 100%;
+            visibility: hidden;
+            opacity: 0;
+            position: absolute;
+            transition: opacity 0.3s ease-in-out;
+
+            &.active {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            // & > div {
+            //     margin-bottom: 50px;
+                
+            //     @include mixin.breakpoint(lg) {
+            //         margin-bottom: 20px;
+            //     }
+            // }
+
+            button {
+                cursor: pointer;
+            }
+        }
+        
+        .form {
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: none;
+            
+            &.active {
+                top: 50px;
+                display: block;
+            }
+
+            > div {
+                margin: auto;
+                display: grid;
+                max-width: 600px;
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .settings-input {
+                width: 100%;
+                margin: 10px auto;
+                grid-column: 1 / span 2;
+
+                &--button {
+                    display: flex;
+                    justify-content: end;
+                    align-items: end;
+                    grid-column: 2;
+                }
+            }
+        }
+
+        .section--password {
+            .form {
+                display: block;
+                top: 60px;
+            }
+        }
+    }
+
+    .info-panel {
+        padding: 0 20px;
+        
+        @include mixin.breakpoint(lg) {
+            padding: unset;
+        }
+    }
+
+    .panel-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid black;
+        padding: 10px 0;
+
+        h2 {
+            margin: 0;
+        }
+
+        .panel-category b {
+            margin-right: 20px;
+        }
+        
+        @include mixin.breakpoint(lg) {
+            display: grid;
+            grid-template-columns: 75% auto;
+
+            .panel-category {
+                grid-column: 1;
+                grid-row: 2;
+            }
+
+            .class-buttons {
+                justify-content: end;
+            }
+        }
+    }
+
+    .panel-description {
+        margin: 10px 0;
+
+        > span {
+            font-weight: bold;
+        }
+    }
+
+    .panel-options {
+        margin: 25px 0;
+
+        .options-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+        }
+    }
+
+    .options-container .option {
+        display: grid;
+        grid-template-columns: 35% auto 8%;
+        align-items: center;
+        padding: 10px;
+        margin: 5px 0;
+        border-radius: 5px;
+        border: 1px solid black;
+        background-color: theme.colours(--bg-lt-grey);
+
+        @include mixin.breakpoint(lg) {
+            grid-template-columns: auto 20%;
+
+            .panel-header {
+                display: none;
+            }
+
+            .option-buttons {
+                justify-content: end;
+            }
+
+            .option-schedule {
+                display: none;
+            }
+        }
+    }
+}
+
+.class-buttons,
+.option-buttons {
+    display: flex;
+    gap: 10px;
+
+    .edit, .delete {
+        cursor: pointer;
+        padding: 0;
+        margin: 0;
+        width: 20px;
+        height: 20px;
+        display: flex;
+        justify-content: center;
+        
+        .svg-icon {
+            width: 30px;
+            height: 30px;
+            margin: 1px;
+        }
+
+        svg {
+            height: 20px;
+            width: 20px;
+        }
+    }
+
+    .delete {
+        fill: theme.colours(--danger);
+    }
+}
+
+.add-button {
+    padding: 0;
+    margin: 0;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .svg-icon {
+        width: 30px;
+        height: 30px;
+        margin: 1px;
+    }
+
+    svg {
+        height: 100%;
+        width: 100%;
+    }
+}
+
+.options-container .options-form {
+    margin: 10px 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+
+    div:last-of-type {
+        grid-row: 4;
+        grid-column: 1 / span 2;
+        display: flex;
+        justify-content: end;
+    }
+
+    @include mixin.breakpoint(lg) {
+        grid-template-columns: 1fr;
+        
+        div:last-of-type {
+            grid-row: 6;
+            grid-column: 1;
+        }
+    }
+}

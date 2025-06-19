@@ -1,0 +1,65 @@
+@use 'sass:color';
+@use 'sass:map';
+
+// @font-face {
+//     font-family: 'amsterdam-four';
+//     src: url(../../../fonts/AmsterdamFourSlant.ttf);
+// }
+
+// $font-family: (
+//     --amsterdam: 'amsterdam-four',
+// );
+
+// @function font($key) {
+//     $map: map.get($font-family, $key);
+//     @return $map;
+// }
+
+$theme-colours: (
+    --green: #7BB4A5,
+    --grey: #A6A6A6,
+    --navy: #283044,
+
+    --bg-grey: #b8b6b6,
+    --bg-lt-grey: #cdcccc,
+    --stl-grey: #edeaea,
+    
+    --bg-dk-green: #639386,
+    --bg-lt-green: #7eb9a9,
+
+    --orange: #b28a6d,
+
+    --danger: #cb5959,
+    --warning: #ffcc00,
+    --success: #43bb43,
+
+    --map-marker: #e56666,
+
+    --form-input-gry: #f3f1f1,
+
+    --black: #000000,
+    --white: #ffffff,
+
+    --success-banner: #579357,
+);
+
+@function colours($key) {
+    $map: map.get($theme-colours, $key);
+    @return $map;
+}
+
+// @function rgba($colour, $alpha) {
+//     @return rgba(red(color.$colour), green(color.$colour), blue(color.$colour), $alpha);
+// }
+
+$theme-elements : (
+    --border-radius-sm: 2px,
+    --border-radius-md: 5px,
+    --border-radius-lg: 8px,
+    --border-radius-xl: 10px,
+);
+
+@function elements($key) {
+    $map: map.get($theme-elements, $key);
+    @return $map;
+}

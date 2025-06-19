@@ -1,0 +1,248 @@
+@use '../mixins/mixins' as mixin;
+@use '../theme/theme' as theme;
+
+.banner {
+    width: 100%;
+    margin: 0;
+
+    .heading {
+        position: relative;
+        z-index: 10;
+        background-color: theme.colours(--green);
+        
+        .desktop-nav {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+
+            .tag-line {
+                z-index: 10;
+                position: relative;
+                margin: 0 50px;
+    
+                h1 {
+                    font-size: 1.2rem;
+                }
+            }
+    
+            nav {
+                align-items: center;
+                padding: 10px 0;
+                margin: 0 100px 0;
+                
+                ul {
+                    li {
+                        display: inline;
+                        margin: 0 25px;
+                    }
+                }
+    
+                @include mixin.breakpoint(xl_1) {
+                    display: none;
+                }
+            }
+        }
+    }
+    
+    .mobile-nav {
+        display: none;
+        background-color: theme.colours(--green);
+        
+        .mobile-nav-btn {
+            margin: 10px;
+            width: 35px;
+            height: 36px;
+            z-index: 10;
+            position: absolute;
+            border-radius: 6px;
+            cursor: pointer;
+            border: 1px solid black;
+            right: 5px;
+            top: -5px;
+
+            .line {
+                position: absolute;
+                width: 40%;
+                height: 0;
+                left: 0;
+                right: 0;
+                margin: auto;
+                border: 1px solid black;
+            }
+
+            .top-line {
+                top: 0;
+                bottom: 10px;
+                transform: rotate(0deg);
+                transition: all 0.5s;
+            }
+
+            .middle-line {
+                top: 0;
+                bottom: 0;
+                opacity: 1;
+                transition: all 0.5s;
+            }
+
+            .bottom-line {
+                top: 10px;
+                bottom: 0;
+                transform: rotate(0deg);
+                transition: all 0.5s;
+            }
+        }
+
+        .mobile-nav-links {
+            position: absolute;
+            left: 0;
+            padding: 20px 0;
+            width: 100%;
+            z-index: 9;
+            background-color: theme.colours(--green);
+            top: -85px;
+            opacity: 0;
+            transition: all 0.5s ease-in-out;
+
+            &.active {
+                top: 40px;
+                opacity: 1;
+            }
+
+            div {
+                display: flex;
+                align-items: center;
+                padding: 0;
+
+                &:hover {
+                    background-color: theme.colours(--bg-dk-green);
+                }
+                
+                a {
+                    display: block;
+                    width: 100%;
+                    text-decoration: none;
+                    font-size: 1rem;
+                    padding: 10px 30px;
+
+                }
+            }
+        }
+
+        @include mixin.breakpoint(xl_1) {
+            display: block;
+        }
+    }
+}
+
+.hero-banner {
+    display: flex;
+    justify-content: space-between;
+
+    max-width: 1600px;
+    margin: 0 auto;
+
+    .hero-logo {
+        display: flex;
+        justify-content: center;
+        
+        img {
+            width: 350px;
+            height: auto;
+        }
+    }
+    
+    .hero-images {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 800px;
+        position: relative;
+        
+        .hero-image {
+            width: 250px;
+            height: 250px;
+            position: relative;
+            box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.2);
+
+            img {
+                width: 100%;
+                height: 100%;
+                border-radius: 5px;
+            }
+
+            .overlay {
+                top: 0;
+                left: 0;
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(255, 255, 255, 0.3);
+            }
+        }
+
+        .hero-image:nth-child(1) {
+            top: 18px;
+            left: 40px;
+            transform: rotate(-15deg) scale(0.9);
+            z-index: 1;
+        }
+
+        .hero-image:nth-child(2) {
+            z-index: 2;
+        }
+        .hero-image:nth-child(3) {
+            top: 18px;
+            right: 40px;
+            transform: rotate(15deg) scale(0.9);
+            z-index: 1;
+        }
+    }
+
+    // @include mixin.breakpoint(xl) {
+    //     flex-direction: column;
+    //     align-items: center;
+    // }
+
+    
+    @include mixin.breakpoint(xl) {
+        .hero-logo {
+            img {
+                width: 300px;
+            }
+        }
+
+        .hero-images {
+            width: 600px;
+
+            .hero-image {
+                width: 200px;
+                height: 200px;
+            }
+        }
+    }
+    
+    @include mixin.breakpoint(xl_1) {
+        justify-content: space-around;
+
+        .hero-logo {
+            img {
+                width: 150px;
+            }
+        }
+
+        .hero-images {
+            width: unset;
+
+            .hero-image {
+                width: 100px;
+                height: 100px;
+            }
+        }
+    }
+
+    @include mixin.breakpoint(sm_2) {
+        flex-direction: column;
+        align-items: center;
+    }
+}

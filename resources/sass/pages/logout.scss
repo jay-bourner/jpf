@@ -1,0 +1,37 @@
+@use '../mixins/mixins' as mixin;
+@use '../theme/theme' as theme;
+
+.logout-section {
+    max-width: 1400px;
+    width: 100%;
+    margin: 20px auto;
+    height: 45vh;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: theme.colours(--bg-grey);
+    
+    h2 {
+        padding: 0 20px;
+        border-bottom: 1px solid black;
+    }
+
+    .logout-message {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+        font-size: 1.5rem;
+        flex-direction: column;
+        gap: 35px;
+
+        svg {
+            width: 100px;
+            height: 100px;
+            fill: theme.colours(--success);
+        }
+    }
+
+    @include mixin.breakpoint(2xl) {
+        width: 95%;
+    }
+}

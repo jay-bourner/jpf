@@ -1,0 +1,57 @@
+@use '../mixins/mixins' as mixin;
+@use '../theme/theme' as theme;
+
+footer {
+    width: 100%;
+    background-color: theme.colours(--bg-grey);
+
+    .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        width: 80%;
+        margin: auto;
+        padding: 20px 0;
+        gap: 20px;
+    
+        > div {
+            padding: 0 20px;
+        }
+
+        .copyright {
+            padding: 20px 0;
+        }
+        
+        .find-me {
+            nav {
+                display: flex;
+                justify-content: start;
+                gap: 20px;
+                
+                @include mixin.breakpoint(sm) {
+                    justify-content: center;
+                }
+            }
+        }
+
+        nav > div {
+            margin: 5px 0;
+        }
+    
+        @include mixin.breakpoint(xl_1) {
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: auto auto;
+    
+            > div:nth-child(2), > div:nth-child(4) {
+                text-align: right;
+            }
+        }
+        
+        @include mixin.breakpoint(sm) {
+            grid-template-columns: 1fr;
+
+            > div {
+                text-align: center !important;
+            }
+        }
+    }
+}
