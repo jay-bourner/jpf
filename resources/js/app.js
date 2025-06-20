@@ -6,7 +6,7 @@ import '../sass/common/main.scss';
 import '../sass/common/footer.scss';
 
 // // pages specific files
-// import '../sass/pages/home.scss';
+import '../sass/pages/home.scss';
 // import '../sass/pages/contact.scss';
 // import '../sass/pages/classes.scss';
 // import '../sass/pages/admin.scss';

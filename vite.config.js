@@ -1,8 +1,12 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 
+const isProduction = process.env.NODE_ENV == 'production';
+
 export default defineConfig({
-    base: '/public',
+    build: {
+        sourcemap: true,
+    },
     plugins: [
         laravel({
             input: ['resources/js/app.js'],
