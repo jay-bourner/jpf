@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\ContactFormRequest; // Assuming you have a request class for validation
 
 class ContactController extends Controller
 {
@@ -22,9 +23,10 @@ class ContactController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function submit(ContactFormRequest $request)
     {
-        //
+        return redirect()->route('contact.index')
+            ->with('success', 'Your message has been sent successfully!');
     }
 
     /**

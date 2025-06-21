@@ -29,6 +29,8 @@ Route::get('/classes', [ClassesController::class, 'index'])
 
 Route::get('/contact', [ContactController::class, 'index'])
     ->name('contact.index');
+    
+Route::post('/contact/submit', [ContactController::class, 'submit']);
 
 Route::get('/admin', [AdminController::class, 'index'])
     ->name('admin.index');
