@@ -58,7 +58,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "dev": "vite build --watch",
+    "dev": "vite build --mode development --watch",
     "build": "vite build"
   },
   "keywords": [],
