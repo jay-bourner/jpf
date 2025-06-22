@@ -20,7 +20,7 @@
                             </div>
                         </div>
                     @else
-                        <form action="contact/submit" method="post" id="contact-form">
+                        <form action="{{ route('contact.submit') }}" method="post" id="contact-form">
                             @csrf
                             <div>
                                 <div class="jp-form-group @error('email') has-error @enderror">
