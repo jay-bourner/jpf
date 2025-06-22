@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -54,7 +55,7 @@ class HomeController extends Controller
                             'text' => 'View All Classes',
                             'link' => '/classes'
                         ],
-                        // 'prices' => $model_prices_prices->getPrice(['type' => 'payg']),
+                        'price' => DB::table('class_prices')->where('type', 'payg')->first(),
                         // 'term' => $model_prices_prices->getPrice(['type' => 'term'])
                     ],
                 ]
@@ -151,6 +152,8 @@ class HomeController extends Controller
                 ]
             ]
         );
+
+        // $data['prices'] = DB::table('class_prices')->where('type', 'payg')->first();
 
         return view('home.index', compact('data'));
     }

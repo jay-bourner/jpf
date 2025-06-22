@@ -1,11 +1,10 @@
-import './bootstrap';
-
-//sass common files
+// SASS Imports
+// common files
 import '../sass/common/banner.scss';
 import '../sass/common/main.scss';
 import '../sass/common/footer.scss';
 
-// // pages specific files
+// page specific files
 import '../sass/pages/home.scss';
 import '../sass/pages/contact.scss';
 // import '../sass/pages/classes.scss';
@@ -18,3 +17,11 @@ import '../sass/pages/contact.scss';
 // // features styles
 // import '../sass/features/popup.scss';
 // import '../sass/features/keyframes.scss';
+
+
+
+// JavaScript imports
+import './bootstrap';
+import { StartUp } from './common/StartUp';
+
+new StartUp();

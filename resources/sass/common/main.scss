@@ -31,20 +31,45 @@ Form Elements
 
 .jp-form-group {
     margin: 10px 0px;
+    position: relative;
 
-    .required {
-        &::before {
-            content: '*';
-            padding: 0 5px;
-            color: theme.colours(--danger);
-        }
-    }
+    // .required {
+    //     &::before {
+    //         content: '*';
+    //         padding: 0 5px;
+    //         color: theme.colours(--danger);
+    //     }
+    // }
 
     &.jp-form-footer {
         display: flex;
         justify-content: end;
         align-items: center;
     }
+
+    &.has-error {
+        label {
+            font-weight: bold;
+            color: theme.colours(--danger);
+        }
+        input, textarea {
+            border: 2px solid theme.colours(--danger);
+        }
+    }
+
+    span.warning {
+        position:  absolute;
+        right: 5px;
+        top: 20px;
+        display: flex;
+        align-items: center;
+        fill: theme.colours(--danger);
+    }
+}
+
+.invalid-feedback {
+    font-weight: bold;
+    color: theme.colours(--danger);
 }
 
 input:not([type="file"]), select, textarea, button {

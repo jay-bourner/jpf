@@ -1,9 +1,6 @@
 @extends('layouts.master')
 
 @section('content')
-    @if(session('success'))
-        {{ session('success') }}
-    @endif
     <div class="contact-page">
         <div>
             <div class="contact-header">
@@ -15,39 +12,51 @@
                     <img src="image/contact/Jaime-chilling.jpg" alt="">
                 </div>
                 <div class="contact-form">
-                    <form action="contact/submit" method="post" id="contact-form">
-                        @csrf
-                        <fieldset>
-                            <div class="jp-form-group">
-                                <label for="name">Name:</label>
-                                <input value="{{ old('name') }}" class="jp-input jp-input--md @error('name') is-invalid @enderror" type="text" id="name" name="name" aria-describeedby="nameInput">
-                                @error('name')
-                                    <div id="nameInput" class="invalid-feedback">{{ $message }}</div>
-                                @enderror
+                    @if(session('success'))
+                        <div class="success-message">
+                            <span class="svg-icon svg-icon--check-circle"></span>
+                            <div class="success-text">
+                                {{ session('success') }}
                             </div>
-                            <div class="jp-form-group">
-                                <label for="email">Email: </label>
-                                <input value="{{ old('email') }}" class="jp-input jp-input--md @error('email') is-invalid @enderror" type="email" id="email" name="email" aria-describeedby="emailInput">
-                                @error('name')
-                                    <div id="emailInput" class="invalid-feedback">{{ $message }}</div>
-                                @enderror
+                        </div>
+                    @else
+                        <form action="contact/submit" method="post" id="contact-form">
+                            @csrf
+                            <div>
+                                <div class="jp-form-group @error('email') has-error @enderror">
+                                    <label for="name">Name:</label>
+                                    <input value="{{ old('name') }}" class="jp-input jp-input--md" type="text" id="name" name="name" aria-describeedby="nameInput">
+                                    @error('name')
+                                        <span class="svg-icon svg-icon--warning-circle warning"></span>
+                                        <div id="nameInput" class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="jp-form-group @error('email') has-error @enderror">
+                                    <label for="email">Email: </label>
+                                    <input value="{{ old('email') }}" class="jp-input jp-input--md" type="email" id="email" name="email" aria-describeedby="emailInput">
+                                    @error('email')
+                                        <span class="svg-icon svg-icon--warning-circle warning"></span>
+                                        <div id="emailInput" class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="jp-form-group">
+                                    <label for="email">Number:</label>
+                                    <input value="{{ old('tel') }}" class="jp-input jp-input--md" type="tel" id="tel" name="tel">
+                                </div>
+                                <div class="jp-form-group @error('message') has-error @enderror">
+                                    <label for="message">Message:</label>
+                                    <textarea class="jp-input" id="message" name="message" rows="20" aria-describeedby="messageInput">{{ old('message') }}</textarea>
+                                    @error('message')
+                                        <span class="svg-icon svg-icon--warning-circle warning"></span>
+                                        <div id="messageInput" class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="jp-form-group jp-form-footer">
+                                    <button class="jp-btn jp-btn--md jp-btn-grn" type="submit">Send</button>
+                                </div>
                             </div>
-                            <div class="jp-form-group">
-                                <label for="email">Number:</label>
-                                <input value="{{ old('tel') }}" class="jp-input jp-input--md" type="tel" id="tel" name="tel">
-                            </div>
-                            <div class="jp-form-group">
-                                <label for="message">Message:</label>
-                                <textarea class="jp-input @error('message') is-invalid @enderror" id="message" name="message" rows="20" aria-describeedby="messageInput">{{ old('message') }}</textarea>
-                                @error('name')
-                                    <div id="messageInput" class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="jp-form-group jp-form-footer">
-                                <button class="jp-btn jp-btn--md jp-btn-grn" type="submit">Send</button>
-                            </div>
-                        </fieldset>
-                    </form>
+                        </form>
+                    @endif
                 </div>
             </div>
         </div>

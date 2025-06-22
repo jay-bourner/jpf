@@ -37,16 +37,36 @@
         }
 
         .contact-form {
-            form {
-                border-radius: theme.elements(--border-radius-xl);
-                background-color: theme.colours(--bg-lt-grey);
-                box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
-            }
+            height: 700px;
+            border-radius: theme.elements(--border-radius-xl);
+            background-color: theme.colours(--bg-lt-grey);
+            box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
 
-            fieldset {
+            .success-message {
                 display: flex;
                 flex-direction: column;
-                border-radius: theme.elements(--border-radius-xl);
+                align-items: center;
+                justify-content: center;
+                height: 100%;
+
+                .success-text {
+                    font-size: 1.5em;
+                    color: theme.colours(--black);
+                    margin-top: 20px;
+                }
+
+                span svg {
+                    width: 200px;
+                    height: 200px;
+                    fill: theme.colours(--success);
+                }
+            }
+
+            form > div {
+                height: 100%;
+                margin: 10px;
+                display: flex;
+                flex-direction: column;
 
                 button {
                     width: 200px;

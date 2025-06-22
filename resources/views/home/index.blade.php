@@ -64,19 +64,17 @@
                                 @endforeach
                             </div>
                         @endif
-                        @if(isset($value['prices']))
+                        @if(isset($value['price']))
                             <div class="price-tag">
-                                @foreach($value['prices'] as $price)
-                                    <img src="image/icons/new-star.png" alt="">
-                                    <div class="price-item">
-                                        <span>£{{ $price['price'] }}</span>
-                                        <span>per session</span>
-                                        <span>
-                                            <p>Please ask for term prices.</p>
-                                            <p>Each term is {{ (isset($value['term'][0]['period'])) ? $value['term'][0]['period'] : '6 weeks' }} </p>
-                                        </span>
-                                    </div>
-                                @endforeach
+                                <img src="image/icons/new-star.png" alt="">
+                                <div class="price-item">
+                                    <span>£{{ $value['price']->price }}</span>
+                                    <span>per session</span>
+                                    <span>
+                                        <p>Please ask for term prices.</p>
+                                        <p>Each term is 6 weeks </p>
+                                    </span>
+                                </div>
                             </div>
                         @endif
                         @if(isset($value['button']))
