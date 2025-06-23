@@ -8,6 +8,7 @@
 </head>
 <body>
     <x-navigation></x-navigation>
+    <x-admin-sidebar></x-admin-sidebar>
 
     <main class="container">
         @yield('content')

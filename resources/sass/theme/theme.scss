@@ -37,6 +37,11 @@ $theme-colours: (
 
     --form-input-gry: #f3f1f1,
 
+    --dark-bg: #353535,
+    // --dark-bg-fade: rgba(53, 53, 53, 0.5),
+
+    --text-light: #f3f3f3,
+
     --black: #000000,
     --white: #ffffff,
 
@@ -49,7 +54,8 @@ $theme-colours: (
 }
 
 // @function rgba($colour, $alpha) {
-//     @return rgba(red(color.$colour), green(color.$colour), blue(color.$colour), $alpha);
+//     $color: colours($colour);
+//     @return rgba(red($color:$colour), green($color:$colour), blue($color:$colour), $alpha);
 // }
 
 $theme-elements : (
