@@ -27,27 +27,27 @@ class AdminSidebar extends Component
                 [
                     'name' => 'Dashboard', 
                     'icon' => 'gauge',
-                    // 'url' => route('admin.dashboard')
+                    'href' => route('admin.index')
                 ],
                 [
                     'name' => 'Classes', 
                     'icon' => 'barbell',
-                    // 'url' => route('admin.settings.index')
+                    'href' => route('admin.classes')
                 ],
                 [
                     'name' => 'Venues', 
                     'icon' => 'map-pin-area',
-                    // 'url' => route('admin.users.index')
+                    'href' => ''
                 ],
                 [
                     'name' => 'Prices', 
                     'icon' => 'currency-gbp',
-                    // 'url' => route('admin.settings.index')
+                    'href' => ''
                 ],
                 [
                     'name' => 'Settings', 
                     'icon' => 'gear',
-                    // 'url' => route('admin.settings.index')
+                    'href' => ''
                 ],
             ],
         );

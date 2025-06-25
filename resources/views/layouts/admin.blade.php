@@ -11,9 +11,11 @@
     <x-admin-sidebar></x-admin-sidebar>
 
     <main class="container">
-        @yield('content')
+        <div class="admin-container">
+            @yield('content')
+        </div>
     </main>
     
-    <x-footer></x-footer>
+    <x-footer class="{{$data['footer_class']}}"></x-footer>
 </body>
 </html>

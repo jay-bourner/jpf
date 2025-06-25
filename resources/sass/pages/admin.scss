@@ -1,6 +1,60 @@
 @use '../mixins/mixins' as mixin;
 @use '../theme/theme' as theme;
 
+.admin-container {
+    // padding: 20px 20px 20px 263px;
+    width: 87%;
+    float: right;
+    margin: 20px;
+
+    &__form {
+        &--input {
+            width: 100%;
+            margin: 10px auto;
+        }
+
+        &--twin {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            margin: 10px auto;
+
+            & > div {
+                width: 48%;
+            }
+        }
+
+        &--buttons {
+            display: flex;
+            justify-content: end;
+            align-items: end;
+            margin: 10px auto;
+
+            button {
+                cursor: pointer;
+                padding: 10px 20px;
+                margin: 0 20px;
+                border: none;
+                border-radius: 5px;
+                // background-color: theme.colours(--green);
+                color: theme.colours(--white);
+                font-size: 1rem;
+                font-weight: bold;
+                // transition: background-color 0.3s ease;
+
+                // &:hover {
+                //     background-color: theme.colours(--dark-green);
+                // }
+            }
+        }
+    }
+}
+
+
+
+
+
 .admin-section {
     max-width: 1400px;
     margin: 20px auto;

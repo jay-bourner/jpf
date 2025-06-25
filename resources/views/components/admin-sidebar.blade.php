@@ -4,7 +4,7 @@
         @foreach($data['links'] as $link)
             <li>
                 <span class="svg-icon svg-icon--{{ $link['icon'] }}"></span>
-                <a href="" class="">
+                <a href="{{ $link['href'] }}" class="">
                     {{ $link['name'] }}
                 </a>
             </li>

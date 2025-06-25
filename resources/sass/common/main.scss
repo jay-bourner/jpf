@@ -84,6 +84,10 @@ input, select, textarea {
     width: 100%;
 }
 
+input:not(input[type="file"]), select, textarea {
+    background-color: theme.colours(--bg-lt-grey);
+}
+
 input, select {
     height: 35px;
 }
@@ -91,6 +95,12 @@ input, select {
 input, select, textarea {
     box-sizing: border-box;
 }
+
+// input[type="checkbox"] {
+//     width: auto;
+//     height: auto;
+//     margin-right: 5px;
+// }
 
 .jp-btn {
     display: flex;
@@ -129,6 +139,10 @@ input, select, textarea {
 
 .jp-btn-gry {
     background-color: theme.colours(--grey);
+}
+
+.jp-btn-red {
+    background-color: theme.colours(--danger);
 }
 
 .new {

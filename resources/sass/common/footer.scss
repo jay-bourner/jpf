@@ -4,9 +4,12 @@
 footer {
     width: 100%;
     bottom: 0;
-    position: absolute;
-    z-index: 3;
     background-color: theme.colours(--bg-grey);
+    
+    &.admin-footer {
+        position: absolute;
+        z-index: 3;
+    }
 
     .footer-grid {
         display: grid;

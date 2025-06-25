@@ -1,4 +1,4 @@
-<footer>
+<footer {{ $attributes->merge(['class' => ($data['footer_class'] ?? '')]) }}>
     <div class="footer-grid">
         <?php foreach($footer['columns'] as $column): ?>
             <div class="<?= (isset($column['class'])) ? $column['class'] : '' ?>">

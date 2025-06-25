@@ -4,20 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class AdminController extends Controller
+class AdminVenuesController extends Controller
 {
-    private $data = array(
-        'footer_class' => 'admin-footer'
-    );
-    
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data['footer_class'] = 'admin-footer';
-        // $data['classes_form'] = route('admin.classes.index');
-        return view('admin.index', compact('data'));
+        //
     }
 
     /**
