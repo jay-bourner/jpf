@@ -84,9 +84,11 @@ input, select, textarea {
     width: 100%;
 }
 
-input:not(input[type="file"]), select, textarea {
-    background-color: theme.colours(--bg-lt-grey);
-}
+
+// meant for the admin pages
+// input:not(input[type="file"]), select, textarea {
+//     background-color: theme.colours(--bg-lt-grey);
+// }
 
 input, select {
     height: 35px;

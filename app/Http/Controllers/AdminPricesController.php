@@ -6,12 +6,15 @@ use Illuminate\Http\Request;
 
 class AdminPricesController extends Controller
 {
+    private $data = array(
+        'footer_class' => 'admin-footer'
+    );
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return view('admin.prices', ['data' => $this->data]);
     }
 
     /**

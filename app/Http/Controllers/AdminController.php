@@ -15,9 +15,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $data['footer_class'] = 'admin-footer';
-        // $data['classes_form'] = route('admin.classes.index');
-        return view('admin.index', compact('data'));
+        return view('admin.index', ['data' => $this->data]);
     }
 
     /**

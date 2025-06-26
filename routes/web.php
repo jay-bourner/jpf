@@ -3,6 +3,9 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClassesController;
 use App\Http\Controllers\AdminClassesController;
+use App\Http\Controllers\AdminPricesController;
+use App\Http\Controllers\AdminSettingsController;
+use App\Http\Controllers\AdminVenuesController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -34,28 +37,21 @@ Route::get('/contact', [ContactController::class, 'index'])
 Route::post('/contact/submit', [ContactController::class, 'submit'])
     ->name('contact.submit');
 
-Route::get('/admin', [AdminController::class, 'index'])
-    ->name('admin.index');
 
-Route::get('/admin/classes', [AdminClassesController::class, 'index'])
-    ->name('admin.classes');
+    
+Route::group(['prefix' => 'admin'], function() {
+    Route::get('/', [AdminController::class, 'index'])
+        ->name('admin.index');
 
-Route::get('/admin/classes/create', [AdminClassesController::class, 'create'])
-    ->name('admin.classes.create');
+    Route::get('/classes', [AdminClassesController::class, 'index'])
+        ->name('admin.classes');
 
-// Route::group(['prefix' => 'admin'], function() {
-//     Route::get('/classes', [ClassesFormController::class, 'index'])
-//         ->name('admin.classes.create');
-
-    // Route::post('/store', [ClassesController::class, 'store'])
-    //     ->name('admin.classes.store');
-
-    // Route::get('/{id}/edit', [ClassesController::class, 'edit'])
-    //     ->name('admin.classes.edit');
-
-    // Route::put('/{id}', [ClassesController::class, 'update'])
-    //     ->name('admin.classes.update');
-
-    // Route::delete('/{id}', [ClassesController::class, 'destroy'])
-    //     ->name('admin.classes.destroy');
-// });
+    Route::get('/venues', [AdminVenuesController::class, 'index'])
+        ->name('admin.venues');
+        
+    Route::get('/prices', [AdminPricesController::class, 'index'])
+        ->name('admin.prices');
+        
+    Route::get('/settings', [AdminSettingsController::class, 'index'])
+        ->name('admin.settings');
+});

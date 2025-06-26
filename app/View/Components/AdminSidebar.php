@@ -37,17 +37,17 @@ class AdminSidebar extends Component
                 [
                     'name' => 'Venues', 
                     'icon' => 'map-pin-area',
-                    'href' => ''
+                    'href' => route('admin.venues')
                 ],
                 [
                     'name' => 'Prices', 
                     'icon' => 'currency-gbp',
-                    'href' => ''
+                    'href' => route('admin.prices')
                 ],
                 [
                     'name' => 'Settings', 
                     'icon' => 'gear',
-                    'href' => ''
+                    'href' => route('admin.settings')
                 ],
             ],
         );

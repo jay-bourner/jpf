@@ -38,6 +38,7 @@
 
         .contact-form {
             height: 700px;
+            border: 1px solid theme.colours(--black);
             border-radius: theme.elements(--border-radius-xl);
             background-color: theme.colours(--bg-lt-grey);
             box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
