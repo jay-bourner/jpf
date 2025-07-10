@@ -53,11 +53,12 @@ Form Elements
             color: theme.colours(--danger);
         }
         input, textarea {
-            border: 2px solid theme.colours(--danger);
+            border: 1px solid theme.colours(--danger);
         }
     }
 
     span.warning {
+        width: 20px;
         position:  absolute;
         right: 5px;
         top: 20px;

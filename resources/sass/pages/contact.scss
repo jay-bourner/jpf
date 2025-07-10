@@ -74,6 +74,12 @@
                 }
             }
         }
+
+        div.required label::before {
+            content: '*';
+            color: theme.colours(--danger);
+            margin-right: 5px;
+        }
         
         @include mixin.breakpoint(xl_1) {
             max-width: 600px;

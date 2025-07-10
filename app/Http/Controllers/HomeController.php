@@ -4,10 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Prices;
 
 class HomeController extends Controller
 {
     public function index() {
+        $payg_price = Prices::where('type', 'payg')->first();
+        // dd($payg_price);
+
         $data = array(
             'meta_title' => 'Welcome to JP Fitness',
             'meta_description' => 'Welcome to JP Fitness',
@@ -55,8 +59,7 @@ class HomeController extends Controller
                             'text' => 'View All Classes',
                             'link' => '/classes'
                         ],
-                        'price' => DB::table('class_prices')->where('type', 'payg')->first(),
-                        // 'term' => $model_prices_prices->getPrice(['type' => 'term'])
+                        'price' => $payg_price,
                     ],
                 ]
             ],
@@ -152,8 +155,7 @@ class HomeController extends Controller
                 ]
             ]
         );
-
-        // $data['prices'] = DB::table('class_prices')->where('type', 'payg')->first();
+        
 
         return view('home.index', compact('data'));
     }

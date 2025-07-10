@@ -28,17 +28,18 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])
     ->name('home.index');
 
-Route::get('/classes', [ClassesController::class, 'index'])
-    ->name('classes.index');
+Route::group(['prefix' => 'classes'], function() {
+    Route::get('/', [ClassesController::class, 'index'])
+        ->name('classes.index');
+});
 
-Route::get('/contact', [ContactController::class, 'index'])
-    ->name('contact.index');
-    
-Route::post('/contact/submit', [ContactController::class, 'submit'])
-    ->name('contact.submit');
+Route::group(['prefix' => 'contact'], function() {
+    Route::get('/', [ContactController::class, 'index'])
+        ->name('contact.index');
+    Route::post('/submit', [ContactController::class, 'submit'])
+        ->name('contact.submit');
+});
 
-
-    
 Route::group(['prefix' => 'admin'], function() {
     Route::get('/', [AdminController::class, 'index'])
         ->name('admin.index');

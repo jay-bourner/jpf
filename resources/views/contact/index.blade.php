@@ -23,7 +23,7 @@
                         <form action="{{ route('contact.submit') }}" method="post" id="contact-form">
                             @csrf
                             <div>
-                                <div class="jp-form-group @error('email') has-error @enderror">
+                                <div class="jp-form-group required @error('email') has-error @enderror">
                                     <label for="name">Name:</label>
                                     <input value="{{ old('name') }}" class="jp-input jp-input--md" type="text" id="name" name="name" aria-describeedby="nameInput">
                                     @error('name')
@@ -31,7 +31,7 @@
                                         <div id="nameInput" class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
-                                <div class="jp-form-group @error('email') has-error @enderror">
+                                <div class="jp-form-group required @error('email') has-error @enderror">
                                     <label for="email">Email: </label>
                                     <input value="{{ old('email') }}" class="jp-input jp-input--md" type="email" id="email" name="email" aria-describeedby="emailInput">
                                     @error('email')
@@ -43,7 +43,7 @@
                                     <label for="email">Number:</label>
                                     <input value="{{ old('tel') }}" class="jp-input jp-input--md" type="tel" id="tel" name="tel">
                                 </div>
-                                <div class="jp-form-group @error('message') has-error @enderror">
+                                <div class="jp-form-group required @error('message') has-error @enderror">
                                     <label for="message">Message:</label>
                                     <textarea class="jp-input" id="message" name="message" rows="20" aria-describeedby="messageInput">{{ old('message') }}</textarea>
                                     @error('message')
