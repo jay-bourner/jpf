@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Classes;
+use App\Models\Categories;
+use App\Services\ImageService;
 
 class ClassesController extends Controller
 {
@@ -15,8 +18,11 @@ class ClassesController extends Controller
             "meta_title" => "Welcome to JP Fitness",
             "meta_description" => "JP Fitness, Move With Me. We are a fitness company that offers a variety of services to help you reach your fitness goals.",
             'header' => 'Classes',
-            'description' => 'I have a range of classes available to you, both in person and online. See below for timetables of what\'s available. Please visit my contact page if you have any questions.',
+            // 'description' => 'I have a range of classes available to you, both in person and online. See below for timetables of what\'s available. Please visit my contact page if you have any questions.',
+            'description' => 'There are a range of classes available to you, Check them out below.',
         );
+
+        $data['categories'] = Categories::all();
 
         return view('classes.index', compact('data'));
     }

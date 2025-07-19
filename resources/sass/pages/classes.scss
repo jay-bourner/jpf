@@ -1,7 +1,7 @@
 @use '../mixins/mixins' as mixin;
 @use '../theme/theme' as theme;
 
-.services-page {
+.classes-page {
     max-width: 1600px;
     width: 95%;
     margin: auto;
@@ -45,7 +45,7 @@
                 border-radius: theme.elements(--border-radius-md);
             }
 
-            + .services-page__header--text {
+            + .classes-page__header--text {
                 display: flex;
                 min-height: 500px;
                 margin: 50px 0 200px;
@@ -84,7 +84,7 @@
             width: 50%;
             // min-height: 500px;
             padding: 20px;
-            text-align: left;
+            text-align: center;
             margin: 50px auto;
             border: 2px solid theme.colours(--bg-lt-green);
             border-radius: 5px;
@@ -97,7 +97,7 @@
             &--image {
                 width: 70%;
 
-                + .services-page__header--text {
+                + .classes-page__header--text {
                     width: 70%;
                 }
             }
@@ -112,7 +112,7 @@
                 left: 0;
                 top: 0;
                 
-                + .services-page__header--text {
+                + .classes-page__header--text {
                     right: 0;
                     top: 0;
                     margin: 50px 0;
@@ -125,7 +125,7 @@
                 width: 90%;
                 height: 350px;
 
-                + .services-page__header--text {
+                + .classes-page__header--text {
                     width: 100%;
                     height: auto;
                     margin: 20px 0;
@@ -144,7 +144,7 @@
             &--image {
                 height: 250px;
 
-                + .services-page__header--text {
+                + .classes-page__header--text {
                     width: 100%;
                     height: auto;
                     margin: 20px 0;
@@ -187,11 +187,11 @@
             width: 200px;
             height: 200px;
             margin: auto;
+            padding: 0;
             position: relative;
             border-radius: theme.elements(--border-radius-md);
             border: 1px solid black;
             position: relative;
-            background-color: theme.colours(--bg-lt-green);
             box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.2);
 
             img {

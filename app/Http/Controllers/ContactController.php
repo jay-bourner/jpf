@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\ContactFormRequest; // Assuming you have a request class for validation
+use App\Http\Requests\ContactFormRequest;
+use App\Services\ImageService;
 
 class ContactController extends Controller
 {

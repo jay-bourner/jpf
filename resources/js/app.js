@@ -9,7 +9,7 @@ import '../sass/common/sidebar.scss';
 import '../sass/pages/home.scss';
 import '../sass/pages/contact.scss';
 import '../sass/pages/admin.scss';
-// import '../sass/pages/classes.scss';
+import '../sass/pages/classes.scss';
 // import '../sass/pages/about.scss';
 // import '../sass/pages/login.scss';
 // import '../sass/pages/logout.scss';

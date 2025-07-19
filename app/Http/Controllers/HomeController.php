@@ -5,9 +5,21 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Prices;
+use App\Services\ImageService;
 
 class HomeController extends Controller
 {
+    protected $imageService;
+
+    public function __construct(ImageService $imageService)
+    {
+        $this->imageService = $imageService;
+    }
+    /**
+     * Display the home page.
+     *
+     * @return \Illuminate\View\View
+     */
     public function index() {
         $payg_price = Prices::where('type', 'payg')->first();
         // dd($payg_price);
@@ -36,7 +48,7 @@ class HomeController extends Controller
             'classes' => [
                 [
                     'left' => [
-                        'image' => 'image/instructor/jaime-about-me.jpg',
+                        'image' => $this->imageService->resize('instructor/jaime-about-me.jpg', 500, 500),
                         'alt' => 'Instructor 1',
                         'header' => 'Welcome to Putting Your Fitness & Wellness First',
                         'paragraphs' => [
@@ -88,43 +100,43 @@ class HomeController extends Controller
                 'sub_header' => 'Take a look at some of the fun we have in our classes!',
                 'images' => [
                     [
-                        'src' => 'image/gallery/dark-neon.jpg',
+                        'src' => $this->imageService->resize('gallery/dark-neon.jpg', 500, 500),
                         'alt' => ''
                     ],
                     [
-                        'src' => 'image/gallery/lift-lean.jpg',
+                        'src' => $this->imageService->resize('gallery/lift-lean.jpg', 500, 500),
                         'alt' => ''
                     ],
                     [
-                        'src' => 'image/gallery/long-hall-1.jpg',
+                        'src' => $this->imageService->resize('gallery/long-hall-1.jpg', 500, 500),
                         'alt' => ''
                     ],
                     [
-                        'src' => 'image/gallery/long-hall-2.jpg',
+                        'src' => $this->imageService->resize('gallery/long-hall-2.jpg', 500, 500),
                         'alt' => ''
                     ],
                     [
-                        'src' => 'image/gallery/long-hall-3.jpg',
+                        'src' => $this->imageService->resize('gallery/long-hall-3.jpg', 500, 500),
                         'alt' => ''
                     ],
                     [
-                        'src' => 'image/gallery/seated.jpg',
+                        'src' => $this->imageService->resize('gallery/seated.jpg', 500, 500),
                         'alt' => ''
                     ],
                     [
-                        'src' => 'image/gallery/grassy-workout.jpg',
+                        'src' => $this->imageService->resize('gallery/grassy-workout.jpg', 500, 500),
                         'alt' => ''
                     ],
                     [
-                        'src' => 'image/gallery/tent-workout.jpg',
+                        'src' => $this->imageService->resize('gallery/tent-workout.jpg', 500, 500),
                         'alt' => ''
                     ],
                     [
-                        'src' => 'image/gallery/stability-ball.jpg',
+                        'src' => $this->imageService->resize('gallery/stability-ball.jpg', 500, 500),
                         'alt' => ''
                     ],
                     [
-                        'src' => 'image/gallery/equipment.jpg',
+                        'src' => $this->imageService->resize('gallery/equipment.jpg', 500, 500),
                         'alt' => ''
                     ],
                 ]
@@ -145,11 +157,11 @@ class HomeController extends Controller
                 ],
                 'images' => [
                     [
-                        'src' => 'image/certificates/fitness-pilates-2025.png',
+                        'src' => $this->imageService->resize('certificates/fitness-pilates-2025.png', 500, 500),
                         'alt' => 'Qualifications' ,
                     ],
                     [
-                        'src' => 'image/certificates/lift-lean-cert.jpeg',
+                        'src' => $this->imageService->resize('certificates/lift-lean-cert.jpeg', 500, 500),
                         'alt' => 'Qualifications' ,
                     ],
                 ]
