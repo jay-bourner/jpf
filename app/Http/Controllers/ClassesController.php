@@ -4,11 +4,28 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Classes;
+use App\Models\ClassOptions;
 use App\Models\Categories;
 use App\Services\ImageService;
 
 class ClassesController extends Controller
 {
+    protected $imageService;
+    protected $categories;
+    protected $classes;
+    protected $classOptions;
+
+    public function __construct(ImageService $imageService, 
+        Categories $categories, 
+        Classes $classes, 
+        ClassOptions $classOptions)
+    {
+        $this->categories = $categories;
+        $this->imageService = $imageService;
+        $this->classes = $classes;
+        $this->classOptions = $classOptions;
+    }
+    
     /**
      * Display a listing of the resource.
      */
@@ -22,7 +39,9 @@ class ClassesController extends Controller
             'description' => 'There are a range of classes available to you, Check them out below.',
         );
 
-        $data['categories'] = Categories::all();
+        $data['categories'] = $this->categories->getAllCategories();
+        $data['classes'] = $this->classes->getAllClasses();
+        // dd($data['classes']);
 
         return view('classes.index', compact('data'));
     }

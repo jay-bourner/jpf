@@ -10,12 +10,14 @@
                 </div>
             </div>
             <main class="category-list">
-                @foreach($data['categories'] as $category)
-                    <button class="category" id="{{ $category['id'] }}">
-                        <img src="{{ $category['image'] }}" alt="">
-                        <span>{{ $category['name'] }}</span>
-                    </button>
-                @endforeach
+                <div class="category-list_filters">
+                    @foreach($data['categories'] as $category)
+                        <button class="category" id="{{ $category['id'] }}" data-filter="{{ $category['filter'] }}">
+                            <img src="{{ $category['image'] }}" alt="{{ $category['alt'] }}" class="category-image">
+                            <span>{{ $category['name'] }}</span>
+                        </button>
+                    @endforeach
+                </div>
             </main>
         @else
             <main class="no-services">

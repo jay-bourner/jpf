@@ -8,6 +8,13 @@ use App\Services\ImageService;
 
 class ContactController extends Controller
 {
+    protected $imageService;
+
+    public function __construct(ImageService $imageService)
+    {
+        $this->imageService = $imageService;
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -16,6 +23,10 @@ class ContactController extends Controller
         $data = array(
             "meta_title" => "Welcome to JP Fitness",
             "meta_description" => "JP Fitness, Move With Me. We are a fitness company that offers a variety of services to help you reach your fitness goals.",
+            'image' => [
+                'src' => $this->imageService->resize('contact/Jaime-chilling.jpg', 750, 750),
+                'alt' => 'Contact Us'
+            ],
         );
 
         return view('contact.index', compact('data'));

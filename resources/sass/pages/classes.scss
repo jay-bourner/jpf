@@ -180,8 +180,11 @@
     .category-list {
         width: 85%;
         margin: 30px auto;
-        display: flex;
-        gap: 20px;
+
+        &_filters {
+            display: flex;
+            gap: 20px;
+        }
 
         .category {
             width: 200px;

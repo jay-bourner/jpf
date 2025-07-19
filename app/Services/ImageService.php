@@ -17,7 +17,7 @@ class ImageService
         $image_old = public_path('/image/'.$imagePath);
 
         if(!is_file($image_old)) {
-            return false;
+            $image_old = public_path('/image/icons/no_image.png');
         }
 
         $image_size_text = '-'. $width . 'x' . $height;

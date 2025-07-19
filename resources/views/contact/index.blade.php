@@ -9,7 +9,7 @@
             </div>
             <div class="contact-content">
                 <div class="contact-image">
-                    <img src="image/contact/Jaime-chilling.jpg" alt="">
+                    <img src="{{ $data['image']['src'] }}" alt="{{ $data['image']['alt'] }}">
                 </div>
                 <div class="contact-form">
                     @if(session('success'))
