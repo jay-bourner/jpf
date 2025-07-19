@@ -65,9 +65,29 @@ class ClassesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $name)
     {
-        //
+        $class = $this->classes->getClassesByName($name);
+
+        dd($class);
+
+        // if (!$class) {
+        //     abort(404);
+        // }
+
+        // $data = array(
+        //     "meta_title" => $class['name'] . " | JP Fitness",
+        //     "meta_description" => $class['short_description'],
+        //     'header' => $class['name'],
+        //     'description' => $class['description'],
+        // );
+
+        // $data['class'] = $class;
+
+        // dd($data['class']);
+        // $data['options'] = $this->classOptions->getOptionsByClassId($class['id']);
+
+        // return view('classes.index', compact('data'));
     }
 
     /**

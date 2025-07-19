@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Services\ImageService;
+use Illuminate\Support\Str;
 
 class Classes extends Model
 {
@@ -27,8 +28,15 @@ class Classes extends Model
         $classes = $this->all();
 
         foreach($classes as $class) {
-            $imageString = $class->image;
-            $imageString = str_replace('image/', '', $imageString);
+            if($class->image) {
+                $imageString = $class->image;
+                $imageString = str_replace('image/', '', $imageString);
+            } else {
+                $imageString = 'icons/no_image.png';
+            }
+
+            $url = 'classes/' . Str::slug($class->name);
+
             $category = $this->category->getCategoryById($class->category_id);
             $filter = $category['filter'];
 
@@ -41,10 +49,10 @@ class Classes extends Model
                 'filter' => $filter,
                 'title' => $class->title ?? '',
                 'short_description' => $class->short_description ?? '',
-                'url' => $class->url ?? '',
+                'url' => $url,
                 'description' => $class->description,
                 'notes' => $class->notes,
-                'image' => ($imageString) ? $this->imageService->resize($imageString, 300, 300) : null,
+                'image' => ($imageString) ? $this->imageService->resize($imageString, 400, 400) : null,
                 'image_description' => $class->image_description ?? '',
                 'start_date' => $class->created_at,
                 'status' => $class->updated_at,
@@ -61,5 +69,15 @@ class Classes extends Model
         $classes = $this->where('category_id', $categoryId)->get();
         // This method can be implemented to retrieve classes by category if needed
         return $classes;
+    }
+
+    public function getClassesByName($name)
+    {
+        $name = str_replace('-', ' ', $name);
+        $name = ucwords($name);
+
+        $class = $this->where('name', 'like', '%' . $name . '%')->get();
+        
+        return $class;
     }
 }

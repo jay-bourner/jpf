@@ -14,16 +14,19 @@ class ImageService
     }
 
     public function resize($imagePath, $width, $height, $type = 'contain') {
-        $image_old = public_path('/image/'.$imagePath);
+        $image_old = 'image/'.$imagePath;
 
-        if(!is_file($image_old)) {
-            $image_old = public_path('/image/icons/no_image.png');
+        if(!is_file(public_path($image_old))) {
+            $image_old = 'image/icons/no_image.png';
         }
+
+        $new_image_path = str_replace('image/', '', $image_old);
+        $image_old = public_path($image_old);
 
         $image_size_text = '-'. $width . 'x' . $height;
         $manager = ImageManager::gd();
         $image = $manager->read($image_old);
-        
+
         // Get dimensions
         $originalWidth = $image->width();
         $originalHeight = $image->height();
@@ -58,7 +61,7 @@ class ImageService
         $encoded = $image->toWebp(80);
 
         // Save to cache directory
-        $webpPath = 'image/cache/' . substr($imagePath, 0, strrpos($imagePath, '.')) . $image_size_text . '.webp';
+        $webpPath = 'image/cache/' . substr($new_image_path, 0, strrpos($new_image_path, '.')) . $image_size_text . '.webp';
         Storage::disk('public')->put($webpPath, $encoded);
 
         return 'storage/'.$webpPath;

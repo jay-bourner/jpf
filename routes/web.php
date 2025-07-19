@@ -31,6 +31,8 @@ Route::get('/', [HomeController::class, 'index'])
 Route::group(['prefix' => 'classes'], function() {
     Route::get('/', [ClassesController::class, 'index'])
         ->name('classes.index');
+    Route::get('/{slug}', [ClassesController::class, 'show'])
+        ->name('classes.show');
 });
 
 Route::group(['prefix' => 'contact'], function() {

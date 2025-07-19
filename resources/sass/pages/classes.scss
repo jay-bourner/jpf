@@ -184,11 +184,29 @@
         &_filters {
             display: flex;
             gap: 20px;
+            padding: 0 0 20px;
+            border-bottom: 1px solid black;
+        }
+
+        
+        &_items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px 0 0;
         }
 
         .category {
             width: 200px;
             height: 200px;
+        }
+
+        .class {
+            width: 300px;
+            height: 300px;
+        }
+
+        .category, .class {
             margin: auto;
             padding: 0;
             position: relative;
@@ -204,7 +222,7 @@
                 border-radius: theme.elements(--border-radius-md);
             }
 
-            span {
+            .category-name, .class-name {
                 left: 50%;
                 bottom: 20px;
                 position: absolute;
@@ -216,6 +234,16 @@
                 font-size: 1.5em;
                 width: 80%;
                 padding: 5px 10px;
+            }
+
+            .class-category {
+                position: absolute;
+                top: 2px;
+                right: 2px;
+                background-color: theme.colours(--bg-lt-green);
+                padding: 2px 5px;
+                border-radius: theme.elements(--border-radius-sm);
+                font-size: 1em;
             }
         }
         

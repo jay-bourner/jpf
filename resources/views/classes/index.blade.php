@@ -14,8 +14,17 @@
                     @foreach($data['categories'] as $category)
                         <button class="category" id="{{ $category['id'] }}" data-filter="{{ $category['filter'] }}">
                             <img src="{{ $category['image'] }}" alt="{{ $category['alt'] }}" class="category-image">
-                            <span>{{ $category['name'] }}</span>
+                            <span class="category-name">{{ $category['name'] }}</span>
                         </button>
+                    @endforeach
+                </div>
+                <div class="category-list_items">
+                    @foreach($data['classes'] as $class)
+                        <a href="{{ $class['url'] }}" class="class" id="{{ $class['id'] }}" data-filter="{{ $class['filter'] }}">
+                            <span class="class-category">{{ $class['category'] }}</span>
+                            <img src="{{ $class['image'] }}" alt="{{ $class['image_description'] }}" class="category-image">
+                            <span class="class-name">{{ $class['name'] }}</span>
+                        </a>
                     @endforeach
                 </div>
             </main>
