@@ -28,6 +28,23 @@
                     @endforeach
                 </div>
             </main>
+        @elseif(isset($data['class']))
+            <div class="classes-page__header"<?= (isset($no_image)) ? $no_image : '' ?>">
+                {{-- @if($data['class'][0]['image'])
+                    <div class="services-page__header--image">
+                        <img src="<?= $data['class'][0]['image'] ?>" alt="<?= $data['class'][0]['image_description'] ?>">
+                    </div>
+                @endif --}}
+                <div class="classes-page__header--text">
+                    <h1>{{ $data['header'] }}</h1>
+                    <p>{{ $data['description'] }}</p>
+                </div>
+            </div>
+            {{-- <main class="class-details">
+                <h2>{{ $data['class']['header'] }}</h2>
+                <p>{{ $data['class']['description'] }}</p>
+                <img src="{{ $data['class']['image'] }}" alt="{{ $data['class']['image_description'] }}">
+            </main> --}}
         @else
             <main class="no-services">
                 <h2>Sorry, no services available at the moment.</h2>

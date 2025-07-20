@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Services\ImageService;
 use Illuminate\Support\Str;
+use App\Models\ClassOptions;
 
 class Classes extends Model
 {
@@ -13,12 +14,14 @@ class Classes extends Model
     
     protected $imageService;
     protected $category;
+    protected $classOptions;
 
     public function __construct($attributes = array())
     {
         parent::__construct($attributes);
         $this->imageService = app(ImageService::class);
         $this->category = app(Categories::class);
+        $this->classOptions = app(ClassOptions::class);
     }
 
     public function getAllClasses()
@@ -59,7 +62,6 @@ class Classes extends Model
             ];
         }
 
-        // This method can be implemented to retrieve all classes if needed
         return $result;
     }
 
@@ -77,7 +79,39 @@ class Classes extends Model
         $name = ucwords($name);
 
         $class = $this->where('name', 'like', '%' . $name . '%')->get();
+
+        foreach($class as $cl) {
+            if($cl->image) {
+                $imageString = $cl->image;
+                $imageString = str_replace('image/', '', $imageString);
+            } else {
+                $imageString = 'icons/no_image.png';
+            }
+
+            $url = 'classes/' . Str::slug($cl->name);
+
+            $category = $this->category->getCategoryById($cl->category_id);
+            $filter = $category['filter'];
+
+            $result = array(
+                'id' => $cl->id,
+                'name' => $cl->name,
+                'category_id' => $cl->category_id,
+                'category' => $category['name'],
+                'filter' => $filter,
+                'title' => $cl->title ?? '',
+                'short_description' => $cl->short_description ?? '',
+                'url' => $url,
+                'description' => nl2br(e($cl->description)),
+                'notes' => nl2br(e($cl->notes)),
+                'image' => ($imageString) ? $this->imageService->resize($imageString, 400, 400) : null,
+                'image_description' => $cl->image_description ?? '',
+                'start_date' => $cl->created_at,
+                'status' => $cl->updated_at,
+                'options' => $this->classOptions->getClassOptions($cl->id),
+            );
+        }
         
-        return $class;
+        return $result;
     }
 }

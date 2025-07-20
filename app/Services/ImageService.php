@@ -64,6 +64,6 @@ class ImageService
         $webpPath = 'image/cache/' . substr($new_image_path, 0, strrpos($new_image_path, '.')) . $image_size_text . '.webp';
         Storage::disk('public')->put($webpPath, $encoded);
 
-        return 'storage/'.$webpPath;
+        return '/storage/'.$webpPath;
     }
 }

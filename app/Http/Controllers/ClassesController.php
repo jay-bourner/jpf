@@ -69,25 +69,23 @@ class ClassesController extends Controller
     {
         $class = $this->classes->getClassesByName($name);
 
-        dd($class);
+        // dd($class);
 
-        // if (!$class) {
-        //     abort(404);
-        // }
+        if (!$class) {
+            abort(404);
+        }
 
-        // $data = array(
-        //     "meta_title" => $class['name'] . " | JP Fitness",
-        //     "meta_description" => $class['short_description'],
-        //     'header' => $class['name'],
-        //     'description' => $class['description'],
-        // );
+        $data = array(
+            "meta_title" => $class['name'] . " | JP Fitness",
+            "meta_description" => $class['short_description'],
+            'header' => $class['name'],
+            'description' => $class['description'],
+            'class' => $class,
+        );
 
-        // $data['class'] = $class;
+        dd($data);
 
-        // dd($data['class']);
-        // $data['options'] = $this->classOptions->getOptionsByClassId($class['id']);
-
-        // return view('classes.index', compact('data'));
+        return view('classes.index', compact('data'));
     }
 
     /**
