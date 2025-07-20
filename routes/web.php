@@ -1,13 +1,14 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\ClassesController;
-use App\Http\Controllers\AdminClassesController;
-use App\Http\Controllers\AdminPricesController;
-use App\Http\Controllers\AdminSettingsController;
-use App\Http\Controllers\AdminVenuesController;
-use App\Http\Controllers\ContactController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AdminClassesController;
+use App\Http\Controllers\Admin\AdminPricesController;
+use App\Http\Controllers\Admin\AdminSettingsController;
+use App\Http\Controllers\Admin\AdminVenuesController;
+
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ClassesController;
+use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 
 /*

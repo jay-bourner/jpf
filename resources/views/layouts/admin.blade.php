@@ -8,9 +8,9 @@
 </head>
 <body>
     <x-navigation></x-navigation>
-    <x-admin-sidebar></x-admin-sidebar>
-
-    <main class="container">
+    
+    <main class="admin-main">
+        <x-admin-sidebar></x-admin-sidebar>
         <div class="admin-container">
             @yield('content')
         </div>

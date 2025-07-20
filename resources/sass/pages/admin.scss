@@ -1,11 +1,13 @@
 @use '../mixins/mixins' as mixin;
 @use '../theme/theme' as theme;
 
+.admin-main {
+    display: flex;
+    height: 100vh;
+}
+
 .admin-container {
-    // padding: 20px 20px 20px 263px;
-    width: 87%;
-    float: right;
-    margin: 20px;
+    padding: 20px;
 
     &__form {
         &--input {

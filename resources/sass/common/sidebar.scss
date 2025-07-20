@@ -2,15 +2,10 @@
 @use '../theme/theme' as theme;
 
 nav.admin-sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
     width: 200px;
-    height: 100%;
-    padding: 70px 20px 0;
+    padding: 20px 0;
     background-color: theme.colours(--dark-bg);
     color: theme.colours(--text-light);
-    border-right: 1px solid black;
     z-index: 1;
 
     ul {

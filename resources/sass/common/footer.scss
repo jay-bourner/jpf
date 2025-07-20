@@ -7,7 +7,7 @@ footer {
     background-color: theme.colours(--bg-grey);
     
     &.admin-footer {
-        position: absolute;
+        display: none;
         z-index: 3;
     }
 
