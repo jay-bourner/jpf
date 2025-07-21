@@ -4,18 +4,29 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Services\ImageService;
+use App\Models\Prices;
 
 class AdminPricesController extends Controller
 {
-    private $data = array(
-        'footer_class' => 'admin-footer'
-    );
+    protected $imageService;
+    protected $prices;
+
+    public function __construct(ImageService $imageService, Prices $prices) {
+        $this->imageService = $imageService;
+        $this->prices = $prices;
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('admin.prices', ['data' => $this->data]);
+        $attributes = [
+            'title' => 'Prices',
+        ];
+
+        return view('admin.prices', compact('attributes'));
     }
 
     /**

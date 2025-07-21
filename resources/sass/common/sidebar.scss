@@ -8,6 +8,10 @@ nav.admin-sidebar {
     color: theme.colours(--text-light);
     z-index: 1;
 
+    h2 {
+        margin: 0 10px 10px;
+    }
+
     ul {
         position: relative;
         margin: 0;

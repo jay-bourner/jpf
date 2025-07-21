@@ -7,16 +7,16 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    private $data = array(
-        'footer_class' => 'admin-footer'
-    );
-    
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('admin.index', ['data' => $this->data]);
+        $attributes = [
+            'title' => 'Dashboard',
+        ];
+
+        return view('admin.index', compact('attributes'));
     }
 
     /**

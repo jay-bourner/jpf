@@ -4,14 +4,21 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Services\ImageService;
 
 class AdminSettingsController extends Controller
 {
-    private $data = array(
-        'footer_class' => 'admin-footer'
-    );
+    protected $imageService;
+
+    public function __construct(ImageService $imageService) {
+        $this->imageService = $imageService;
+    }
 
     public function index() {
-        return view('admin.settings', ['data' => $this->data]);
+        $attributes = [
+            'title' => 'Settings',
+        ];
+
+        return view('admin.settings', compact('attributes'));
     }
 }
