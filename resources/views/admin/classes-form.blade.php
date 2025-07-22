@@ -1,51 +1,71 @@
 @extends('layouts.admin')
 
 @section('content')
-    <form class="admin-container__form">
-        <div class="admin-container__form--input">
-            <label for="name">Name</label>
-            <input type="text" class="" value="" placeholder="" name="name" id="name">
+    <form class="admin-content__form">
+        <div class="admin-content__form--input">
+            <label for="name">Class Name</label>
+            <input type="text" class="" value="{{ $attributes['class']['name'] ?? old('name') }}" placeholder="" name="name" id="name">
         </div>
-        <div class="admin-container__form--twin">
-            <div>
-                <div class="">
-                    <label for="">Image</label>
-                    <input type="file" class="" name="" id="">
+        <div class="admin-content__form--input">
+            <label for="">Image</label>
+            <input type="file" class="" name="" id="">
+            {{-- @if(isset($class_image) && $class_image != '')
+                <div class="jp-image-preview">
+                    <img src="" alt="" />
                 </div>
-                <?php if(isset($class_image) && $class_image != ''): ?>
-                    <div class="jp-image-preview">
-                        <img src="" alt="" />
-                    </div>
-                <?php endif; ?>
-            </div>
-            <div>
-                <label for="">Venue</label>
-                <select class="" name="" id="">
-                    {{-- @foreach($category_select_options as $category)
-                        <option value="$category['id'] " (isset($category_select_value)  && $category_select_value == $category['name']) ? 'selected="selected"' : '';?>></option>
-                    @endforeach --}}
+            @endif --}}
+        <div>
+        <div class="admin-content__form--input">
+            <label for="">Image Description</label>
+            <input type="text" class="" name="image_description" id="image_description" value="{{ $attributes['class']['image_description'] ?? old('image_description') }}">
+        </div>
+        <div class="admin-content__form--input">
+            <label for="">Category</label>
+            @if(!empty($attributes['categories']))
+                <select class="" name="category_id" id="category_id">
+                    @foreach($attributes['categories'] as $category)
+                        <option value="{{ $category['id'] }}" {{ (isset($attributes['class']['category_id']) && $attributes['class']['category_id'] == $category['id']) ? 'selected' : '' }}>
+                            {{ $category['name'] }}
+                        </option>
+                    @endforeach
                 </select>
-            </div>
+            @else
+                <p>No categories available.</p>
+            @endif
         </div>
-        {{-- <div class="admin-container__form--input">
-            
+        <div class="admin-content__form--input">
+            <label for="">Venue</label>
+            @if(!empty($attributes['venues']))
+                <select class="" name="venue_id" id="venue_id">
+                    @foreach($attributes['venues'] as $venue)
+                        <option value="{{ $venue['id'] }}" {{ (isset($attributes['class']['venue_id']) && $attributes['class']['venue_id'] == $venue['id']) ? 'selected' : '' }}>
+                            {{ $venue['name'] }}
+                        </option>
+                    @endforeach
+                </select>
+            @else
+                <p>No venues available.</p>
+            @endif
+        </div>
+        {{-- <div class="admin-content__form--input">
+            <label for="">Title</label>
+            <input type="text" class="" name="title" id="title" value="{{ $attributes['class']['title'] ?? old('title') }}" placeholder="">
         </div> --}}
-        <div class="admin-container__form--input">
+        <div class="admin-content__form--input">
             <label for="">Short Description</label>
-            <input type="text" class="" name="" id="">
+            <input type="text" class="" name="short_description" id="short_description" value="{{ $attributes['class']['short_description'] ?? old('short_description') }}" placeholder="">
         </div>
-        <div class="admin-container__form--input">
+        <div class="admin-content__form--input">
             <label for="">Description</label>
-            <textarea class="jp-input" rows="20" placeholder="" name="" id=""></textarea>
+            <textarea class="jp-input" rows="20" placeholder="" name="description" id="description">{{ $attributes['class']['description'] ?? old('description') }}</textarea>
         </div>
-        {{-- <div class="admin-container__form--input">
-            <label for=""></label>
-            <textarea class="jp-input" rows="10" placeholder="" name="" id=""></textarea>
-        </div> --}}
-        
-        <div class="admin-container__form--buttons">
-            <button type="submit" id="submit-class-btn" class="jp-btn jp-btn--md jp-btn-gry">Save</button>
-            <button type="clear" id="submit-class-btn" class="jp-btn jp-btn--md jp-btn-red">Cancel</button>
+        <div class="admin-content__form--input">
+            <label for="">Start Date</label>
+            <input type="date" class="" name="start_date" id="start_date" value="{{ $attributes['class']['start_date'] ?? old('start_date') }}" placeholder="YYYY-MM-DD">
+        </div>
+        <div class="admin-content__form--input">
+            <label for="">Notes</label>
+            <textarea class="jp-input" rows="20" placeholder="" name="notes" id="notes">{{ $attributes['class']['notes'] ?? old('notes') }}</textarea>
         </div>
     </form>
 @endsection

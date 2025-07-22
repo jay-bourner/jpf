@@ -47,18 +47,49 @@ Route::group(['prefix' => 'admin'], function() {
     Route::get('/', [AdminController::class, 'index'])
         ->name('admin.index');
 
+
+    // Classes Routes
     Route::get('/classes', [AdminClassesController::class, 'index'])
         ->name('admin.classes');
-    
-    // Route::get('/classes/create', [AdminClassesController::class, 'create'])
-    //     ->name('admin.classes.create');
 
+    Route::get('/classes/create', [AdminClassesController::class, 'create'])
+        ->name('admin.classes.create');
+
+    Route::get('/classes/edit/{id}', [AdminClassesController::class, 'edit'])
+        ->name('admin.classes.edit');
+
+    Route::get('/classes/delete', [AdminClassesController::class, 'delete'])
+        ->name('admin.classes.delete');
+
+
+    // venues routes
     Route::get('/venues', [AdminVenuesController::class, 'index'])
         ->name('admin.venues');
-        
+
+    Route::get('/venues/create', [AdminVenuesController::class, 'create'])
+        ->name('admin.venues.create');
+
+    Route::get('/venues/edit/{id}', [AdminVenuesController::class, 'edit'])
+        ->name('admin.venues.edit');
+
+    Route::get('/venues/delete', [AdminVenuesController::class, 'delete'])
+        ->name('admin.venues.delete');
+
+
+    // prices routes
     Route::get('/prices', [AdminPricesController::class, 'index'])
         ->name('admin.prices');
-        
+
+    Route::get('/prices/create', [AdminPricesController::class, 'create'])
+        ->name('admin.prices.create');
+
+    Route::get('/prices/edit/{id}', [AdminPricesController::class, 'edit'])
+        ->name('admin.prices.edit');
+
+    Route::get('/prices/delete', [AdminPricesController::class, 'delete'])
+        ->name('admin.prices.delete');
+
+    // settings routes
     Route::get('/settings', [AdminSettingsController::class, 'index'])
         ->name('admin.settings');
 });

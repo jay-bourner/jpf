@@ -24,6 +24,9 @@ class AdminPricesController extends Controller
     {
         $attributes = [
             'title' => 'Prices',
+            'page_action_create' => route('admin.prices.create'),
+            'page_action_delete' => route('admin.prices.delete'),
+            'prices' => $this->prices->getAllPrices(),
         ];
 
         return view('admin.prices', compact('attributes'));
@@ -32,9 +35,58 @@ class AdminPricesController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        //
+    public function create() {
+        $attributes = [
+            'title' => 'Create New Price',
+            'page_actions' => [
+                [
+                    'label' => 'Save',
+                    'class' => 'save jp-btn-gry',
+                    'icon' => 'save',
+                    'action' => ''
+                ],
+                [
+                    'label' => 'Cancel',
+                    'class' => 'cancel jp-btn-red',
+                    'icon' => 'x',
+                    'action' => route('admin.prices')
+                ]
+            ],
+        ];
+
+        return view('admin.prices-form', compact('attributes'));
+    }
+    
+    /**
+     * Show the form for editing the specified resource.
+     */
+    
+    public function edit($id) {
+        $price = $this->prices->getPriceById($id);
+
+        if (!$price) {
+            return redirect()->route('admin.prices')->with('error', 'Price not found.');
+        }
+
+        $attributes = [
+            'title' => 'Edit Price',
+            'price' => $price,
+            'page_actions' => [
+                [
+                    'label' => 'Save',
+                    'class' => 'save jp-btn-gry',
+                    'icon' => 'save',
+                    'action' => ''
+                ],
+                [
+                    'label' => 'Cancel',
+                    'class' => 'cancel jp-btn-red',
+                    'icon' => 'x',
+                    'action' => route('admin.prices')
+                ]
+            ],
+        ];
+        return view('admin.prices-form', compact('attributes'));
     }
 
     /**
@@ -49,14 +101,6 @@ class AdminPricesController extends Controller
      * Display the specified resource.
      */
     public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
     {
         //
     }

@@ -99,11 +99,11 @@ class Classes extends Model
                 'category_id' => $cl->category_id,
                 'category' => $category['name'],
                 'filter' => $filter,
-                'title' => $cl->title ?? '',
+                // 'title' => $cl->title ?? '',
                 'short_description' => $cl->short_description ?? '',
                 'url' => $url,
-                'description' => nl2br(e($cl->description)),
-                'notes' => nl2br(e($cl->notes)),
+                'description' => $cl->description,
+                'notes' => $cl->notes,
                 'image' => ($imageString) ? $this->imageService->resize($imageString, 400, 400) : null,
                 'image_description' => $cl->image_description ?? '',
                 'start_date' => $cl->created_at,
@@ -113,5 +113,44 @@ class Classes extends Model
         }
         
         return $result;
+    }
+
+    public function getClassById($id)
+    {
+        $class = $this->where('id', $id)->first();
+
+        if (!$class) {
+            return null;
+        }
+
+        if($class->image) {
+            $imageString = $class->image;
+            $imageString = str_replace('image/', '', $imageString);
+        } else {
+            $imageString = 'icons/no_image.png';
+        }
+
+        $url = 'classes/' . Str::slug($class->name);
+
+        $category = $this->category->getCategoryById($class->category_id);
+        $filter = $category['filter'];
+
+        return array(
+            'id' => $class->id,
+            'name' => $class->name,
+            'category_id' => $class->category_id,
+            'category' => $category['name'],
+            'filter' => $filter,
+            'title' => $class->title ?? '',
+            'short_description' => $class->short_description ?? '',
+            'url' => $url,
+            'description' => $class->description,
+            'notes' => $class->notes,
+            'image' => ($imageString) ? $this->imageService->resize($imageString, 400, 400) : null,
+            'image_description' => $class->image_description ?? '',
+            'start_date' => $class->created_at,
+            'status' => $class->updated_at,
+            'options' => $this->classOptions->getClassOptions($class->id),
+        );
     }
 }

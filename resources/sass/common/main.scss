@@ -144,16 +144,16 @@ input, select, textarea {
 }
 
 .jp-btn-grn {
-    background-color: theme.colours(--green);
+    background-color: theme.colours(--btn-green);
     transition: background-color 0.3s ease;
 }
 
 .jp-btn-gry {
-    background-color: theme.colours(--grey);
+    background-color: theme.colours(--btn-grey);
 }
 
 .jp-btn-red {
-    background-color: theme.colours(--danger);
+    background-color: theme.colours(--btn-red);
 }
 
 .new {

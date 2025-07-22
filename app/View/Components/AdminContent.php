@@ -19,10 +19,20 @@ class AdminContent extends Component
     {
         $this->componentAttributes = $attributes;
         $this->title = $attributes['title'] ?? 'Admin Content';
-        $this->actions = [
-            ['label' => 'Create', 'class' => 'add', 'icon' => 'plus'],
+        $this->actions = $this->componentAttributes['page_actions'] ?? [
+            [
+                'label' => 'Create',
+                'class' => 'add jp-btn-gry',
+                'icon' => 'plus',
+                'action' => $this->componentAttributes['page_action_create'] ?? ''
+            ],
             // ['label' => 'Edit', 'class' => 'edit', 'icon' => 'icon-edit'],
-            ['label' => 'Delete', 'class' => 'delete', 'icon' => 'trash'],
+            [
+                'label' => 'Delete', 
+                'class' => 'delete jp-btn-red', 
+                'icon' => 'trash', 
+                'action' => $this->componentAttributes['page_action_delete'] ?? ''
+            ],
         ];
     }
 
