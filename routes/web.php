@@ -58,6 +58,12 @@ Route::group(['prefix' => 'admin'], function() {
     Route::get('/classes/edit/{id}', [AdminClassesController::class, 'edit'])
         ->name('admin.classes.edit');
 
+    Route::post('/classes/store', [AdminClassesController::class, 'store'])
+        ->name('admin.classes.store');
+
+    Route::put('/classes/update/{id}', [AdminClassesController::class, 'update'])
+        ->name('admin.classes.update');
+
     Route::get('/classes/delete', [AdminClassesController::class, 'delete'])
         ->name('admin.classes.delete');
 

@@ -45,13 +45,14 @@ class AdminClassesController extends Controller
     }
 
     public function create() {
-        $this->categories = $this->categories->getAllCategories();
-        $this->venues = $this->venues->getAllVenues();
+        $categories = $this->categories->getAllCategories();
+        $venues = $this->venues->getAllVenues();
 
         $attributes = [
             'title' => 'Create New Class',
-            'categories' => $this->categories ?? [],
-            'venues' => $this->venues ?? [],
+            'categories' => $categories ?? [],
+            'venues' => $venues ?? [],
+            'action' => route('admin.classes.store'),
             'page_actions' => [
                 [
                     'label' => 'Save',
@@ -72,6 +73,8 @@ class AdminClassesController extends Controller
 
     public function edit($id) {
         $class = $this->classes->getClassById($id);
+        $categories = $this->categories->getAllCategories();
+        $venues = $this->venues->getAllVenues();
 
         if (!$class) {
             return redirect()->route('admin.classes')->with('error', 'Class not found.');
@@ -80,6 +83,9 @@ class AdminClassesController extends Controller
         $attributes = [
             'title' => 'Edit Class',
             'class' => $class,
+            'categories' => $categories ?? [],
+            'venues' => $venues ?? [],
+            'action' => route('admin.classes.update', $id),
             'page_actions' => [
                 [
                     'label' => 'Save',
@@ -96,5 +102,37 @@ class AdminClassesController extends Controller
             ],
         ];
         return view('admin.classes-form', compact('attributes'));
+    }
+    
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        //
     }
 }
