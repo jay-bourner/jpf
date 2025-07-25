@@ -6,6 +6,8 @@ import { SvgIcons } from '../components/SvgIcons';
 // import { Admin } from "../pages/admin/Admin";
 // import { Services } from '../pages/Services';
 
+import { Header } from '../admin/Header';
+
 
 class StartUp {
     constructor() {
@@ -17,6 +19,7 @@ class StartUp {
 
         const modules = [
             { class: SvgIcons },
+            { class: Header },
         ];
 
         modules.forEach((Class) => {

@@ -1,7 +1,17 @@
 @extends('layouts.admin')
 
 @section('content')
-    <form class="admin-content__form">
+    @if($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+    <form class="admin-content__form" method="{{ isset($attributes['method']) ? $attributes['method'] : 'POST' }}" action="{{ isset($attributes['action']) ? $attributes['action'] : '' }}" enctype="multipart/form-data">
+        @csrf
         <div class="admin-content__form--input">
             <label for="name">Class Name</label>
             <input type="text" class="" value="{{ $attributes['class']['name'] ?? old('name') }}" placeholder="" name="name" id="name">

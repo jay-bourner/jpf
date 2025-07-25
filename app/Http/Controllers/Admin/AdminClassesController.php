@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\AdminClassRequest;
 use App\Models\Classes;
 use App\Models\ClassOptions;
 use App\Models\Categories;
@@ -53,12 +54,14 @@ class AdminClassesController extends Controller
             'categories' => $categories ?? [],
             'venues' => $venues ?? [],
             'action' => route('admin.classes.store'),
+            'method' => 'POST',
             'page_actions' => [
                 [
                     'label' => 'Save',
                     'class' => 'save jp-btn-gry',
                     'icon' => 'save',
-                    'action' => ''
+                    // 'action' => ''
+                    'dataset' => 'submit-form'
                 ],
                 [
                     'label' => 'Cancel',
@@ -107,9 +110,10 @@ class AdminClassesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(AdminClassRequest $request)
     {
-        //
+        return redirect()->route('admin.classes')
+            ->with('success', 'Class created successfully!');
     }
 
     /**
