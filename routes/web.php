@@ -75,8 +75,14 @@ Route::group(['prefix' => 'admin'], function() {
     Route::get('/venues/create', [AdminVenuesController::class, 'create'])
         ->name('admin.venues.create');
 
+    Route::post('/venues/store', [AdminVenuesController::class, 'store'])
+        ->name('admin.venues.store');
+
     Route::get('/venues/edit/{id}', [AdminVenuesController::class, 'edit'])
         ->name('admin.venues.edit');
+
+    Route::put('/venues/update/{id}', [AdminVenuesController::class, 'update'])
+        ->name('admin.venues.update');
 
     Route::get('/venues/delete', [AdminVenuesController::class, 'delete'])
         ->name('admin.venues.delete');
@@ -89,8 +95,14 @@ Route::group(['prefix' => 'admin'], function() {
     Route::get('/prices/create', [AdminPricesController::class, 'create'])
         ->name('admin.prices.create');
 
+    Route::post('/prices/store', [AdminPricesController::class, 'store'])
+        ->name('admin.prices.store');
+
     Route::get('/prices/edit/{id}', [AdminPricesController::class, 'edit'])
         ->name('admin.prices.edit');
+
+    Route::put('/prices/update/{id}', [AdminPricesController::class, 'update'])
+        ->name('admin.prices.update');
 
     Route::get('/prices/delete', [AdminPricesController::class, 'delete'])
         ->name('admin.prices.delete');

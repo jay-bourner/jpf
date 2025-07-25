@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\ImageService;
 use App\Models\Venues;
+use App\Http\Requests\AdminVenuesRequest;
 
 class AdminVenuesController extends Controller
 {
@@ -38,12 +39,14 @@ class AdminVenuesController extends Controller
     public function create() {
         $attributes = [
             'title' => 'Create New Venue',
+            'action' => route('admin.venues.store'),
             'page_actions' => [
                 [
                     'label' => 'Save',
                     'class' => 'save jp-btn-gry',
                     'icon' => 'save',
-                    'action' => ''
+                    'method' => 'POST',
+                    'dataset' => 'submit-form'
                 ],
                 [
                     'label' => 'Cancel',
@@ -92,9 +95,11 @@ class AdminVenuesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(AdminVenuesRequest $request)
     {
-        //
+        // $validated = $request->validated();
+        // $this->venues->createVenue($validated);
+        return redirect()->route('admin.venues')->with('success', 'Venue created successfully.');
     }
 
     /**

@@ -23,14 +23,13 @@ class AdminClassRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
+            'description' => 'nullable|string|max:5000',
             'category_id' => 'required|exists:categories,id',
             'venue_id' => 'required|exists:venues,id',
             'short_description' => 'nullable|string|max:500',
             'image' => 'nullable|image|max:2048',
             'image_description' => 'nullable|string|max:255',
-            'start_time' => 'required|date_format:H:i',
-            'notes' => 'required|date',
+            // 'notes' => 'nullable|string|max:1000',
         ];
     }
 }

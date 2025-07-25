@@ -38,12 +38,14 @@ class AdminPricesController extends Controller
     public function create() {
         $attributes = [
             'title' => 'Create New Price',
+            'action' => route('admin.prices.store'),
             'page_actions' => [
                 [
                     'label' => 'Save',
                     'class' => 'save jp-btn-gry',
                     'icon' => 'save',
-                    'action' => ''
+                    'method' => 'POST',
+                    'dataset' => 'submit-form'
                 ],
                 [
                     'label' => 'Cancel',
