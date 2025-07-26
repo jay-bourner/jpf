@@ -4,7 +4,7 @@
     <form class="admin-content__form"  method="{{ isset($attributes['method']) ? $attributes['method'] : 'POST' }}" action="{{ isset($attributes['action']) ? $attributes['action'] : '' }}" enctype="multipart/form-data">
         @csrf
         <div class="admin-content__form--input">
-            <label for="price">Price Name</label>
+            <label for="price">Price</label>
             <input type="text" id="price" name="price" value="{{ $attributes['price']['price'] ?? old('price') }}" class="form-control" required>
             @if($errors->has('price'))
                 <span class="invalid-feedback">{{ $errors->first('price') }}</span>
@@ -23,11 +23,11 @@
         </div>
         
         <div class="admin-content__form--input">
-            <label for="amount">Amount of Classes</label>
-            <input type="text" id="amount" name="amount" value="{{ isset($attributes['price']['amount']) ? $attributes['price']['amount'] : old('amount') }}" class="form-control" {{ isset($attributes['price']['type']) && $attributes['price']['type'] == 'payg' ? 'disabled' : 'required' }}>
+            <label for="classes">Classes <small>(per week)</small></label>
+            <input type="number" id="classes" name="classes" value="{{ $attributes['price']['classes'] ?? old('classes') }}" class="form-control" {{ isset($attributes['price']['type']) && $attributes['price']['type'] == 'payg' ? 'disabled' : 'required' }}>
         </div>
-            @if($errors->has('amount'))
-                <span class="invalid-feedback">{{ $errors->first('amount') }}</span>
+            @if($errors->has('classes'))
+                <span class="invalid-feedback">{{ $errors->first('classes') }}</span>
             @endif
         
         <div class="admin-content__form--input">
@@ -40,9 +40,12 @@
             @endif
         </div>
 
-        {{-- <div class="admin-content__form--input">
-            <label for="capacity">Notes</label>
-            <textarea name="capacity" id="capacity" class="form-control">{{ $attributes['price']['capacity'] ?? old('capacity') }}</textarea>
-        </div> --}}
+        <div class="admin-content__form--input">
+            <label for="notes">Notes</label>
+            <textarea name="notes" id="notes" class="form-control">{{ $attributes['price']['notes'] ?? old('notes') }}</textarea>
+            @if($errors->has('notes'))
+                <span class="invalid-feedback">{{ $errors->first('notes') }}</span>
+            @endif
+        </div>
     </form>
 @endsection

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\ImageService;
 use App\Models\Prices;
+use App\Http\Requests\AdminPricesRequest;
 
 class AdminPricesController extends Controller
 {
@@ -94,9 +95,9 @@ class AdminPricesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(AdminPricesRequest $request)
     {
-        //
+        return redirect()->route('admin.prices')->with('success', 'Price created successfully.');
     }
 
     /**

@@ -42,6 +42,7 @@ class Prices extends Model
             'id' => $price->id,
             'price' => $price->price,
             'type' => $price->type,
+            'classes' => $price->classes,
             'period' => $price->period,
             'notes' => $price->notes,
         );

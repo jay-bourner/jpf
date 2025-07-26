@@ -20,11 +20,11 @@
         <div class="admin-content__form--input">
             <label for="">Image</label>
             <input type="file" class="" name="image" id="image">
-            {{-- @if(isset($class_image) && $class_image != '')
+            @if(isset($class_image) && $class_image != '')
                 <div class="jp-image-preview">
                     <img src="" alt="" />
                 </div>
-            @endif --}}
+            @endif
             @if($errors->has('image'))
                 <span class="invalid-feedback">{{ $errors->first('image') }}</span>
             @endif

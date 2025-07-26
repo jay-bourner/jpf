@@ -18,12 +18,84 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px 0;
-            // border-bottom: 1px solid black;
+            // border: 1px solid black;
 
             h1 {
                 margin: 0;
                 font-size: 2rem;
                 font-weight: bold;
+            }
+
+            .warning-message {
+                width: 75%;
+                height: 35px;
+                display: flex;
+                align-items: center;
+                padding: 0 20px;
+                opacity: 1;
+                justify-content: space-between;
+                background-color: theme.colours(--danger);
+                animation: messageFadeOut .5s 2s forwards;
+
+                .message {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    color: white;
+
+                    .svg-icon {
+                        // width: 20px;
+                        // height: 20px;
+                        fill: white;
+                    }
+
+                    p {
+                        margin: 0;
+                        color: white;
+                        font-weight: bold;
+                    }
+                }
+                
+                p {
+                    margin: 0;
+                    color: white;
+                    font-weight: bold;
+                }
+            }
+            
+            .success-message {
+                width: 75%;
+                height: 35px;
+                display: flex;
+                align-items: center;
+                padding: 0 20px;
+                opacity: 1;
+                justify-content: space-between;
+                background-color: theme.colours(--success);
+                animation: messageFadeOut .5s 2s forwards;
+
+                .message {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    color: white;
+
+                    .svg-icon {
+                        fill: white;
+                    }
+
+                    p {
+                        margin: 0;
+                        color: white;
+                        font-weight: bold;
+                    }
+                }
+                
+                p {
+                    margin: 0;
+                    color: white;
+                    font-weight: bold;
+                }
             }
 
             .classes-nav {
@@ -153,6 +225,16 @@
                 }
             }
         }
+    }
+}
+
+@keyframes messageFadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        display:none;
     }
 }
 

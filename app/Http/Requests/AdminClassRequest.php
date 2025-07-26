@@ -26,7 +26,7 @@ class AdminClassRequest extends FormRequest
             'description' => 'nullable|string|max:5000',
             'category_id' => 'required|exists:categories,id',
             'venue_id' => 'required|exists:venues,id',
-            'short_description' => 'nullable|string|max:500',
+            'short_description' => 'required|string|max:500',
             'image' => 'nullable|image|max:2048',
             'image_description' => 'nullable|string|max:255',
             // 'notes' => 'nullable|string|max:1000',
