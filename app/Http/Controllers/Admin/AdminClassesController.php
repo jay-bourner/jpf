@@ -10,8 +10,7 @@ use App\Models\ClassOptions;
 use App\Models\Categories;
 use App\Models\Venues;
 use App\Services\ImageService;
-use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
+// use Illuminate\Support\Facades\DB;
 
 class AdminClassesController extends Controller
 {
@@ -116,22 +115,19 @@ class AdminClassesController extends Controller
     {
         $inputs = $request->validated();
 
+        // dd($inputs);
+
         $data = $request->safe()
             ->merge($inputs)
             ->except(['_token']);
 
-        DB::table('classes')->insert([
-            'name' => $data['name'],
-            'description' => $data['description'] ?? null,
-            'category_id' => $data['category_id'],
-            'venue_id' => $data['venue_id'],
-            'start_date' => $data['start_date'] ?? Carbon::now(),
-            'short_description' => $data['short_description'],
-            'image' => $data['image'] ?? null,
-            'image_description' => $data['image_description'] ?? null,
-        ]);
+        $result = $this->classes->addClass($data);
 
-        // dd($data);
+        if (isset($result['warning'])) {
+            return redirect()->route('admin.classes.create')
+                ->withErrors($result['warning']);
+        }
+
         return redirect()->route('admin.classes')
             ->with('success', 'Class created successfully!');
     }

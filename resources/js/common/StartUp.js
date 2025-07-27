@@ -1,12 +1,13 @@
 import { LocalStorageHandler } from "./LocalStorageHandler";
-import { Popup } from "./Popup";
-import { Navigation } from "./Navigation";
+// import { Popup } from "./Popup";
+// import { Navigation } from "./Navigation";
 import { SvgIcons } from '../components/SvgIcons';
 
 // import { Admin } from "../pages/admin/Admin";
 // import { Services } from '../pages/Services';
 
 import { Header } from '../admin/Header';
+import { Textarea } from '../forms/Textarea';
 
 
 class StartUp {
@@ -20,10 +21,11 @@ class StartUp {
         const modules = [
             { class: SvgIcons },
             { class: Header },
+            { class: Textarea },
         ];
 
-        modules.forEach((Class) => {
-            new Class.class();
+        modules.forEach((Module) => {
+            new Module.class();
         });
     }
 }

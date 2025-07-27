@@ -1,13 +1,36 @@
 @extends('layouts.admin')
 
 @section('content')
+@if($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
     <form class="admin-content__form" method="{{ isset($attributes['method']) ? $attributes['method'] : 'POST' }}" action="{{ isset($attributes['action']) ? $attributes['action'] : '' }}" enctype="multipart/form-data">
         @csrf
         <div class="admin-content__form--input">
             <label for="name">Class Name</label>
-            <input type="text" class="" value="{{ $attributes['class']['name'] ?? old('name') }}" placeholder="" name="name" id="name">
+            <input type="text" class="" value="{{ isset($attributes['class']['name']) ? $attributes['class']['name'] : old('name') }}" placeholder="" name="name" id="name">
             @if($errors->has('name'))
-                <span class="invalid-feedback">{{ $errors->first('name') }}</span>
+                <span class="invalid-feedback">{{ $errors->first('name') ?? $warning }}</span>
+            @endif
+        </div>
+        <div class="admin-content__form--input">
+            <label for="">Short Description</label>
+            <input type="text" class="" name="short_description" id="short_description" value="{{ $attributes['class']['short_description'] ?? old('short_description') }}" placeholder="">
+            @if($errors->has('short_description'))
+                <span class="invalid-feedback">{{ $errors->first('short_description') }}</span>
+            @endif
+        </div>
+        <div class="admin-content__form--input">
+            <label for="">Description</label>
+            <textarea class="jp-input summernote" rows="20" placeholder="" name="description" id="description">{{ $attributes['class']['description'] ?? old('description') }}</textarea>
+            @if($errors->has('description'))
+                <span class="invalid-feedback">{{ $errors->first('description') }}</span>
             @endif
         </div>
         <div class="admin-content__form--input">
@@ -68,20 +91,6 @@
             <label for="">Title</label>
             <input type="text" class="" name="title" id="title" value="{{ $attributes['class']['title'] ?? old('title') }}" placeholder="">
         </div> --}}
-        <div class="admin-content__form--input">
-            <label for="">Short Description</label>
-            <input type="text" class="" name="short_description" id="short_description" value="{{ $attributes['class']['short_description'] ?? old('short_description') }}" placeholder="">
-            @if($errors->has('short_description'))
-                <span class="invalid-feedback">{{ $errors->first('short_description') }}</span>
-            @endif
-        </div>
-        <div class="admin-content__form--input">
-            <label for="">Description</label>
-            <textarea class="jp-input" rows="20" placeholder="" name="description" id="description">{{ $attributes['class']['description'] ?? old('description') }}</textarea>
-            @if($errors->has('description'))
-                <span class="invalid-feedback">{{ $errors->first('description') }}</span>
-            @endif
-        </div>
         {{-- <div class="admin-content__form--input">
             <label for="">Notes</label>
             <textarea class="jp-input" rows="20" placeholder="" name="notes" id="notes">{{ $attributes['class']['notes'] ?? old('notes') }}</textarea>

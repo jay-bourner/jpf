@@ -7,7 +7,7 @@
                     <span class="svg-icon svg-icon--warning"></span>
                     <p>Error</p>
                 </div>
-                <p>Somethings not right!</p>
+                <p>{{ 'Somethings not right!' }}</p>
             </div>
         @endif
         {{-- @if($success)

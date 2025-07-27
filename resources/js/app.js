@@ -1,3 +1,6 @@
+import jQuery from 'jquery';
+window.$ = window.jQuery = jQuery;
+
 // SASS Imports
 // common files
 import '../sass/common/banner.scss';
@@ -19,7 +22,9 @@ import '../sass/pages/classes.scss';
 // import '../sass/features/popup.scss';
 // import '../sass/features/keyframes.scss';
 
-
+//libraries
+import 'summernote/dist/summernote-lite.css';
+import 'summernote/dist/summernote-lite.js';
 
 // JavaScript imports
 import './bootstrap';

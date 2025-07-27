@@ -36,6 +36,7 @@
     "is-extglob": "^2.1.1",
     "is-glob": "^4.0.3",
     "is-number": "^7.0.0",
+    "jquery": "^3.7.1",
     "laravel-vite-plugin": "^0.7.8",
     "math-intrinsics": "^1.1.0",
     "micromatch": "^4.0.8",
@@ -53,6 +54,7 @@
     "sass": "^1.89.2",
     "sass-loader": "^16.0.5",
     "source-map-js": "^1.2.1",
+    "summernote": "^0.9.1",
     "to-regex-range": "^5.0.1",
     "vite": "^4.5.14",
     "vite-plugin-full-reload": "^1.2.0"

@@ -22,14 +22,15 @@ class AdminClassRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string|max:5000',
             'category_id' => 'required|exists:categories,id',
             'venue_id' => 'required|exists:venues,id',
+            'name' => 'required|string|max:255',
             'short_description' => 'required|string|max:500',
+            'description' => 'nullable|string|max:5000',
             'image' => 'nullable|image|max:2048',
             'image_description' => 'nullable|string|max:255',
-            // 'notes' => 'nullable|string|max:1000',
+            'start_date' => 'nullable|date|after_or_equal:now',
+            'notes' => 'nullable|string|max:1000',
         ];
     }
 }

@@ -226,6 +226,11 @@
             }
         }
     }
+
+    .note-editing-area {
+            border: 1px solid theme.colours(--black);
+        background-color: field;
+    }
 }
 
 @keyframes messageFadeOut {
