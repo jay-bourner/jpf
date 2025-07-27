@@ -69,8 +69,6 @@ class ClassesController extends Controller
     {
         $class = $this->classes->getClassesByName($name);
 
-        // dd($class);
-
         if (!$class) {
             abort(404);
         }
@@ -79,11 +77,9 @@ class ClassesController extends Controller
             "meta_title" => $class['name'] . " | JP Fitness",
             "meta_description" => $class['short_description'],
             'header' => $class['name'],
-            'description' => $class['description'],
+            'short_description' => $class['short_description'],
             'class' => $class,
         );
-
-        dd($data);
 
         return view('classes.index', compact('data'));
     }

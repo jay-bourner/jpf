@@ -26,7 +26,12 @@ class AdminContent extends Component
                 'icon' => 'plus',
                 'action' => $this->componentAttributes['page_action_create'] ?? ''
             ],
-            // ['label' => 'Edit', 'class' => 'edit', 'icon' => 'icon-edit'],
+            [
+                'label' => 'Disable',
+                'class' => 'add jp-btn-gry',
+                'icon' => 'prohibit',
+                // 'action' => $this->componentAttributes['page_action_create'] ?? ''
+            ],
             [
                 'label' => 'Delete', 
                 'class' => 'delete jp-btn-red', 

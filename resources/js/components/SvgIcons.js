@@ -34,7 +34,7 @@ class SvgIcons {
         svg.setAttribute('width', '30px');
         svg.setAttribute('height', '30px');
 
-        use.setAttribute('href', `/image/svg/sprite-sheet/sprite-sheet-1.svg#${iconName}`);
+        use.setAttribute('href', `/image/svg/sprite-sheet/sprite-sheet-2.svg#${iconName}`);
         svg.appendChild(use);
 
         elem.appendChild(svg);

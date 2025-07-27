@@ -29,15 +29,15 @@
                 </div>
             </main>
         @elseif(isset($data['class']))
-            <div class="classes-page__header"<?= (isset($no_image)) ? $no_image : '' ?>">
-                {{-- @if($data['class'][0]['image'])
+            <div class="classes-page__header {{ (!$data['class']['no_image']) ? 'no_image' : '' }}">
+                @if(!$data['class']['no_image'])
                     <div class="services-page__header--image">
-                        <img src="<?= $data['class'][0]['image'] ?>" alt="<?= $data['class'][0]['image_description'] ?>">
+                        <img src="{{ $data['class']['image'] }}" alt="{{ $data['class']['image_description'] }}">
                     </div>
-                @endif --}}
+                @endif
                 <div class="classes-page__header--text">
                     <h1>{{ $data['header'] }}</h1>
-                    <p>{{ $data['description'] }}</p>
+                    <p>{{ $data['short_description'] }}</p>
                 </div>
             </div>
             {{-- <main class="class-details">

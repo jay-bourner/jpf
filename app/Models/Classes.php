@@ -66,13 +66,12 @@ class Classes extends Model
                 'category' => $category['name'],
                 'name' => $class->name,
                 'filter' => $filter,
-                'title' => $class->title ?? '',
-                'short_description' => $class->short_description ?? '',
+                'short_description' => html_entity_decode($class->short_description ?? ''),
                 'url' => $url,
-                'description' => $class->description,
-                'notes' => $class->notes,
+                'description' => html_entity_decode($class->description ?? ''),
+                'notes' => html_entity_decode($class->notes ?? ''),
                 'image' => ($imageString) ? $this->imageService->resize($imageString, 400, 400) : null,
-                'image_description' => $class->image_description ?? '',
+                'image_description' => html_entity_decode($class->image_description ?? ''),
                 'start_date' => $class->start_date,
                 'status' => $class->status,
             ];
@@ -91,8 +90,10 @@ class Classes extends Model
 
     public function getClassesByName($name)
     {
+        $result = array();
+
         $name = str_replace('-', ' ', $name);
-        $name = ucwords($name);
+        // $name = ucwords($name);
 
         $class = $this->where('name', 'like', '%' . $name . '%')->get();
 
@@ -102,12 +103,14 @@ class Classes extends Model
             ];
         }
 
-        if(!$result['error']) {
+        if(!isset($result['error'])) {
             foreach($class as $cl) {
                 if($cl->image) {
+                    $no_image = false;
                     $imageString = $cl->image;
                     $imageString = str_replace('image/', '', $imageString);
                 } else {
+                    $no_image = true;
                     $imageString = 'icons/no_image.png';
                 }
     
@@ -122,12 +125,13 @@ class Classes extends Model
                     'category_id' => $cl->category_id,
                     'category' => $category['name'],
                     'filter' => $filter,
-                    'short_description' => $cl->short_description ?? '',
+                    'short_description' => html_entity_decode($cl->short_description ?? ''),
                     'url' => $url,
-                    'description' => $cl->description,
-                    'notes' => $cl->notes,
+                    'description' => html_entity_decode($cl->description ?? ''),
+                    'notes' => html_entity_decode($cl->notes ?? ''),
                     'image' => ($imageString) ? $this->imageService->resize($imageString, 400, 400) : null,
-                    'image_description' => $cl->image_description ?? '',
+                    'image_description' => html_entity_decode($cl->image_description ?? ''),
+                    'no_image' => $no_image,
                     'start_date' => $cl->start_date,
                     'status' => $cl->status,
                     'options' => $this->classOptions->getClassOptions($cl->id),
@@ -164,13 +168,12 @@ class Classes extends Model
             'category_id' => $class->category_id,
             'category' => $category['name'],
             'filter' => $filter,
-            'title' => $class->title ?? '',
-            'short_description' => $class->short_description ?? '',
+            'short_description' => html_entity_decode($class->short_description ?? ''),
             'url' => $url,
-            'description' => $class->description,
-            'notes' => $class->notes,
+            'description' => html_entity_decode($class->description ?? ''),
+            'notes' => html_entity_decode($class->notes ?? ''),
             'image' => ($imageString) ? $this->imageService->resize($imageString, 400, 400) : null,
-            'image_description' => $class->image_description ?? '',
+            'image_description' => html_entity_decode($class->image_description ?? ''),
             'start_date' => $class->start_date,
             'status' => $class->status,
             'options' => $this->classOptions->getClassOptions($class->id),
