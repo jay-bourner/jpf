@@ -26,7 +26,8 @@ class AdminPricesController extends Controller
         $attributes = [
             'title' => 'Prices',
             'page_action_create' => route('admin.prices.create'),
-            'page_action_delete' => route('admin.prices.delete'),
+            // 'page_action_disable' => 'disable-prices',
+            // 'page_action_delete' => route('admin.prices.delete'),
             'prices' => $this->prices->getAllPrices(),
         ];
 
@@ -97,7 +98,22 @@ class AdminPricesController extends Controller
      */
     public function store(AdminPricesRequest $request)
     {
-        return redirect()->route('admin.prices')->with('success', 'Price created successfully.');
+        $inputs = $request->validated();
+
+        $data = $request->safe()
+            ->merge($inputs)
+            ->except(['_token', '_method']);
+
+        $result = $this->prices->createPrice($data);
+
+        if(isset($result['warning'])) {
+            return redirect()->route('admin.prices.create')
+                ->withErrors($result['warning']);
+        }
+        return redirect()->route('admin.prices')
+            ->with($result['success']);
+
+
     }
 
     /**

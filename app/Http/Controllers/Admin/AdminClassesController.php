@@ -39,7 +39,8 @@ class AdminClassesController extends Controller
         $attributes = [
             'title' => 'Classes',
             'page_action_create' => route('admin.classes.create'),
-            'page_action_delete' => route('admin.classes.delete'),
+            // 'page_action_disable' => 'disable-classes',
+            // 'page_action_delete' => route('admin.classes.delete'),
             'classes' => $classes,
         ];
 
@@ -121,7 +122,7 @@ class AdminClassesController extends Controller
             ->merge($inputs)
             ->except(['_token']);
 
-        $result = $this->classes->addClass($data);
+        $result = $this->classes->createClass($data);
 
         if (isset($result['warning'])) {
             return redirect()->route('admin.classes.create')

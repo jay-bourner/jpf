@@ -23,9 +23,11 @@ class AdminPricesRequest extends FormRequest
     {
         return [
             'price' => 'required|numeric|min:0',
-            'type' => 'required|string|in:payg,block',
+            'type' => 'required|string|in:payg,term',
+            'classes' => 'required|integer|min:1',
             'amount' => 'nullable|numeric|min:0',
             'period' => 'nullable|string',
+            'notes' => 'nullable|string|max:255',
         ];
     }
 }

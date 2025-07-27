@@ -10,6 +10,16 @@ class Prices extends Model
     use HasFactory;
 
     protected $table = 'class_prices';
+    
+    public $timestamps = false;
+
+    protected $fillable = [
+        'price',
+        'type',
+        'classes',
+        'period',
+        'notes',
+    ];
 
     public function getAllPrices() {
         $result = array();
@@ -46,5 +56,27 @@ class Prices extends Model
             'period' => $price->period,
             'notes' => $price->notes,
         );
+    }
+
+    public function createPrice($data)
+    {
+        $result = array();
+
+        try {
+            $price = new self();
+            $price->price = $data['price'];
+            $price->type = $data['type'];
+            $price->classes = $data['classes'];
+            $price->period = $data['period'];
+            $price->notes = $data['notes'];
+
+            if($price->save()) {
+                $result = ['success' => 'Price created successfully.'];
+            }
+        } catch (\Exception $e) {
+            $result = ['warning' => 'Failed to create price. '  . $e->getMessage()];
+        }
+
+        return $result;
     }
 }

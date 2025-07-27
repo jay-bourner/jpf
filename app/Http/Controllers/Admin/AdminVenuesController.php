@@ -27,7 +27,8 @@ class AdminVenuesController extends Controller
         $attributes = [
             'title' => 'Venues',
             'page_action_create' => route('admin.venues.create'),
-            'page_action_delete' => route('admin.venues.delete'),
+            // 'page_action_disable' => 'disable-venues',
+            // 'page_action_delete' => route('admin.venues.delete'),
             'venues' => $this->venues->getAllVenues(),
         ];
         return view('admin.venues', compact('attributes'));
@@ -97,9 +98,21 @@ class AdminVenuesController extends Controller
      */
     public function store(AdminVenuesRequest $request)
     {
-        // $validated = $request->validated();
-        // $this->venues->createVenue($validated);
-        return redirect()->route('admin.venues')->with('success', 'Venue created successfully.');
+        $inputs = $request->validated();
+
+        $data = $request->safe()
+            ->merge($inputs)
+            ->except(['_token']);
+
+        $result = $this->venues->createVenue($data);
+
+        if(isset($result['warning'])) {
+            return redirect()->route('admin.venues.create')
+            ->withErrors($result['warning']);
+        }
+
+        return redirect()->route('admin.venues')
+            ->with($result['success']);
     }
 
     /**

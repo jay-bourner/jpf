@@ -30,7 +30,7 @@ class AdminContent extends Component
                 'label' => 'Disable',
                 'class' => 'add jp-btn-gry',
                 'icon' => 'prohibit',
-                // 'action' => $this->componentAttributes['page_action_create'] ?? ''
+                'dataset' => $this->componentAttributes['page_action_disable'] ?? ''
             ],
             [
                 'label' => 'Delete', 

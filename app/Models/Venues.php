@@ -9,6 +9,16 @@ class Venues extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
+    protected $fillable = [
+        'name',
+        'address',
+        'town',
+        'postcode',
+        'capacity',
+    ];
+
     public function getAllVenues()
     {
         $result = array();
@@ -45,5 +55,55 @@ class Venues extends Model
             'postcode' => $venue->postcode,
             'capacity' => $venue->capacity,
         );
+    }
+
+    public function getVenuesByName($name)
+    {
+        $result = array();
+
+        $name = str_replace('-', ' ', $name);
+
+        $venue = $this->where('name', 'like', '%' . $name . '%')->get();
+
+        if(!$venue || $venue->isEmpty()) {
+            $result = [
+                'error' => 'Venue not found.'
+            ];
+        }
+
+        if(!isset($result['error'])) {
+            $result = array(
+                'id' => $venue->id,
+                'name' => $venue->name,
+                'address' => $venue->address,
+                'town' => $venue->town,
+                'postcode' => $venue->postcode,
+                'capacity' => $venue->capacity,
+            );
+        }
+
+        return $result;
+    }
+
+    public function createVenue($data)
+    {
+        $result = array();
+        
+        try {
+            $venue = new self();
+            $venue->name = $data['name'];
+            $venue->address = $data['address'];
+            $venue->town = $data['town'];
+            $venue->postcode = $data['postcode'];
+            $venue->capacity = $data['capacity'] ?? null;
+
+            if($venue->save()) {
+                $result = ['success' => 'Venue added successfully.', 'venue' => $venue];
+            }
+        } catch (\Exception $e) {
+            $result = ['warning' => 'Failed to add venue. ' . $e->getMessage()];
+        }
+
+        return $result;
     }
 }

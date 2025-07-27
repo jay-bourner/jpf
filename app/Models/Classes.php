@@ -93,7 +93,6 @@ class Classes extends Model
         $result = array();
 
         $name = str_replace('-', ' ', $name);
-        // $name = ucwords($name);
 
         $class = $this->where('name', 'like', '%' . $name . '%')->get();
 
@@ -180,36 +179,28 @@ class Classes extends Model
         );
     }
 
-    public function addClass($data)
+    public function createClass($data)
     {
         $result = array();
 
-        $class_exists = $this->getClassesByName($data['name']);
+        try {
+            $class = new self();
+            $class->category_id = (int)$data['category_id'];
+            $class->venue_id = (int)$data['venue_id'];
+            $class->name = $data['name'];
+            $class->short_description = htmlspecialchars($data['short_description']);
+            $class->description = htmlspecialchars($data['description'] ?? null);
+            $class->image = htmlspecialchars($data['image'] ?? null);
+            $class->image_description = htmlspecialchars($data['image_description'] ?? null);
+            $class->status = ($data['start_date'] && $data['start_date'] > Carbon::now()) ? 'inactive' : 'active';
+            $class->start_date = $data['start_date'] ?? Carbon::now();
+            // $class->notes = htmlspecialchars($data['notes']) ?? null;
 
-        if (!isset($class_exists['error'])) {
-            $result = ['warning' => 'Class with this name already exists.'];
-        }
-
-        if(empty($result)) {
-            try {
-                $class = new self();
-                $class->category_id = (int)$data['category_id'];
-                $class->venue_id = (int)$data['venue_id'];
-                $class->name = $data['name'];
-                $class->short_description = htmlspecialchars($data['short_description']);
-                $class->description = htmlspecialchars($data['description'] ?? null);
-                $class->image = htmlspecialchars($data['image'] ?? null);
-                $class->image_description = htmlspecialchars($data['image_description'] ?? null);
-                $class->status = ($data['start_date'] && $data['start_date'] > Carbon::now()) ? 'inactive' : 'active';
-                $class->start_date = $data['start_date'] ?? Carbon::now();
-                // $class->notes = htmlspecialchars($data['notes']) ?? null;
-
-                if($class->save()) {
-                    $result = ['success' => 'Class added successfully.', 'class' => $class];
-                } 
-            } catch (\Exception $e) {
-                $result = ['warning' => 'Failed to add class. ' . $e->getMessage()];
+            if($class->save()) {
+                $result = ['success' => 'Class added successfully.', 'class' => $class];
             } 
+        } catch (\Exception $e) {
+            $result = ['warning' => 'Failed to add class. ' . $e->getMessage()];
         }
 
         return $result;
