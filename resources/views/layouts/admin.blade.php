@@ -9,7 +9,7 @@
 <body>
     <x-navigation></x-navigation>
     
-    <main class="admin-main">
+    <main id="jpf-admin" class="admin-main">
         <x-admin-sidebar></x-admin-sidebar>
 
         <div class="admin-container">

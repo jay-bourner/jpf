@@ -5,6 +5,7 @@
         <ul>
             <li>Change email address</li>
             <li>Change prices</li>
+            <li>Adjust class (cancel/move date etc)</li>
             {{-- <li>Manage subscriptions</li> --}}
             <li>Change password</li>
         </ul>

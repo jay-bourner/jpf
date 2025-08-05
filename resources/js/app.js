@@ -28,6 +28,6 @@ import 'summernote/dist/summernote-lite.js';
 
 // JavaScript imports
 import './bootstrap';
-import { StartUp } from './common/StartUp';
+import { StartUp } from './startup/StartUp';
 
 new StartUp();

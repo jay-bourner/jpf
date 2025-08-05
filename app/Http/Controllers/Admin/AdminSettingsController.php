@@ -17,6 +17,7 @@ class AdminSettingsController extends Controller
     public function index() {
         $attributes = [
             'title' => 'Settings',
+            'page_actions' => [],
         ];
 
         return view('admin.settings', compact('attributes'));

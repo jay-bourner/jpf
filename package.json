@@ -57,7 +57,8 @@
     "summernote": "^0.9.1",
     "to-regex-range": "^5.0.1",
     "vite": "^4.5.14",
-    "vite-plugin-full-reload": "^1.2.0"
+    "vite-plugin-full-reload": "^1.2.0",
+    "vue": "^3.5.18"
   },
   "scripts": {
     "dev": "vite build --watch",
