@@ -1,21 +1,28 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
+import vue from '@vitejs/plugin-vue';
 
 export default defineConfig({
-    build: {
-        mode: isProduction = 'production',
-        sourcemap: true,
-        watch: {
-            mode: isProduction = 'development',
-            sourcemap: true,
-        },
-    },
     plugins: [
         laravel({
-            input: ['resources/js/app.js'],
+            input: [
+                'resources/sass/app.scss',
+                'resources/js/app.js',
+            ],
             refresh: true,
         }),
-        console.log('Vite configuration loaded in ' + isProduction  + ' mode.'),
+        vue({
+            template: {
+                transformAssetUrls: {
+                    base: null,
+                    includeAbsolute: false,
+                },
+            },
+        }),
     ],
+    resolve: {
+        alias: {
+            vue: 'vue/dist/vue.esm-bundler.js',
+        },
+    },
 });
-

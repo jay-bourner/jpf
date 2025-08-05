@@ -111,3 +111,6 @@ Route::group(['prefix' => 'admin'], function() {
     Route::get('/settings', [AdminSettingsController::class, 'index'])
         ->name('admin.settings');
 });
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
