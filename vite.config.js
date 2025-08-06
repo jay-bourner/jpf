@@ -3,6 +3,15 @@ import laravel from 'laravel-vite-plugin';
 import vue from '@vitejs/plugin-vue';
 
 export default defineConfig({
+    build: {
+        chunkSizeWarningLimit: 600,
+        mode: isProduction = 'production',
+        sourcemap: true,
+        watch: {
+            mode: isProduction = 'development',
+            sourcemap: true,
+        },
+    },
     plugins: [
         laravel({
             input: [
@@ -19,6 +28,7 @@ export default defineConfig({
                 },
             },
         }),
+        console.log('Vite configuration loaded in ' + isProduction  + ' mode.'),
     ],
     resolve: {
         alias: {

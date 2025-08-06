@@ -11,7 +11,9 @@
         <title>{{  $data['meta_title'] }}</title>
     @endif
     
-    @vite(['resources/js/app.js'])
+    <script type="text/javascript" src="https://www.termsfeed.com/public/cookie-consent/4.2.0/cookie-consent.js" charset="UTF-8"></script>
+
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body>
     <x-navigation></x-navigation>

@@ -1,8 +1,25 @@
+
+// common files
+@use './common/banner.scss';
+@use './common/main.scss';
+@use './common/footer.scss';
+@use './common/sidebar.scss';
+
+// page specific files
+@use './pages/home.scss';
+@use './pages/contact.scss';
+@use './pages/admin.scss';
+@use './pages/classes.scss';
+
+//libraries
+@use 'summernote/dist/summernote-lite.css';
+
+// Variables
+@use 'variables';
+
 // Fonts
 @import url('https://fonts.bunny.net/css?family=Nunito');
 
-// Variables
-@import 'variables';
 
 // Bootstrap
-@import 'bootstrap/scss/bootstrap';
+// @import 'bootstrap/scss/bootstrap';
