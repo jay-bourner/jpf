@@ -14,6 +14,7 @@ class AdminController extends Controller
     {
         $attributes = [
             'title' => 'Dashboard',
+            'page_actions' => [],
         ];
 
         return view('admin.index', compact('attributes'));

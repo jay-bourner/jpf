@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/image/icons/jpfitnesslogoicon.png">
+    
     @if(isset($data['meta_description']))
         <meta name="description" content="{{ $data['meta_description'] }}">
     @endif

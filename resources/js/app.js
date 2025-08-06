@@ -8,9 +8,5 @@ import { StartUp } from './startup/StartUp';
 new StartUp();
 
 import { createApp } from 'vue';
-const app = createApp({});
-
-// import ExampleComponent from './components/ExampleComponent.vue';
-// app.component('example-component', ExampleComponent);
-
-app.mount('#app');
+import App from './admin/App.vue'
+createApp(App).mount('#app');
