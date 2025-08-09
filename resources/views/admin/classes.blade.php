@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
+    <div id="classesMenu"></div>
     <div class="admin-content__content--list">
         @if(isset($attributes['classes']))
             @foreach($attributes['classes'] as $class)
@@ -10,6 +11,9 @@
                         <div class="class-name">{{ $class['name'] }}</div>
                     </div>
                     <div class="content-list__item--buttons">
+                        <a href="{{ route('admin.classes.view', $class['id']) }}" class="jp-btn jp-btn--sm view-button">
+                            <span class="svg-icon svg-icon--view"></span>
+                        </a>
                         <a href="{{ route('admin.classes.edit', $class['id']) }}" class="jp-btn jp-btn--sm edit-button">
                             <span class="svg-icon svg-icon--pencil"></span>
                         </a>

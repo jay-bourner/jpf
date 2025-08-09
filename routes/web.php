@@ -58,6 +58,9 @@ Route::group(['prefix' => 'admin'], function() {
     Route::get('/classes/edit/{id}', [AdminClassesController::class, 'edit'])
         ->name('admin.classes.edit');
 
+    Route::get('/classes/view/{id}', [AdminClassesController::class, 'view'])
+        ->name('admin.classes.view');
+
     Route::post('/classes/store', [AdminClassesController::class, 'store'])
         ->name('admin.classes.store');
 
@@ -111,6 +114,6 @@ Route::group(['prefix' => 'admin'], function() {
     Route::get('/settings', [AdminSettingsController::class, 'index'])
         ->name('admin.settings');
 });
-Auth::routes();
+// Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

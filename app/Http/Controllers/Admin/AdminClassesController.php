@@ -136,9 +136,22 @@ class AdminClassesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function view(string $id)
     {
-        //
+        $class = $this->classes->getClassById($id);
+
+        if(!$class) {
+            return redirect()->route('admin.classes')->with('error', 'Class not found.');
+        }
+
+        $attributes = [
+            'title' => $class['name'],
+            'class' => $class,
+        ];
+
+        // dd($class);
+
+        return view('admin.class-view', compact('attributes'));
     }
 
     /**

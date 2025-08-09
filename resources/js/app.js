@@ -11,5 +11,8 @@ new StartUp();
 
 // Vue.js imports and initialisation
 import { createApp } from 'vue';
-import App from './admin/App.vue'
-createApp(App).mount('#app');
+import Dashboard from './admin/components/Dashboard.vue'
+import ClassesMenu from './admin/components/ClassesMenu.vue';
+
+createApp(Dashboard).mount('#dashboard');
+createApp(ClassesMenu).mount('#classesMenu');

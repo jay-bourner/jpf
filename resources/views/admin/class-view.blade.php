@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div id="dashboard" class="admin-content__content--list">
+    <div>
         
     </div>
 @endsection
