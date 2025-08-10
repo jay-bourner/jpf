@@ -146,10 +146,24 @@ class AdminClassesController extends Controller
 
         $attributes = [
             'title' => $class['name'],
+            // 'page_actions' => [
+            //     [
+            //         'label' => 'Save',
+            //         'class' => 'save jp-btn-gry',
+            //         'icon' => 'save',
+            //         'action' => ''
+            //     ],
+            //     [
+            //         'label' => 'Cancel',
+            //         'class' => 'cancel jp-btn-red',
+            //         'icon' => 'x',
+            //         'action' => route('admin.classes')
+            //     ]
+            // ],
             'class' => $class,
         ];
 
-        // dd($class);
+        // dd(count($class['options']));
 
         return view('admin.class-view', compact('attributes'));
     }

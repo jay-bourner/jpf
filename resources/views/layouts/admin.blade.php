@@ -18,5 +18,6 @@
             </x-admin-content>
         </div>
     </main>
+    <div id="modals"></div>
 </body>
 </html>

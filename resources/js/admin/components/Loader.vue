@@ -1,0 +1,45 @@
+<template>
+    <div class="loader">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#000000" viewBox="0 0 256 256">
+            <path d="M220,48V96a4,4,0,0,1-4,4H168a4,4,0,0,1,0-8h38.34L184.89,70.54A84,84,0,0,0,66.8,69.85a4,4,0,1,1-5.6-5.72,92,92,0,0,1,129.34.76L212,86.34V48a4,4,0,0,1,8,0ZM189.2,186.15a83.44,83.44,0,0,1-58.68,23.91h-.47a83.52,83.52,0,0,1-58.94-24.6L49.66,164H88a4,4,0,0,0,0-8H40a4,4,0,0,0-4,4v48a4,4,0,0,0,8,0V169.66l21.46,21.45A91.43,91.43,0,0,0,130,218.06h.51a91.45,91.45,0,0,0,64.28-26.19,4,4,0,1,0-5.6-5.72Z"></path>
+        </svg>
+    </div>
+</template>
+
+<script>
+export default {
+    name: 'Loader',
+    data() {
+        return {
+            showLoader: false,
+        };
+    },
+    methods: {
+        toggleModal() {
+            this.showLoader = !this.showLoader
+        },
+    }
+}
+</script>
+
+<style>
+    .loader {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100px;
+        animation: rotate 1.5s linear infinite;
+    }
+    .loader svg {
+        width: 75px;
+        height: 75px;
+    }
+    @keyframes rotate {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+</style>

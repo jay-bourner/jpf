@@ -68,6 +68,8 @@ $theme-elements : (
     --border-radius-md: 5px,
     --border-radius-lg: 8px,
     --border-radius-xl: 10px,
+
+    --pill-radius: 20px,
 );
 
 @function elements($key) {
