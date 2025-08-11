@@ -189,19 +189,27 @@ input, select, textarea {
     color: theme.colours(--success);
 }
 
-.active-state {
-    height: 20px;
-    // font-weight: 700;
-    // font-size: 1.2rem;
-    // letter-spacing: 1px;
-    // color: theme.colours(--btn-green);
-    // text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+.active-state, .inactive-state {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &::before {
+        content: '';
+        display: block;
+        width: 10px;
+        height: 10px;
+        margin: 2px 5px 0 0;
+        border-radius: 50%;
+    }
 }
 
-.inactive-state {
-    height: 20px;
-    margin: 0 16px;
-    color: theme.colours(--danger);
+.active-state::before {
+    background-color: theme.colours(--btn-green);
+}
+
+.inactive-state::before {
+    background-color: theme.colours(--btn-red);
 }
 
 .banner.success {
@@ -222,7 +230,6 @@ input, select, textarea {
     align-items: center;
     position: absolute;
     justify-content: space-between;
-    // bottom: 0;
 
     &-danger {
         background: theme.colours(--danger);

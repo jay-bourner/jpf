@@ -140,6 +140,7 @@ class AdminClassesController extends Controller
     {
         $class = $this->classes->getClassById($id);
 
+        // dd($class['options']);
         if(!$class) {
             return redirect()->route('admin.classes')->with('error', 'Class not found.');
         }

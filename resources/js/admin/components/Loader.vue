@@ -21,25 +21,3 @@ export default {
     }
 }
 </script>
-
-<style>
-    .loader {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100px;
-        animation: rotate 1.5s linear infinite;
-    }
-    .loader svg {
-        width: 75px;
-        height: 75px;
-    }
-    @keyframes rotate {
-        from {
-            transform: rotate(0deg);
-        }
-        to {
-            transform: rotate(360deg);
-        }
-    }
-</style>

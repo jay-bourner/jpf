@@ -5,6 +5,11 @@
 @use './common/footer.scss';
 @use './common/sidebar.scss';
 
+// features styles
+@use './features/modal.scss';
+@use './features/loader.scss';
+
+
 // page specific files
 @use './pages/home.scss';
 @use './pages/contact.scss';

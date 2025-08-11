@@ -37,7 +37,11 @@
                     <span><strong>{{ $option['day'] }}</strong></span>
                     <ul>
                         <li><strong>Frequency:</strong> <span>{{ $option['frequency'] }}</span></li>
-                        <li><strong>Location:</strong> <span>{{ $option['venue_id'] }}</span></li>
+                        <li><strong>Location:</strong>
+                            <a href="{{ $option['venue_url'] }}" target="_blank">
+                                <span>{{ $option['venue'] }}</span>
+                            </a>
+                        </li>
                         <li><strong>Time:</strong> <span>{{ $option['start_time'] }} - {{ $option['end_time'] }}</span></li>
                     </ul>
                 @endforeach

@@ -1,13 +1,45 @@
 <template>
     <button @click="toggleModal">
         <span class="add-icon"></span>
-        Add Option
+        <span class="icon-btn-text">Add Option</span>
     </button>
     <teleport to="#modals" v-if="showModal">
         <Modal @close="toggleModal">
             <div v-if="!showLoader">
                 <h4>{{ title }}</h4>
-                <button @click="submitOption">submit</button>
+
+                <form>
+                    <label>Venue</label>
+                    <select class="modal-input">
+                        <option value="venue1">Venue 1</option>
+                        <option value="venue2">Venue 2</option>
+                        <option value="venue3">Venue 3</option>
+                    </select>
+                    
+                    <label>Day</label>
+                    <select class="modal-input">
+                        <option value="monday" selected>Monday</option>
+                        <option value="tuesday">Tuesday</option>
+                        <option value="wednesday">Wednesday</option>
+                        <option value="thursday">Thursday</option>
+                        <option value="friday">Friday</option>
+                        <option value="saturday">Saturday</option>
+                        <option value="sunday">Sunday</option>
+                    </select>
+
+                    <label>Start Time</label>
+                    <input class="modal-input" type="time" />
+
+                    <label>Finish Time</label>
+                    <input class="modal-input" type="time" />
+
+                    <label>Frequency</label>
+                    <select class="modal-input">
+                        <option value="custom">Custom</option>
+                        <option value="weekly">Weekly</option>
+                    </select>
+                    <button @click="submitOption">submit</button>
+                </form>
             </div>
             <div v-else>
                 <Loader />
@@ -44,14 +76,3 @@ export default {
     }
 }
 </script>
-
-<style>
-    h4 {
-        border-bottom: 1px solid #ddd;
-        display: inline-block;
-        text-align: center;
-        width: 100%;
-        padding-bottom: 10px;
-        margin-top: 0;
-    }
-</style>
