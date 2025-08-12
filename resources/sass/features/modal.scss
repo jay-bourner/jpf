@@ -1,83 +1,100 @@
 @use '../theme/theme' as theme;
 
-.modal {
-    h4 {
-        border-bottom: 1px solid #ddd;
-        display: inline-block;
-        text-align: center;
-        width: 100%;
-        padding-bottom: 10px;
-        margin-top: 0;
-    }
-    form {
-        width: 500px;
-        margin: 30px auto;
-        background: white;
-        text-align: left;
-        padding: 0 40px;
-        border-radius: 10px;
-    }
-    label {
-        color: #414141;
-        display: inline-block;
-        margin: 25px 0 15px;
-        font-size: 0.6em;
-        text-transform: uppercase;
-        font-weight: bold;
-        letter-spacing: 1px;
-    }
-    .modal-input {
-        display: block;
-        padding: 10px 6px !important;
-        width: 100%;
-        box-sizing: border-box;
-        border: none !important;
-        border-bottom: 1px solid #ddd !important;
-        color: #555;
-    }
-    input[type="checkbox"] {
-        display: inline-block;
-        width: 16px;
-        margin: 0 10px 0 0;
-        position: relative;
-        top: 2px;
-    }
-    .pill {
-        display: inline-block;
-        margin: 20px 10px 0 0;
-        padding: 6px 12px;
-        background: #eee;
-        border-radius: 20px;
-        font-size: 12px;
-        letter-spacing: 1px;
-        font-weight: bold;
-        color: #777;
-        cursor: pointer;
-    }
-    button {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 10px 20px;
-        margin-top: 20px;
-        border-radius: theme.elements(--pill-radius);
-        background-color: theme.colours(--btn-green);
-        border: none;
+.backdrop {
+    top: 0;
+    position: fixed;
+    background: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
 
-        // background: #0b6dff;
-        // border: 0;
-        // padding: 10px 20px;
-        // margin-top: 20px; 
-        // color: white;
-        // border-radius: 20px;
-    }
-    .submit {
-        text-align: center;
-    }
-    .error {
-        color: #ff0062;
-        margin-top: 10px;
-        font-size: 0.8em;
-        font-weight: bold;
+    .modal {
+        max-width: 600px;
+        padding: 20px;
+        background: white;
+        border-radius: 10px;
+        transform: translate(-50%, -50%);
+        position: absolute;
+        left: 50%;
+        top: 50%;
+
+        h4 {
+            border-bottom: 1px solid #ddd;
+            display: inline-block;
+            text-align: center;
+            width: 100%;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        form {
+            width: 500px;
+            margin: 30px auto;
+            background: white;
+            text-align: left;
+            padding: 0 40px;
+            border-radius: 10px;
+        }
+        label {
+            color: #414141;
+            display: inline-block;
+            margin: 25px 0 15px;
+            font-size: 0.6em;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        .modal-input {
+            display: block;
+            padding: 10px 6px !important;
+            width: 100%;
+            box-sizing: border-box;
+            border: none !important;
+            border-bottom: 1px solid #ddd !important;
+            color: #555;
+        }
+        input[type="checkbox"] {
+            display: inline-block;
+            width: 16px;
+            margin: 0 10px 0 0;
+            position: relative;
+            top: 2px;
+        }
+        .pill {
+            display: inline-block;
+            margin: 20px 10px 0 0;
+            padding: 6px 12px;
+            background: #eee;
+            border-radius: 20px;
+            font-size: 12px;
+            letter-spacing: 1px;
+            font-weight: bold;
+            color: #777;
+            cursor: pointer;
+        }
+        button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 20px;
+            margin-top: 20px;
+            border-radius: theme.elements(--pill-radius);
+            background-color: theme.colours(--btn-green);
+            border: none;
+
+            // background: #0b6dff;
+            // border: 0;
+            // padding: 10px 20px;
+            // margin-top: 20px; 
+            // color: white;
+            // border-radius: 20px;
+        }
+        .submit {
+            text-align: center;
+        }
+        .error {
+            color: #ff0062;
+            margin-top: 10px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
     }
 }

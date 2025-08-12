@@ -118,9 +118,33 @@ class AdminVenuesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function view(string $id)
     {
-        //
+        $venue = $this->venues->getVenuesById($id);
+
+        if(!$venue) {
+            return redirect()->route('admin.venues')->with('error', 'Class not found.');
+        }
+
+        $attributes = [
+            'title' => $venue['name'],
+            // 'venue' => $venue,
+            // 'page_actions' => [
+            //     [
+            //         'label' => 'Save',
+            //         'class' => 'save jp-btn-gry',
+            //         'icon' => 'save',
+            //         'action' => ''
+            //     ],
+            //     [
+            //         'label' => 'Cancel',
+            //         'class' => 'cancel jp-btn-red',
+            //         'icon' => 'x',
+            //         'action' => route('admin.venues')
+            //     ]
+            // ],
+        ];
+        return view('admin.venue-view', compact('attributes'));
     }
 
     /**

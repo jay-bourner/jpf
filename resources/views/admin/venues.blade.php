@@ -10,6 +10,9 @@
                         <div class="class-name">{{ $venue['name'] }}</div>
                     </div>
                     <div class="content-list__item--buttons">
+                        <a href="{{ route('admin.venues.view', $venue['id']) }}" class="jp-btn jp-btn--sm view-button">
+                            <span class="svg-icon svg-icon--view"></span>
+                        </a>
                         <a href="{{ route('admin.venues.edit', $venue['id']) }}" class="jp-btn jp-btn--sm edit-button">
                             <span class="svg-icon svg-icon--pencil"></span>
                         </a>

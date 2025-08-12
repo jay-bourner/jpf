@@ -112,16 +112,38 @@ class AdminPricesController extends Controller
         }
         return redirect()->route('admin.prices')
             ->with($result['success']);
-
-
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function view(string $id)
     {
-        //
+        $price = $this->prices->getPriceById($id);
+
+        if(!$price) {
+            return redirect()->route('admin.prices')->with('error', 'Class not found.');
+        }
+
+        $attributes = [
+            'title' => ucwords($price['type']) . ' Price',
+            // 'price' => $price,
+            // 'page_actions' => [
+            //     [
+            //         'label' => 'Edit',
+            //         'class' => 'edit jp-btn-gry',
+            //         'icon' => 'pencil',
+            //         'action' => route('admin.prices.edit', $price['id'])
+            //     ],
+            //     [
+            //         'label' => 'Delete',
+            //         'class' => 'delete jp-btn-red',
+            //         'icon' => 'trash',
+            //         'action' => route('admin.prices.delete', $price['id'])
+            //     ]
+            // ],
+        ];
+        return view('admin.price-view', compact('attributes'));
     }
 
     /**

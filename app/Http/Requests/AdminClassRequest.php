@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class AdminClassRequest extends FormRequest
 {
@@ -21,15 +22,23 @@ class AdminClassRequest extends FormRequest
      */
     public function rules(): array
     {
+        $classId = request()->route('id');
+        
         return [
             'category_id' => 'required|exists:categories,id',
             'venue_id' => 'required|exists:venues,id',
-            'name' => 'required|string|unique:classes|max:255',
+            'name' => $classId ? 'required|string|max:255,' : 'required|string|max:255|unique:classes,name',
+            // 'name' => [
+            //     'required',
+            //     'string',
+            //     'max:255',
+            //     Rule::unique('classes')->ignore($classId)
+            // ],
             'short_description' => 'required|string|max:500',
             'description' => 'nullable|string|max:5000',
             'image' => 'nullable|image|max:2048',
             'image_description' => 'nullable|string|max:255',
-            'start_date' => 'nullable|date|after_or_equal:now',
+            'start_date' => $classId ? 'nullable|date' : 'nullable|date|after_or_equal:now',
             'notes' => 'nullable|string|max:1000',
         ];
     }

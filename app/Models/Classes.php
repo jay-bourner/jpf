@@ -205,4 +205,58 @@ class Classes extends Model
 
         return $result;
     }
+
+    public function updateClass($id, $data)
+    {
+        $result = array();
+
+        try {
+            $class = $this->find($id);
+            $class->category_id = (int)$data['category_id'];
+            $class->venue_id = (int)$data['venue_id'];
+            $class->name = $data['name'];
+            $class->short_description = htmlspecialchars($data['short_description']);
+            $class->description = htmlspecialchars($data['description'] ?? null);
+            $class->image = htmlspecialchars($data['image'] ?? null);
+            $class->image_description = htmlspecialchars($data['image_description'] ?? null);
+            $class->status = ($data['start_date'] && $data['start_date'] > Carbon::now()) ? 'inactive' : 'active';
+            $class->start_date = $data['start_date'] ?? Carbon::now();
+            // $class->notes = htmlspecialchars($data['notes']) ?? null;
+
+            // dd($class);
+            if($class->update()) {
+                $result = ['success' => 'Class added successfully.', 'class' => $class];
+            } 
+        } catch (\Exception $e) {
+            $result = ['warning' => 'Failed to add class. ' . $e->getMessage()];
+        }
+
+        return $result;
+    }
+
+    public function deleteClass($id)
+    {
+        $result = array();
+
+        try {
+            $class = $this->find($id);
+            $classOptions = $this->classOptions->where('class_id', $id)->get();
+            if ($classOptions) {
+                foreach ($classOptions as $option) {
+                    $option->delete();
+                }
+            }
+            
+            if ($class) {
+                $class->delete();
+                $result = ['success' => 'Class deleted successfully.'];
+            } else {
+                $result = ['warning' => 'Class not found.'];
+            }
+        } catch (\Exception $e) {
+            $result = ['warning' => 'Failed to delete class. ' . $e->getMessage()];
+        }
+
+        return $result;
+    }
 }

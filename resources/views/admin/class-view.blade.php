@@ -5,7 +5,7 @@
         <div class="class-view__heading--desc">
             <h2>{{ $attributes['class']['short_description']}}</h2>
             <div>
-                <p>{{ $attributes['class']['description'] }}</p>
+                {!! $attributes['class']['description'] !!}
             </div>
         </div>
         @if($attributes['class']['image'] != '')
@@ -28,11 +28,11 @@
             @endif
         </div>
         <div class="class-view__content--right">
-            @if(count($attributes['class']['options']) > 0)
                 <div class="schedule-options-header">
                     <h3>Class Schedules</h3>
                     <span id="classesOptions"></span>
                 </div>
+            @if(count($attributes['class']['options']) > 0)
                 @foreach($attributes['class']['options'] as $option)
                     <span><strong>{{ $option['day'] }}</strong></span>
                     <ul>
@@ -45,6 +45,8 @@
                         <li><strong>Time:</strong> <span>{{ $option['start_time'] }} - {{ $option['end_time'] }}</span></li>
                     </ul>
                 @endforeach
+            @else
+                <p>No schedules available for this class.</p>
             @endif
         </div>
 @endsection

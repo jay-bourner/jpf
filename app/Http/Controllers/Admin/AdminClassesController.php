@@ -90,13 +90,15 @@ class AdminClassesController extends Controller
             'class' => $class,
             'categories' => $categories ?? [],
             'venues' => $venues ?? [],
+            'method' => 'POST',
+            'second_method' => 'PUT',
             'action' => route('admin.classes.update', $id),
             'page_actions' => [
                 [
                     'label' => 'Save',
                     'class' => 'save jp-btn-gry',
                     'icon' => 'save',
-                    'action' => ''
+                    'dataset' => 'submit-form'
                 ],
                 [
                     'label' => 'Cancel',
@@ -172,9 +174,25 @@ class AdminClassesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(AdminClassRequest $request, string $id)
     {
-        //
+        $inputs = $request->validated();
+
+        // dd($inputs);
+
+        $data = $request->safe()
+            ->merge($inputs)
+            ->except(['_token', '_method']);
+
+        $result = $this->classes->updateClass($id, $data);
+
+        if (isset($result['warning'])) {
+            return redirect()->route('admin.classes.edit')
+                ->withErrors($result['warning']);
+        }
+
+        return redirect()->route('admin.classes')
+            ->with('success', 'Class created successfully!');
     }
 
     /**
@@ -182,6 +200,14 @@ class AdminClassesController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $result = $this->classes->deleteClass($id);
+        
+        if (isset($result['warning'])) {
+            return redirect()->route('admin.classes')
+                ->withErrors($result['warning']);
+        }
+
+        return redirect()->route('admin.classes')
+            ->with('success', 'Class created successfully!');
     }
 }
