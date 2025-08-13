@@ -79,4 +79,30 @@ class Prices extends Model
 
         return $result;
     }
+
+    public function updatePrice($id, $data)
+    {
+        $result = array();
+
+        try {
+            $price = $this->find($id);
+            if (!$price) {
+                return ['warning' => 'Price not found.'];
+            }
+
+            $price->price = $data['price'];
+            $price->type = $data['type'];
+            $price->classes = $data['classes'] ?? null;
+            $price->period = $data['period'] ?? null;
+            $price->notes = $data['notes'] ?? null;
+
+            $price->update($data);
+
+            $result = ['success' => 'Price updated successfully.'];
+        } catch (\Exception $e) {
+            $result = ['warning' => 'Failed to update price. ' . $e->getMessage()];
+        }
+
+        return $result;
+    }
 }

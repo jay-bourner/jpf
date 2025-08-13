@@ -90,7 +90,7 @@ Route::group(['prefix' => 'admin'], function() {
     Route::put('/venues/update/{id}', [AdminVenuesController::class, 'update'])
         ->name('admin.venues.update');
 
-    Route::get('/venues/delete/{id}', [AdminVenuesController::class, 'delete'])
+    Route::get('/venues/delete/{id}', [AdminVenuesController::class, 'destroy'])
         ->name('admin.venues.delete');
 
 
@@ -113,7 +113,7 @@ Route::group(['prefix' => 'admin'], function() {
     Route::put('/prices/update/{id}', [AdminPricesController::class, 'update'])
         ->name('admin.prices.update');
 
-    Route::get('/prices/delete/{id}', [AdminPricesController::class, 'delete'])
+    Route::get('/prices/delete/{id}', [AdminPricesController::class, 'destroy'])
         ->name('admin.prices.delete');
 
     // settings routes

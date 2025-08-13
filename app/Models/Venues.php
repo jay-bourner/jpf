@@ -106,4 +106,30 @@ class Venues extends Model
 
         return $result;
     }
+
+    public function updateVenue($id, $data)
+    {
+        $result = array();
+
+        try {
+            $venue = $this->find($id);
+            if (!$venue) {
+                return ['warning' => 'Venue not found.'];
+            }
+
+            $venue->name = $data['name'];
+            $venue->address = $data['address'];
+            $venue->town = $data['town'];
+            $venue->postcode = $data['postcode'];
+            $venue->capacity = $data['capacity'] ?? null;
+
+            if ($venue->save()) {
+                $result = ['success' => 'Venue updated successfully.'];
+            }
+        } catch (\Exception $e) {
+            $result = ['warning' => 'Failed to update venue. ' . $e->getMessage()];
+        }
+
+        return $result;
+    }
 }

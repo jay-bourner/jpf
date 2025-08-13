@@ -75,12 +75,15 @@ class AdminPricesController extends Controller
         $attributes = [
             'title' => 'Edit Price',
             'price' => $price,
+            'method' => 'POST',
+            'second_method' => 'PUT',
+            'action' => route('admin.prices.update', $id),
             'page_actions' => [
                 [
                     'label' => 'Save',
                     'class' => 'save jp-btn-gry',
                     'icon' => 'save',
-                    'action' => ''
+                    'dataset' => 'submit-form'
                 ],
                 [
                     'label' => 'Cancel',
@@ -127,7 +130,7 @@ class AdminPricesController extends Controller
 
         $attributes = [
             'title' => ucwords($price['type']) . ' Price',
-            // 'price' => $price,
+            'price' => $price,
             // 'page_actions' => [
             //     [
             //         'label' => 'Edit',
@@ -149,9 +152,23 @@ class AdminPricesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(AdminPricesRequest $request, string $id)
     {
-        //
+        $inputs = $request->validated();
+
+        $data = $request->safe()
+            ->merge($inputs)
+            ->except(['_token', '_method']);
+
+        $result = $this->prices->updatePrice($id, $data);
+
+        if(isset($result['warning'])) {
+            return redirect()->route('admin.prices.edit', $id)
+                ->withErrors($result['warning']);
+        }
+
+        return redirect()->route('admin.prices')
+            ->with($result['success']);
     }
 
     /**

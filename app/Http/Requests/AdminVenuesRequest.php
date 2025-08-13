@@ -21,8 +21,10 @@ class AdminVenuesRequest extends FormRequest
      */
     public function rules(): array
     {
+        $venueId = request()->route('id');
+
         return [
-            'name' => 'required|string|unique:venues|max:100',
+            'name' => $venueId ? 'required|string|max:100' : 'required|string|unique:venues|max:100',
             'address' => 'required|string|max:100',
             'town' => 'required|string|max:100',
             'postcode' => 'required|string|max:10',

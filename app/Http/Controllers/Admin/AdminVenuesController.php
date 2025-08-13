@@ -75,12 +75,15 @@ class AdminVenuesController extends Controller
         $attributes = [
             'title' => 'Edit Venue',
             'venue' => $venue,
+            'method' => 'POST',
+            'second_method' => 'PUT',
+            'action' => route('admin.venues.update', $id),
             'page_actions' => [
                 [
                     'label' => 'Save',
                     'class' => 'save jp-btn-gry',
                     'icon' => 'save',
-                    'action' => ''
+                    'dataset' => 'submit-form'
                 ],
                 [
                     'label' => 'Cancel',
@@ -127,8 +130,8 @@ class AdminVenuesController extends Controller
         }
 
         $attributes = [
-            'title' => $venue['name'],
-            // 'venue' => $venue,
+            'title' => ucwords($venue['name']),
+            'venue' => $venue,
             // 'page_actions' => [
             //     [
             //         'label' => 'Save',
@@ -144,15 +147,31 @@ class AdminVenuesController extends Controller
             //     ]
             // ],
         ];
+
+        // dd($attributes);
         return view('admin.venue-view', compact('attributes'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(AdminVenuesRequest $request, string $id)
     {
-        //
+        $inputs = $request->validated();
+
+        $data = $request->safe()
+            ->merge($inputs)
+            ->except(['_token', '_method']);
+
+        $result = $this->venues->updateVenue($id, $data);
+
+        if(isset($result['warning'])) {
+            return redirect()->route('admin.venues.edit', ['id' => $id])
+                ->withErrors($result['warning']);
+        }
+
+        return redirect()->route('admin.venues')
+            ->with($result['success']);
     }
 
     /**

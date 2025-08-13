@@ -28,12 +28,6 @@ class AdminClassRequest extends FormRequest
             'category_id' => 'required|exists:categories,id',
             'venue_id' => 'required|exists:venues,id',
             'name' => $classId ? 'required|string|max:255,' : 'required|string|max:255|unique:classes,name',
-            // 'name' => [
-            //     'required',
-            //     'string',
-            //     'max:255',
-            //     Rule::unique('classes')->ignore($classId)
-            // ],
             'short_description' => 'required|string|max:500',
             'description' => 'nullable|string|max:5000',
             'image' => 'nullable|image|max:2048',

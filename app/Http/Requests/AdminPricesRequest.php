@@ -21,12 +21,13 @@ class AdminPricesRequest extends FormRequest
      */
     public function rules(): array
     {
+        $priceType = request('type');
+
         return [
             'price' => 'required|numeric|min:0',
             'type' => 'required|string|in:payg,term',
-            'classes' => 'required|integer|min:1',
-            'amount' => 'nullable|numeric|min:0',
-            'period' => 'nullable|string',
+            'classes' => ($priceType == 'payg') ? '' : 'required|integer|min:1',
+            'period' => ($priceType == 'payg') ? '' : 'required|nullable|string',
             'notes' => 'nullable|string|max:255',
         ];
     }

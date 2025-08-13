@@ -49,4 +49,5 @@
                 <p>No schedules available for this class.</p>
             @endif
         </div>
+    </div>
 @endsection

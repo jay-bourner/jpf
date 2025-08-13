@@ -148,7 +148,8 @@ class AdminClassesController extends Controller
         }
 
         $attributes = [
-            'title' => $class['name'],
+            'title' => ucwords($class['name']),
+            'class' => $class,
             // 'page_actions' => [
             //     [
             //         'label' => 'Save',
@@ -163,7 +164,6 @@ class AdminClassesController extends Controller
             //         'action' => route('admin.classes')
             //     ]
             // ],
-            'class' => $class,
         ];
 
         // dd(count($class['options']));
@@ -177,8 +177,6 @@ class AdminClassesController extends Controller
     public function update(AdminClassRequest $request, string $id)
     {
         $inputs = $request->validated();
-
-        // dd($inputs);
 
         $data = $request->safe()
             ->merge($inputs)

@@ -27,24 +27,27 @@ nav.admin-sidebar {
             cursor: pointer;
             transition: background-color 0.3s ease;
 
-            &:hover {
-                background-color: theme.colours(--dark-bg-fade);
-            }
-
             .svg-icon {
+                width: 20px;
+                height: 20px;
                 fill: theme.colours(--text-light);
-            }
-            a {
-                text-decoration: none;
-                color: theme.colours(--text-light);
-                display: flex;
-                align-items: center;
 
                 svg {
                     margin-right: 10px;
                     width: 20px;
                     height: 20px;
                 }
+            }
+
+            a {
+                text-decoration: none;
+                color: theme.colours(--text-light);
+                display: flex;
+                align-items: center;
+            }
+
+            &:hover {
+                background-color: theme.colours(--btn-green);
             }
         }
     }
