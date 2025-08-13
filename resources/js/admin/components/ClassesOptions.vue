@@ -49,8 +49,8 @@
 </template>
 
 <script>
-import Modal from './Modal.vue';
-import Loader from './Loader.vue';
+import Modal from '../../components/Modal.vue';
+import Loader from '../../components/Loader.vue';
 
 export default {
     name: 'ClassesOptions',
