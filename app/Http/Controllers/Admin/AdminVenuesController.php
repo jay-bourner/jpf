@@ -181,4 +181,45 @@ class AdminVenuesController extends Controller
     {
         //
     }
+
+    /**
+     * API method for venues
+     */
+    public function apiIndex()
+    {
+        $result = array();
+        $id = request()->route('id');
+
+        if($id) {
+            $venue = $this->venues->getVenuesById($id);
+
+            if (!$venue) {
+                $result = ['error' => 'No venues found.'];
+            } else {
+                $result = [
+                    'id' => $venue['id'],
+                    'name' => $venue['name'],
+                    'address' => $venue['address'],
+                    'town' => $venue['town'],
+                    'postcode' => $venue['postcode'],
+                    'capacity' => $venue['capacity'],
+                ];
+            }
+        } else {
+            $venues = $this->venues->getAllVenues();
+            
+            foreach ($venues as $venue) {
+                $result[] = [
+                    'id' => $venue['id'],
+                    'name' => $venue['name'],
+                    'address' => $venue['address'],
+                    'town' => $venue['town'],
+                    'postcode' => $venue['postcode'],
+                    'capacity' => $venue['capacity'],
+                ];
+            }
+        }
+
+        return response()->json($result);
+    }
 }

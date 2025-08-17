@@ -47,7 +47,6 @@ Route::group(['prefix' => 'admin'], function() {
     Route::get('/', [AdminController::class, 'index'])
         ->name('admin.index');
 
-
     // Classes Routes
     Route::get('/classes', [AdminClassesController::class, 'index'])
         ->name('admin.classes');
@@ -120,6 +119,13 @@ Route::group(['prefix' => 'admin'], function() {
     Route::get('/settings', [AdminSettingsController::class, 'index'])
         ->name('admin.settings');
 });
+
+
+// API routes
+Route::prefix('api')->group(function () {
+    Route::get('/venues', [AdminVenuesController::class, 'apiIndex']);
+});
+
 // Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

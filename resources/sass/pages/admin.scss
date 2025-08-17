@@ -388,6 +388,29 @@
             // }
         }
     }
+
+    .dashboard {
+
+        &-cards {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+
+            .card {
+                flex: 1;
+                padding: 20px;
+                background-color: theme.colours(--white);
+                border-radius: theme.elements(--border-radius-md);
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+                h2 {
+                    margin: 0;
+                    font-size: 1.5rem;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
 }
 
 @keyframes messageFadeOut {
