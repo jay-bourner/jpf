@@ -190,9 +190,14 @@ input, select, textarea {
 }
 
 .active-state, .inactive-state {
+    background: #f3eeee;
+    padding: 5px 15px;
+    border-radius: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    left: 15px;
 
     &::before {
         content: '';

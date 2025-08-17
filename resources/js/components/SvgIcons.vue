@@ -1,24 +1,19 @@
 <template>
-    <span class="svg-icon svg-icon--plus">
-        <svg width="30px" height="30px">
-            <use href="/image/svg/sprite-sheet/sprite-sheet-3.svg#plus"></use>
-        </svg>
-    </span>
+    <svg width="30px" height="30px">
+        <use :href="icon"></use>
+    </svg>
 </template>
 
 <script>
 export default {
     name: 'SvgIcons',
-    props: {
-        icon: {
-            type: String,
-            required: true
-        }
+    props: [
+        'icon'
+    ],
+    data() {
+        return {
+            icon: `/image/svg/sprite-sheet/sprite-sheet-1.svg#${this.icon}`
+        };
     },
-    // computed: {
-    //     iconPath() {
-    //         return `/image/svg/sprite-sheet/sprite-sheet-3.svg#${this.icon}`;
-    //     }
-    // }
 }
 </script>
