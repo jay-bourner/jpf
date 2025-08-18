@@ -1,18 +1,42 @@
 const FetchAPI = {
-    async get(url) {
-        let results;
-        // return url;
-        fetch(`/api/${url}`)
-        .then(response => response.json())
-        .then(data => {
-            results = data;
-        })
-        .catch(error => {
-            console.error('Error fetching venues:', error);
-        });
+    async get(object) {
+        try {
+            const response = await fetch(`${object.url}`, {
+                method: 'GET',
+            });
 
-        return results;
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            let data = null
+            
+            if(object.dataType === 'json') {
+                data = await response.json();
+            } else if(object.dataType === 'html') {
+                data = await response.text();
+            }
+
+            return data;
+        } catch (error) {
+            console.error('Error:', error);
+            throw error;
+        }
     }
+    // async get(url) {
+    //     let results;
+    //     // return url;
+    //     fetch(`/api/${url}`)
+    //     .then(response => response.json())
+    //     .then(data => {
+    //         results = data;
+    //     })
+    //     .catch(error => {
+    //         console.error('Error fetching venues:', error);
+    //     });
+
+    //     return results;
+    // }
     // async get(endpoint, params = {}) {
     //     const url = new URL(`/api/${endpoint}`);
     //     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
@@ -39,30 +63,6 @@ const FetchAPI = {
     //     return response.json();
     // }
     
-    // async get(object) {
-    //     try {
-    //         const response = await fetch(`${object.url}`, {
-    //             method: 'GET',
-    //         });
-
-    //         if (!response.ok) {
-    //             throw new Error(`HTTP error! status: ${response.status}`);
-    //         }
-
-    //         let data = null
-            
-    //         if(object.dataType === 'json') {
-    //             data = await response.json();
-    //         } else if(object.dataType === 'html') {
-    //             data = await response.text();
-    //         }
-
-    //         return data;
-    //     } catch (error) {
-    //         console.error('Error:', error);
-    //         throw error;
-    //     }
-    // }
 
     // async post(object, form = '') {
     //     try {

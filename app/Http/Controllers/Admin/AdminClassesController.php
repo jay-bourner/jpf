@@ -208,4 +208,24 @@ class AdminClassesController extends Controller
         return redirect()->route('admin.classes')
             ->with('success', 'Class created successfully!');
     }
+
+    public function apiIndex() {
+        $result = array();
+        $id = request()->route('id');
+
+        if($id) {
+            $class = $this->classes->getClassById($id);
+
+            if(!$class) {
+                $result = ['error' => 'Class not found.'];
+            } else {
+                $result = $class;
+            }
+        } else {
+            $classes = $this->classes->getAllClasses();
+            $result = $classes;
+        }
+
+        return response()->json($result);
+    }
 }

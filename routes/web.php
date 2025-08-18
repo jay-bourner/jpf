@@ -122,8 +122,9 @@ Route::group(['prefix' => 'admin'], function() {
 
 
 // API routes
-Route::prefix('api')->group(function () {
+Route::group(['prefix' => 'api'], function () {
     Route::get('/venues', [AdminVenuesController::class, 'apiIndex']);
+    Route::get('/classes', [AdminClassesController::class, 'apiIndex']);
 });
 
 // Auth::routes();

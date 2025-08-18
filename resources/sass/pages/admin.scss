@@ -390,7 +390,6 @@
     }
 
     .dashboard {
-
         &-cards {
             display: flex;
             gap: 20px;
@@ -407,6 +406,34 @@
                     margin: 0;
                     font-size: 1.5rem;
                     font-weight: bold;
+                }
+            }
+        }
+
+        &-data {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: theme.colours(--white);
+            border-radius: theme.elements(--border-radius-md);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+
+                th, td {
+                    padding: 10px;
+                    text-align: left;
+                    border-bottom: 1px solid theme.colours(--light-grey);
+                }
+
+                th {
+                    background-color: theme.colours(--bg-lt-grey);
+                    font-weight: bold;
+                }
+
+                tr:hover {
+                    background-color: theme.colours(--bg-lt-green);
                 }
             }
         }

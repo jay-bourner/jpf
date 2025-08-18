@@ -74,6 +74,7 @@ class Classes extends Model
                 'image_description' => html_entity_decode($class->image_description ?? ''),
                 'start_date' => $class->start_date,
                 'status' => $class->status,
+                'options' => $this->classOptions->getClassOptions($class->id),
             ];
         }
 
