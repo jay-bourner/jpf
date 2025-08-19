@@ -1,28 +1,46 @@
+import { data } from "jquery";
+
 const FetchAPI = {
-    async get(object) {
+    async get(url) {
         try {
-            const response = await fetch(`${object.url}`, {
-                method: 'GET',
-            });
+            const response = await fetch(url);
 
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                throw new Error('Network response was not ok');
             }
 
-            let data = null
-            
-            if(object.dataType === 'json') {
-                data = await response.json();
-            } else if(object.dataType === 'html') {
-                data = await response.text();
-            }
-
+            const data = await response.json();
+            console.log('Data fetched:', data);
             return data;
-        } catch (error) {
-            console.error('Error:', error);
-            throw error;
+        } catch (err) {
+            return err.message;
         }
+        
     }
+    // async get(object) {
+    //     try {
+    //         const response = await fetch(`${object.url}`, {
+    //             method: 'GET',
+    //         });
+
+    //         if (!response.ok) {
+    //             throw new Error(`HTTP error! status: ${response.status}`);
+    //         }
+
+    //         let data = null
+            
+    //         if(object.dataType === 'json') {
+    //             data = await response.json();
+    //         } else if(object.dataType === 'html') {
+    //             data = await response.text();
+    //         }
+
+    //         return data;
+    //     } catch (error) {
+    //         console.error('Error:', error);
+    //         throw error;
+    //     }
+    // }
     // async get(url) {
     //     let results;
     //     // return url;

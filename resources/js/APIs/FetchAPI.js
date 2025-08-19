@@ -3,31 +3,43 @@ class FetchAPI {
         this.baseUrl = '/api';
     }
 
-    async get(endpoint, params = {}) {
-        const url = new URL(`${this.baseUrl}/${endpoint}`);
-        Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
-        
-        const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+    async get() {
+        try {
+            const response = await fetch('/api/venues');
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json()
+        } catch (err) {
+            return err.message;
         }
-        return response.json();
     }
 
-    async post(endpoint, data) {
-        const response = await fetch(`${this.baseUrl}/${endpoint}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        });
+    // async get(endpoint, params = {}) {
+    //     const url = new URL(`${this.baseUrl}/${endpoint}`);
+    //     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
         
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.json();
-    }
+    //     const response = await fetch(url);
+    //     if (!response.ok) {
+    //         throw new Error(`HTTP error! status: ${response.status}`);
+    //     }
+    //     return response.json();
+    // }
+
+    // async post(endpoint, data) {
+    //     const response = await fetch(`${this.baseUrl}/${endpoint}`, {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify(data)
+    //     });
+        
+    //     if (!response.ok) {
+    //         throw new Error(`HTTP error! status: ${response.status}`);
+    //     }
+    //     return response.json();
+    // }
     
     // async get(object) {
     //     try {

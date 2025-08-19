@@ -228,4 +228,27 @@ class AdminClassesController extends Controller
 
         return response()->json($result);
     }
+
+    public function apiSchedules() {
+        $result = array();
+        $venues = $this->venues->getAllVenues();
+
+        foreach($venues as $venue) {
+            $schedules = $this->classOptions->getSchedulesByVenueId($venue['id']);
+            
+            if(!empty($schedules)) {
+                foreach($schedules as $key => $schedule) {
+                    $result[$venue['name']][] = [
+                        'event' => $this->classes->getClassById($schedule['class_id'])['name'],
+                        'starts' => $schedule['start_time'],
+                        'ends' => $schedule['end_time'],
+                        'frequency' => $schedule['frequency'],
+                        'day' => $schedule['day'],
+                    ];
+                }
+            }
+        }
+
+        return response()->json($result);
+    }
 }

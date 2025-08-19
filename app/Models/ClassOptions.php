@@ -61,4 +61,23 @@ class ClassOptions extends Model
 
         return $url;
     }
+
+    public function getSchedulesByVenueId($venue_id)
+    {
+        $schedules = $this->where('venue_id', $venue_id)->get();
+        $results = [];
+        foreach ($schedules as $schedule) {
+            $results[] = [
+                'id' => $schedule->id,
+                'class_id' => $schedule->class_id,
+                'venue_id' => $schedule->venue_id,
+                'start_time' => $schedule->start_time,
+                'end_time' => $schedule->end_time,
+                'frequency' => $schedule->frequency,
+                'day' => $schedule->day,
+            ];
+        }
+
+        return $results;
+    }
 }
