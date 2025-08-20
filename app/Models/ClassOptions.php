@@ -52,6 +52,40 @@ class ClassOptions extends Model
 
         return $results;
     }
+
+    public function createClassOption($data)
+    {
+        $option = new self();
+        $option->class_id = $data['class_id'];
+        $option->venue_id = $data['venue_id'];
+        $option->start_time = $data['start_time'];
+        $option->end_time = $data['end_time'];
+        $option->frequency = $data['frequency'];
+        $option->day = $data['day'];
+
+        if ($option->save()) {
+            return ['success' => 'Class option created successfully!'];
+        }
+
+        return ['error' => 'Failed to create class option.'];
+    }
+    // {
+    //     $options = $this->where('venue_id', $venue_id)->get();
+    //     $results = [];
+    //     foreach ($options as $option) {
+    //         $results[] = [
+    //             'id' => $option->id,
+    //             'class_id' => $option->class_id,
+    //             'venue_id' => $option->venue_id,
+    //             'start_time' => $option->start_time,
+    //             'end_time' => $option->end_time,
+    //             'frequency' => $option->frequency,
+    //             'day' => $option->day,
+    //         ];
+    //     }
+
+    //     return $results;
+    // }
     
     private function getGoogleApiLocation($venue)
     {

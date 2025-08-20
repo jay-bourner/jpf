@@ -10,13 +10,46 @@ const FetchAPI = {
             }
 
             const data = await response.json();
-            console.log('Data fetched:', data);
+            // console.log('Data fetched:', data);
             return data;
         } catch (err) {
             return err.message;
         }
-        
-    }
+    },
+
+    async post(endpoint, data) {
+        try {
+            const response = await fetch(endpoint, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            return await response.json();
+        } catch (err) {
+            return err.message;
+        }
+    },
+
+    // getFormData(form) {
+    //     const formData = new FormData();
+    //     const inputs = form.querySelectorAll('input, select, textarea');
+
+    //     inputs.forEach(input => {
+    //         if (input.name) {
+    //             formData.append(input.name, input.value);
+    //         }
+    //     });
+
+    //     return formData;
+    // }
+
     // async get(object) {
     //     try {
     //         const response = await fetch(`${object.url}`, {

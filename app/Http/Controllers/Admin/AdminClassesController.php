@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AdminClassOptionRequest;
 use Illuminate\Http\Request;
 use App\Http\Requests\AdminClassRequest;
 use App\Models\Classes;
@@ -10,6 +11,7 @@ use App\Models\ClassOptions;
 use App\Models\Categories;
 use App\Models\Venues;
 use App\Services\ImageService;
+use Illuminate\Validation\Rule;
 // use Illuminate\Support\Facades\DB;
 
 class AdminClassesController extends Controller
@@ -251,4 +253,21 @@ class AdminClassesController extends Controller
 
         return response()->json($result);
     }
+
+    public function apiCreateOptions(AdminClassOptionRequest $request) {
+        $inputs = $request->validated();
+
+        $data = $request->safe()
+            ->merge($inputs)
+            ->except(['_token', '_method']);
+
+        $result = $this->classOptions->createClassOption($data);
+
+        if (isset($result['error'])) {
+            return response()->json(['error' => $result['warning']], 400);
+        }
+
+        return response()->json(['success' => 'Class option created successfully!'], 201);
+    }
+
 }

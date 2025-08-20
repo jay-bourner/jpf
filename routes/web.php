@@ -123,9 +123,13 @@ Route::group(['prefix' => 'admin'], function() {
 
 // API routes
 Route::group(['prefix' => 'api'], function () {
+    // gets
     Route::get('/venues', [AdminVenuesController::class, 'apiIndex']);
     Route::get('/classes', [AdminClassesController::class, 'apiIndex']);
     Route::get('/schedules', [AdminClassesController::class, 'apiSchedules']);
+
+    // posts
+    Route::post('/classes/options', [AdminClassesController::class, 'apiCreateOptions']);
 });
 
 // Auth::routes();

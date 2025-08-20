@@ -16,7 +16,18 @@
         </div>
         <div class="dashboard-data">
             <h2>Upcoming Classes</h2>
-            
+            <div class="schedule">
+                <div v-for="(schedule, key) in schedules" :key="key" class="schedule__column">
+                    <div class="schedule__column--header">{{ key }}</div>
+                    <div v-for="(classItem, index) in schedule" :key="index"  class="schedule__column--list">
+                        <div class="schedule__column--item">
+                            <h3>{{ classItem.event }}</h3>
+                            <div>{{ classItem.frequency }} on a {{ classItem.day }}</div>
+                            <div>{{ classItem.starts }} - {{ classItem.ends }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
