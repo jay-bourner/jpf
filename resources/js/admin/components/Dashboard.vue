@@ -52,28 +52,16 @@ export default {
 
         
         const setVenues = async () => { 
-            get('/api/venues', venues, venueCount) 
+            FetchAPI.get('/api/venues', venues, venueCount) 
         };
 
         const setClasses = async () => { 
-            get('/api/classes', classes, classesCount) 
+            FetchAPI.get('/api/classes', classes, classesCount) 
         }; 
 
         const setSchedules = async () => { 
-            get('/api/schedules', schedules) 
+            FetchAPI.get('/api/schedules', schedules) 
         };
-
-        const get = async (url, ref, counter = null) => {
-            await FetchAPI.get(url).then(response => {
-                ref.value = response;
-                if(counter) {
-                    counter.value = ref.value.length;
-                }
-            }).catch(err => {
-                ref.error.value = err;
-                console.error('Error fetching data:', ref.error.value);
-            });
-        }
 
         setVenues()
         setClasses()

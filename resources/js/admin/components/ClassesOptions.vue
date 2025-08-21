@@ -1,5 +1,5 @@
 <template>
-    <button @click="toggleModal">
+    <button v-if="showButton" @click="toggleModal">
         <span class="add-icon"></span>
         <span class="icon-btn-text">Add Option</span>
     </button>
@@ -62,7 +62,13 @@ export default {
         Modal,
         Loader
     },
-    setup() {
+    props: [ 'instantDisplay' ],
+    setup(props) {
+        const title = ref('Add Option');
+        const showModal = ref(false);
+        const showLoader = ref(false);
+        const showButton = ref(true);
+
         const venues = ref('');
 
         const venue_id = ref('');
@@ -73,11 +79,11 @@ export default {
 
         const postResult = ref('');
         const postError = ref('');
-
-        const showLoader = ref(false);
         
         const classId = document.querySelector('.class-view__heading').dataset.classId;
         
+        const directModal = ref(props);
+
         const handleSubmit = async () => {
             showLoader.value = true;
 
@@ -91,38 +97,33 @@ export default {
                 frequency: frequency.value
             };
 
-            await post('/api/classes/options', postData);
+            await FetchAPI.post('/api/classes/options', postData);
         }
 
         const setVenues = async () => { 
-            get('/api/venues', venues) 
+            FetchAPI.get('/api/venues', venues) 
         };
 
-        const get = async (url, ref) => {
-            await FetchAPI.get(url).then(response => {
-                ref.value = response;
-            }).catch(err => {
-                ref.error.value = err;
-                console.error('Error fetching data:', ref.error.value);
-            });
+        const toggleModal = () => {
+            showModal.value = !showModal.value
+            showLoader.value = false; // Reset loader state when toggling modal
+        }
+        // const instantDisplay = props.instantDisplay
+
+        if (directModal.value.instantDisplay) {
+            toggleModal();
+            showButton.value = false;
         }
 
-        const post = async (url, obj) => {
-            await FetchAPI.post(url, obj).then(response => {
-                postResult.value = response;
-                if(response.success) {
-                    window.location.reload();
-                }
-                console.log('post response', postResult.value);
-            }).catch(err => {
-                postError = err;
-                console.error('Error fetching data:', postError);
-            });
-        }
-
+        // console.log(props)
+        console.log(directModal.value.instantDisplay)
         setVenues()
 
         return {
+            title,
+            showModal,
+            showLoader,
+            showButton,
             venues,
             venue_id,
             day,
@@ -131,20 +132,16 @@ export default {
             frequency,
             handleSubmit,
             showLoader,
+            toggleModal
         };
     },
-    data() {
-        return {
-            title: 'Add Option',
-            showModal: false,
-            showLoader: false,
-        };
-    },
-    methods: {
-        toggleModal() {
-            this.showModal = !this.showModal
-            this.showLoader = false; // Reset loader state when toggling modal
-        },
-    }
+    // data() {
+
+    //     return {
+    //     };
+    // },
+    // methods: {
+        
+    // }
 }
 </script>

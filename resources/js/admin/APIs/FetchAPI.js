@@ -1,7 +1,7 @@
 import { data } from "jquery";
 
 const FetchAPI = {
-    async get(url) {
+    async getFetch(url) {
         try {
             const response = await fetch(url);
 
@@ -17,7 +17,19 @@ const FetchAPI = {
         }
     },
 
-    async post(endpoint, data) {
+    async get(url, ref, counter = null) {
+        await this.getFetch(url).then(response => {
+            ref.value = response;
+            if(counter) {
+                counter.value = ref.value.length;
+            }
+        }).catch(err => {
+            ref.error.value = err;
+            console.error('Error fetching data:', ref.error.value);
+        });
+    },
+
+    async postFetch(endpoint, data) {
         try {
             const response = await fetch(endpoint, {
                 method: 'POST',
@@ -36,6 +48,19 @@ const FetchAPI = {
             return err.message;
         }
     },
+
+    async post(url, obj)  {
+        await this.postFetch(url, obj).then(response => {
+            postResult.value = response;
+            if(response.success) {
+                window.location.reload();
+            }
+            console.log('post response', postResult.value);
+        }).catch(err => {
+            postError = err;
+            console.error('Error fetching data:', postError);
+        });
+    }
 
     // getFormData(form) {
     //     const formData = new FormData();

@@ -323,10 +323,11 @@
                         background-color: theme.colours(--bg-lt-green);
                         border-radius: theme.elements(--border-radius-md);
 
-                        .svg-icon {
+                        .edit-option {
                             width: 15px;
                             height: 15px;
                             margin-left: 10px;
+                            cursor: pointer;
                             fill: theme.colours(--black);
 
                             svg {

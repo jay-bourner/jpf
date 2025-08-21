@@ -38,9 +38,9 @@
             <div class="schedule-options-grid">
                 @if(count($attributes['class']['options']) > 0)
                     @foreach($attributes['class']['options'] as $option)
-                    <div class="schedule-option" data-option-id="{{ $option['id'] }}">
+                    <div class="schedule-option">
                         <h4 class="schedule-option__heading">{{ $option['day'] }}
-                            <span class="svg-icon svg-icon--pencil" id="edit-option"></span>
+                            <span class="edit-option" data-option-id="{{ $option['id'] }}"></span>
                         </h4>
                         <ul>
                             <li><strong>Frequency:</strong> <span>{{ $option['frequency'] }}</span></li>
