@@ -26,8 +26,6 @@ export default {
             showModal.value = !showModal.value;
         }
 
-        console.log(optionId.value);
-        
         return {
             icon: 'pencil',
             optionId,

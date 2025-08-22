@@ -11,20 +11,20 @@
                 <form @submit.prevent="handleSubmit">
                     <label>Venue</label>
                     <select class="modal-input" v-model="venue_id">
-                        <option v-for="venue in venues" :key="venue.id" :value="venue.id">
+                        <option v-for="venue in venues" :key="venue.id" :value="venue.id" :selected="venue.id === option.venue_id">
                             {{ venue.name }}
                         </option>
                     </select>
                     
                     <label>Day</label>
                     <select class="modal-input" v-model="day">
-                        <option value="monday" selected>Monday</option>
-                        <option value="tuesday">Tuesday</option>
-                        <option value="wednesday">Wednesday</option>
-                        <option value="thursday">Thursday</option>
-                        <option value="friday">Friday</option>
-                        <option value="saturday">Saturday</option>
-                        <option value="sunday">Sunday</option>
+                        <option value="Monday" :selected="day === option.day">Monday</option>
+                        <option value="Tuesday" :selected="day === option.day">Tuesday</option>
+                        <option value="Wednesday" :selected="day === option.day">Wednesday</option>
+                        <option value="Thursday" :selected="day === option.day">Thursday</option>
+                        <option value="Friday" :selected="day === option.day">Friday</option>
+                        <option value="Saturday" :selected="day === option.day">Saturday</option>
+                        <option value="Sunday" :selected="day === option.day">Sunday</option>
                     </select>
 
                     <label>Start Time</label>
@@ -35,8 +35,8 @@
 
                     <label>Frequency</label>
                     <select class="modal-input" v-model="frequency">
-                        <option value="weekly">Weekly</option>
-                        <option value="custom">Custom</option>
+                        <option value="weekly" :selected="frequency === option.frequency">Weekly</option>
+                        <option value="custom" :selected="frequency === option.frequency">Custom</option>
                     </select>
                     <button>submit</button>
                 </form>
@@ -109,20 +109,31 @@ export default {
 
         if(classOptionId.value) {
             const getOption = async () => { 
-                FetchAPI.get('/api/option/' + classOptionId.value, option).then((response) => {
-                    console.log('editing option: ', option.value);
-                });
+                FetchAPI.get('/api/option/' + classOptionId.value, option).then(() => {
+                    title.value = 'Edit Option';
+                    venue_id.value = option.value.venue_id;
+                    day.value = option.value.day;
+                    start_time.value = option.value.start_time;
+                    end_time.value = option.value.end_time;
+                    frequency.value = option.value.frequency;
+
+                    console.log('option: ', option.value);
+
+                    console.log('venue_id: ', venue_id.value);
+                    console.log('day: ', day.value);
+                    console.log('start_time: ', start_time.value);
+                    console.log('end_time: ', end_time.value);
+                    console.log('frequency: ', frequency.value);
+                })
             }
 
-            getOption();
-
-            // console.log('venue_id: ', venue_id.value);
-            // console.log('day: ', day.value);
-            // console.log('start_time: ', start_time.value);
-            // console.log('end_time: ', end_time.value);
-            // console.log('frequency: ', frequency.value);
+            getOption()
         }
 
+
+        // make all select boxes and options into objects and loop through
+        // giving the ability to select the correct option dynamically
+        
         const toggleModal = () => {
             showModal.value = !showModal.value
             showLoader.value = false; // Reset loader state when toggling modal
@@ -148,7 +159,8 @@ export default {
             frequency,
             handleSubmit,
             showLoader,
-            toggleModal
+            toggleModal,
+            option
         };
     },
 }
