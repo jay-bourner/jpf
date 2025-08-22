@@ -53,6 +53,30 @@ class ClassOptions extends Model
         return $results;
     }
 
+    public function getOptionById($id)
+    {
+        $result = array();
+        $option = $this->where('id', $id)->first();
+
+        if($option) {
+            $venue = $this->venues->getVenuesById($option->venue_id);
+
+            $result = [
+                'id' => $option->id,
+                'class_id' => $option->class_id,
+                'venue_id' => $option->venue_id,
+                'venue' => $venue['name'],
+                // 'venue_url' => $this->getGoogleApiLocation($venue),
+                'start_time' => $option->start_time,
+                'end_time' => $option->end_time,
+                'frequency' => $option->frequency,
+                'day' => $option->day,
+            ];
+        }
+
+        return $this->where('id', $id)->first();
+    }
+
     public function createClassOption($data)
     {
         $option = new self();

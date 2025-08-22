@@ -62,7 +62,7 @@ export default {
         Modal,
         Loader
     },
-    props: [ 'instantDisplay' ],
+    props: [ 'instantDisplay', 'classOptionId' ],
     setup(props) {
         const title = ref('Add Option');
         const showModal = ref(false);
@@ -77,12 +77,15 @@ export default {
         const end_time = ref('');
         const frequency = ref('');
 
+        const option = ref({})
+
         const postResult = ref('');
         const postError = ref('');
         
         const classId = document.querySelector('.class-view__heading').dataset.classId;
         
         const directModal = ref(props);
+        const classOptionId = ref(props.classOptionId);
 
         const handleSubmit = async () => {
             showLoader.value = true;
@@ -104,19 +107,32 @@ export default {
             FetchAPI.get('/api/venues', venues) 
         };
 
+        if(classOptionId.value) {
+            const getOption = async () => { 
+                FetchAPI.get('/api/option/' + classOptionId.value, option).then((response) => {
+                    console.log('editing option: ', option.value);
+                });
+            }
+
+            getOption();
+
+            // console.log('venue_id: ', venue_id.value);
+            // console.log('day: ', day.value);
+            // console.log('start_time: ', start_time.value);
+            // console.log('end_time: ', end_time.value);
+            // console.log('frequency: ', frequency.value);
+        }
+
         const toggleModal = () => {
             showModal.value = !showModal.value
             showLoader.value = false; // Reset loader state when toggling modal
         }
-        // const instantDisplay = props.instantDisplay
 
         if (directModal.value.instantDisplay) {
             toggleModal();
             showButton.value = false;
         }
 
-        // console.log(props)
-        console.log(directModal.value.instantDisplay)
         setVenues()
 
         return {
@@ -135,13 +151,5 @@ export default {
             toggleModal
         };
     },
-    // data() {
-
-    //     return {
-    //     };
-    // },
-    // methods: {
-        
-    // }
 }
 </script>

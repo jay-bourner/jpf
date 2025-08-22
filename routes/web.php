@@ -127,6 +127,7 @@ Route::group(['prefix' => 'api'], function () {
     Route::get('/venues', [AdminVenuesController::class, 'apiIndex']);
     Route::get('/classes', [AdminClassesController::class, 'apiIndex']);
     Route::get('/schedules', [AdminClassesController::class, 'apiSchedules']);
+    Route::get('/option/{id}', [AdminClassesController::class, 'apiOption']);
 
     // posts
     Route::post('/classes/options', [AdminClassesController::class, 'apiCreateOptions']);

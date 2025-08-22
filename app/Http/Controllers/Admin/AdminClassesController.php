@@ -270,4 +270,22 @@ class AdminClassesController extends Controller
         return response()->json(['success' => 'Class option created successfully!'], 201);
     }
 
+    public function apiOption() {
+        $result = array();
+        $id = request()->route('id');
+
+        if($id) {
+            $option = $this->classOptions->getOptionById($id);
+
+            if(!$option) {
+                $result = ['error' => 'Class option not found.'];
+            } else {
+                $result = $option;
+            }
+        } else {
+            $result = ['error' => 'Option ID is required.'];
+        }
+
+        return response()->json($result);
+    }
 }

@@ -1,7 +1,7 @@
 <template>
     <SvgIcons :icon="icon" @click="showOptionsForm" />
     <div v-if="showModal" class="modal-container">
-        <ClassesOptions :instantDisplay="instantDisplay" />
+        <ClassesOptions :instantDisplay="instantDisplay" :classOptionId="optionId" />
     </div>
 </template>
 
@@ -12,20 +12,22 @@ import ClassesOptions from './ClassesOptions.vue';
 
 export default {
     name: 'EditOptions',
+    props: ['optionId'],
     components: {
         ClassesOptions,
         SvgIcons
     },
-    setup() {
-        const optionId = ref(null)
+    setup(props) {
+        const optionId = ref(props.optionId)
         const showModal = ref(false)
+        const instantDisplay = 'true'
 
         const showOptionsForm = () => {
             showModal.value = !showModal.value;
         }
 
-        const instantDisplay = 'true'
-
+        console.log(optionId.value);
+        
         return {
             icon: 'pencil',
             optionId,
