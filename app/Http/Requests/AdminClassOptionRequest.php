@@ -29,7 +29,7 @@ class AdminClassOptionRequest extends FormRequest
             'venue_id' => 'required|exists:venues,id',
             'start_time' => 'required|date_format:H:i',
             'end_time' => 'required|date_format:H:i|after:start_time',
-            'frequency' => ['required', Rule::in(['weekly', 'custom'])],
+            'frequency' => ['required', Rule::in(['Weekly', 'Custom'])],
             'day' => 'required|string|max:10',
         ];
     }

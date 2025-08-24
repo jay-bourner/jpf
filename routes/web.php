@@ -131,6 +131,9 @@ Route::group(['prefix' => 'api'], function () {
 
     // posts
     Route::post('/classes/options', [AdminClassesController::class, 'apiCreateOptions']);
+    
+    // updates
+    Route::put('/options/update/{id}', [AdminClassesController::class, 'apiUpdateOptions']);
 });
 
 // Auth::routes();

@@ -1,6 +1,7 @@
 import { data } from "jquery";
 
 const FetchAPI = {
+    // api calls to GET data
     async getFetch(url) {
         try {
             const response = await fetch(url);
@@ -10,7 +11,6 @@ const FetchAPI = {
             }
 
             const data = await response.json();
-            // console.log('Data fetched:', data);
             return data;
         } catch (err) {
             return err.message;
@@ -29,6 +29,7 @@ const FetchAPI = {
         });
     },
 
+    // api calls to POST data 
     async postFetch(endpoint, data) {
         try {
             const response = await fetch(endpoint, {
@@ -45,22 +46,53 @@ const FetchAPI = {
 
             return await response.json();
         } catch (err) {
+            console.log(err.message);
             return err.message;
         }
     },
 
     async post(url, obj)  {
         await this.postFetch(url, obj).then(response => {
-            postResult.value = response;
+            obj.value = response;
             if(response.success) {
                 window.location.reload();
             }
-            console.log('post response', postResult.value);
+            console.log('Response from POST:', response);
         }).catch(err => {
-            postError = err;
-            console.error('Error fetching data:', postError);
+            obj.error.value = err;
+            console.error('Error posting data:', obj.error.value);
         });
-    }
+    },
+
+    // api calls to PUT data
+    async putFetch(endpoint, data) {
+        try {
+            const response = await fetch(endpoint, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return await response.json();
+        } catch (err) {
+            return err.message;
+        }
+    },
+
+    async put(url, obj)  {
+        await this.putFetch(url, obj).then(response => {
+            obj.value = response;
+            if(response.success) {
+                window.location.reload();
+            }
+        }).catch(err => {
+            obj.error.value = err;
+        });
+    },
 
     // getFormData(form) {
     //     const formData = new FormData();

@@ -255,6 +255,7 @@ class AdminClassesController extends Controller
     }
 
     public function apiCreateOptions(AdminClassOptionRequest $request) {
+        $json = array();
         $inputs = $request->validated();
 
         $data = $request->safe()
@@ -264,10 +265,12 @@ class AdminClassesController extends Controller
         $result = $this->classOptions->createClassOption($data);
 
         if (isset($result['error'])) {
-            return response()->json(['error' => $result['warning']], 400);
+            $json['error'] = $result['error'];
         }
 
-        return response()->json(['success' => 'Class option created successfully!'], 201);
+        $json['success'] = 'Class option created successfully!';
+
+        return response()->json($json);
     }
 
     public function apiOption() {
@@ -287,5 +290,24 @@ class AdminClassesController extends Controller
         }
 
         return response()->json($result);
+    }
+
+    public function apiUpdateOptions(AdminClassOptionRequest $request, string $id) {
+        $json = array();
+        $inputs = $request->validated();
+
+        $data = $request->safe()
+            ->merge($inputs)
+            ->except(['_token', '_method']);
+
+        $result = $this->classOptions->updateClassOption($id, $data);
+
+        if (isset($result['error'])) {
+            $json['error'] = $result['error'];
+        }
+
+        $json['success'] = 'Class option updated successfully!';
+
+        return response()->json($json);
     }
 }

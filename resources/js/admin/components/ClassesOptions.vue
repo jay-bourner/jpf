@@ -18,13 +18,7 @@
                     
                     <label>Day</label>
                     <select class="modal-input" v-model="day">
-                        <option value="Monday" :selected="day === option.day">Monday</option>
-                        <option value="Tuesday" :selected="day === option.day">Tuesday</option>
-                        <option value="Wednesday" :selected="day === option.day">Wednesday</option>
-                        <option value="Thursday" :selected="day === option.day">Thursday</option>
-                        <option value="Friday" :selected="day === option.day">Friday</option>
-                        <option value="Saturday" :selected="day === option.day">Saturday</option>
-                        <option value="Sunday" :selected="day === option.day">Sunday</option>
+                        <option v-for="day in daysList" :key="day" :value="day" :selected="day === option.day">{{ day }}</option>
                     </select>
 
                     <label>Start Time</label>
@@ -35,8 +29,7 @@
 
                     <label>Frequency</label>
                     <select class="modal-input" v-model="frequency">
-                        <option value="weekly" :selected="frequency === option.frequency">Weekly</option>
-                        <option value="custom" :selected="frequency === option.frequency">Custom</option>
+                        <option v-for="frequency in frequencyList" :key="frequency" :value="frequency" :selected="frequency === option.frequency">{{ frequency }}</option>
                     </select>
                     <button>submit</button>
                 </form>
@@ -68,31 +61,28 @@ export default {
         const showModal = ref(false);
         const showLoader = ref(false);
         const showButton = ref(true);
-
         const venues = ref('');
-
         const venue_id = ref('');
         const day = ref('');
         const start_time = ref('');
         const end_time = ref('');
         const frequency = ref('');
-
         const option = ref({})
 
-        const postResult = ref('');
-        const postError = ref('');
-        
-        const classId = document.querySelector('.class-view__heading').dataset.classId;
-        
+        const daysList = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+        const frequencyList = ['Weekly', 'Custom'];
+
         const directModal = ref(props);
         const classOptionId = ref(props.classOptionId);
 
         const handleSubmit = async () => {
             showLoader.value = true;
 
+            const classId = document.querySelector('.class-view__heading').dataset.classId;
+
             const postData = {
                 _token: document.querySelector('input[name="_token"]').value,
-                class_id: classId,
+                class_id: parseInt(classId),
                 venue_id: venue_id.value,
                 day: day.value,
                 start_time: start_time.value,
@@ -100,7 +90,14 @@ export default {
                 frequency: frequency.value
             };
 
-            await FetchAPI.post('/api/classes/options', postData);
+            let result = '';
+            console.log(classOptionId.value);
+            if(typeof(classOptionId.value) !== 'undefined') {
+                postData._method = 'PUT';
+                await FetchAPI.put(`/api/options/update/${classOptionId.value}`, postData);
+            } else {
+                await FetchAPI.post('/api/classes/options', postData);
+            }
         }
 
         const setVenues = async () => { 
@@ -117,13 +114,13 @@ export default {
                     end_time.value = option.value.end_time;
                     frequency.value = option.value.frequency;
 
-                    console.log('option: ', option.value);
+                    // console.log('option: ', option.value);
 
-                    console.log('venue_id: ', venue_id.value);
-                    console.log('day: ', day.value);
-                    console.log('start_time: ', start_time.value);
-                    console.log('end_time: ', end_time.value);
-                    console.log('frequency: ', frequency.value);
+                    // console.log('venue_id: ', venue_id.value);
+                    // console.log('day: ', day.value);
+                    // console.log('start_time: ', start_time.value);
+                    // console.log('end_time: ', end_time.value);
+                    // console.log('frequency: ', frequency.value);
                 })
             }
 
@@ -157,6 +154,8 @@ export default {
             start_time,
             end_time,
             frequency,
+            daysList,
+            frequencyList,
             handleSubmit,
             showLoader,
             toggleModal,
