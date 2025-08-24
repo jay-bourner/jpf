@@ -4,10 +4,6 @@
             <div class="card">
                 <h2>Venues</h2>
                 <div>{{ venueCount }} Venues</div>
-                <!-- <div v-for="venue in venues" :key="venue.id">
-                    <p>{{ venue.name }}</p>
-                </div> -->
-
             </div>
             <div class="card">
                 <h2>Classes</h2>
@@ -15,8 +11,8 @@
             </div>
         </div>
         <div class="dashboard-data">
-            <h2>Upcoming Classes</h2>
-            <div class="schedule">
+            <h2>Class Schedule</h2>
+            <div class="schedule"  :style="`--grid-column-count: ${Object.keys(schedules).length}`">
                 <div v-for="(schedule, key) in schedules" :key="key" class="schedule__column">
                     <div class="schedule__column--header">{{ key }}</div>
                     <div v-for="(classItem, index) in schedule" :key="index"  class="schedule__column--list">
@@ -60,7 +56,7 @@ export default {
         }; 
 
         const setSchedules = async () => { 
-            FetchAPI.get('/api/schedules', schedules) 
+            FetchAPI.get('/api/schedules', schedules)
         };
 
         setVenues()

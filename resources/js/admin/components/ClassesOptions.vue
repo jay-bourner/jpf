@@ -58,9 +58,11 @@ export default {
     props: [ 'instantDisplay', 'classOptionId' ],
     setup(props) {
         const title = ref('Add Option');
+
         const showModal = ref(false);
         const showLoader = ref(false);
         const showButton = ref(true);
+        
         const venues = ref('');
         const venue_id = ref('');
         const day = ref('');
@@ -90,8 +92,6 @@ export default {
                 frequency: frequency.value
             };
 
-            let result = '';
-            console.log(classOptionId.value);
             if(typeof(classOptionId.value) !== 'undefined') {
                 postData._method = 'PUT';
                 await FetchAPI.put(`/api/options/update/${classOptionId.value}`, postData);
@@ -113,24 +113,12 @@ export default {
                     start_time.value = option.value.start_time;
                     end_time.value = option.value.end_time;
                     frequency.value = option.value.frequency;
-
-                    // console.log('option: ', option.value);
-
-                    // console.log('venue_id: ', venue_id.value);
-                    // console.log('day: ', day.value);
-                    // console.log('start_time: ', start_time.value);
-                    // console.log('end_time: ', end_time.value);
-                    // console.log('frequency: ', frequency.value);
                 })
             }
 
             getOption()
         }
 
-
-        // make all select boxes and options into objects and loop through
-        // giving the ability to select the correct option dynamically
-        
         const toggleModal = () => {
             showModal.value = !showModal.value
             showLoader.value = false; // Reset loader state when toggling modal

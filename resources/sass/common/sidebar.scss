@@ -25,7 +25,6 @@ nav.admin-sidebar {
             gap: 15px;
             padding: 10px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
 
             .svg-icon {
                 width: 20px;
@@ -46,9 +45,91 @@ nav.admin-sidebar {
                 align-items: center;
             }
 
-            &:hover {
-                background-color: theme.colours(--btn-green);
+            &.has-dropdown {
+                height: 20px;
+                align-items: start;
+                transition: height 0.3s ease;
+
+                &.active {
+                    height: 95px;
+                }
+            }
+
+            &:not(.admin-sidebar__dropdown--list-item) {
+                transition: background-color 0.3s ease;
+
+                &:hover:not(.has-dropdown) {
+                    background-color: theme.colours(--btn-green);
+                }
             }
         }
     }
+}
+
+.admin-sidebar__dropdown--container {
+    width: 100%;
+    position: relative;
+
+    &.open {
+        .admin-sidebar__dropdown--heading {
+            // background-color: theme.colours(--btn-green);
+            // border-bottom-left-radius: 0;
+            // border-bottom-right-radius: 0;
+
+            .svg-icon {
+                transform: rotate(90deg);
+                transition: transform 0.3s ease;
+            }
+        }
+
+        .admin-sidebar__dropdown--list {
+            display: block;
+            height: 80px;
+            opacity: 1;
+            transition: opacity 0.3s 0.3s ease, height 0s 0.3s ease;
+
+            li {
+                margin: 15px 0;
+                position: relative;
+                transition: unset;
+
+                a {    
+                    position: absolute;
+                    width: 150px;
+                    transform: translateX(-55px);
+                    padding: 10px 0 10px 50px;
+                    transition: background-color 0.3s ease;
+
+                    &:hover {
+                        background-color: theme.colours(--btn-green);
+                    }
+                }
+            }
+        }
+    }
+}
+
+.admin-sidebar__dropdown--heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .svg-icon {
+        width: 15px !important;
+        height: 15px !important;
+        fill: theme.colours(--text-light);
+        transform: rotate(0deg);
+        transition: transform 0.3s ease;
+
+        svg {
+            width: 15px !important;
+            height: 15px !important;
+        }
+    }
+}
+
+.admin-sidebar__dropdown--list {
+    display: none;
+    height: 0;
+    opacity: 0;
 }

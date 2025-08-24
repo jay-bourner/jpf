@@ -461,12 +461,12 @@
             .schedule {
                 border: 2px solid black;
                 border-radius: theme.elements(--border-radius-md);
-                // padding: 10px;
+                display: grid;
+                grid-template-columns: repeat(var(--grid-column-count), 1fr);
 
                 &__column {
-                    flex: 1;
                     // padding: 10px;
-                    // border-right: 1px solid theme.colours(--light-grey);
+                    border-right: 1px solid theme.colours(--light-grey);
                     display: flex;
                     flex-direction: column;
 
@@ -476,20 +476,25 @@
 
                     &--header {
                         font-weight: bold;
-                        margin-bottom: 10px;
                         text-align: center;
                         background-color: theme.colours(--bg-lt-grey);
                         border-bottom: 1px solid theme.colours(--light-grey);
                         padding: 5px;
-                        border-radius: theme.elements(--border-radius-md);
+                        // border-radius: theme.elements(--border-radius-md);
                     }
 
                     &--list {
-                        // padding: 10px;
+                        &:nth-child(odd) {
+                            background-color: theme.colours(--bg-lt-green);
+                        }
+                        // &:nth-child(even) {
+                        //     background-color: theme.colours(--bg-lt-grey);
+                        // }
                     }
 
                     &--item {
                         padding: 10px;
+                        border-bottom: 1px solid theme.colours(--light-grey);
                     }
 
                     p {

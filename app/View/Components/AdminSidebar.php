@@ -30,9 +30,19 @@ class AdminSidebar extends Component
                     'href' => route('admin.index')
                 ],
                 [
-                    'name' => 'Classes', 
+                    'name' => 'Class Info', 
                     'icon' => 'barbell',
                     'href' => route('admin.classes')
+                    // 'dropdown' => [
+                    //     [
+                    //         'name' => 'Classes',
+                    //         'href' => route('admin.classes')
+                    //     ],
+                    //     [
+                    //         'name' => 'Categories',
+                    //         'href' => ''
+                    //     ],
+                    // ]
                 ],
                 [
                     'name' => 'Venues', 
