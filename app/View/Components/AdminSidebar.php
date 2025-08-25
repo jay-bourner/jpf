@@ -32,17 +32,17 @@ class AdminSidebar extends Component
                 [
                     'name' => 'Class Info', 
                     'icon' => 'barbell',
-                    'href' => route('admin.classes')
-                    // 'dropdown' => [
-                    //     [
-                    //         'name' => 'Classes',
-                    //         'href' => route('admin.classes')
-                    //     ],
-                    //     [
-                    //         'name' => 'Categories',
-                    //         'href' => ''
-                    //     ],
-                    // ]
+                    // 'href' => route('admin.classes')
+                    'dropdown' => [
+                        [
+                            'name' => 'Classes',
+                            'href' => route('admin.classes')
+                        ],
+                        [
+                            'name' => 'Categories',
+                            'href' => route('admin.categories')
+                        ],
+                    ]
                 ],
                 [
                     'name' => 'Venues', 

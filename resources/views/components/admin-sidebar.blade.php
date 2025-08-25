@@ -10,16 +10,17 @@
                         <span>{{$link['name'] }}</span>
                         <span class="svg-icon svg-icon--caret-right"></span>
                     </div>
-
-                    {{-- <ul class="admin-sidebar__dropdown--list">
-                        @foreach($link['dropdown'] as $sublink)
-                            <li class="admin-sidebar__dropdown--list-item">
-                                <a href="{{ $sublink['href'] }}" class="">
-                                    {{ $sublink['name'] }}
-                                </a>
-                            </li>
-                        @endforeach
-                    </ul> --}}
+                    <div class="admin-sidebar__dropdown--list">
+                        <ul>
+                            @foreach($link['dropdown'] as $sublink)
+                                <li class="admin-sidebar__dropdown--list-item">
+                                    <a href="{{ $sublink['href'] }}" class="">
+                                        {{ $sublink['name'] }}
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
                 </div>
                 @else
                 <a href="{{ $link['href'] }}" class="">

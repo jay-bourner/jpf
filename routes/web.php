@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminCategoriesController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminClassesController;
 use App\Http\Controllers\Admin\AdminPricesController;
@@ -68,6 +69,28 @@ Route::group(['prefix' => 'admin'], function() {
 
     Route::get('/classes/delete/{id}', [AdminClassesController::class, 'destroy'])
         ->name('admin.classes.delete');
+
+    // categories
+    Route::get('/categories', [AdminCategoriesController::class, 'index'])
+        ->name('admin.categories');
+
+    Route::get('/categories/create', [AdminCategoriesController::class, 'create'])
+        ->name('admin.categories.create');
+        
+    Route::post('/categories/store', [AdminCategoriesController::class, 'store'])
+        ->name('admin.categories.store');
+    
+    Route::get('/categories/edit/{id}', [AdminCategoriesController::class, 'edit'])
+        ->name('admin.categories.edit');
+
+    Route::get('/categories/view/{id}', [AdminCategoriesController::class, 'view'])
+        ->name('admin.categories.view');
+
+    Route::put('/categories/update/{id}', [AdminCategoriesController::class, 'update'])
+        ->name('admin.categories.update');
+
+    Route::get('/categories/delete/{id}', [AdminCategoriesController::class, 'destroy'])
+        ->name('admin.categories.delete');
 
 
     // venues routes
