@@ -26,7 +26,6 @@ class AdminClassRequest extends FormRequest
         
         return [
             'category_id' => 'required|exists:categories,id',
-            'venue_id' => 'required|exists:venues,id',
             'name' => $classId ? 'required|string|max:255,' : 'required|string|max:255|unique:classes,name',
             'short_description' => 'required|string|max:500',
             'description' => 'nullable|string|max:5000',

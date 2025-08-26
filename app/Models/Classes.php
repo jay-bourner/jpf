@@ -17,7 +17,6 @@ class Classes extends Model
 
     protected $fillable = [
         'category_id',
-        'venue_id',
         'name',
         'short_description',
         'description',
@@ -69,7 +68,7 @@ class Classes extends Model
                 'short_description' => html_entity_decode($class->short_description ?? ''),
                 'url' => $url,
                 'description' => html_entity_decode($class->description ?? ''),
-                'notes' => html_entity_decode($class->notes ?? ''),
+                'notes' => html_entity_decode($class->notes) ?? '',
                 'image' => ($imageString) ? $this->imageService->resize($imageString, 400, 400) : null,
                 'image_description' => html_entity_decode($class->image_description ?? ''),
                 'start_date' => $class->start_date,
@@ -170,7 +169,7 @@ class Classes extends Model
             'short_description' => html_entity_decode($class->short_description ?? ''),
             'url' => $url,
             'description' => html_entity_decode($class->description ?? ''),
-            'notes' => html_entity_decode($class->notes ?? ''),
+            'notes' => html_entity_decode($class->notes) ?? '',
             'image' => ($imageString) ? $this->imageService->resize($imageString, 400, 400) : null,
             'image_description' => html_entity_decode($class->image_description ?? ''),
             'start_date' => $class->start_date,
@@ -186,7 +185,6 @@ class Classes extends Model
         try {
             $class = new self();
             $class->category_id = (int)$data['category_id'];
-            $class->venue_id = (int)$data['venue_id'];
             $class->name = $data['name'];
             $class->short_description = htmlspecialchars($data['short_description']);
             $class->description = htmlspecialchars($data['description'] ?? null);
@@ -194,7 +192,7 @@ class Classes extends Model
             $class->image_description = htmlspecialchars($data['image_description'] ?? null);
             $class->status = ($data['start_date'] && $data['start_date'] > Carbon::now()) ? 'inactive' : 'active';
             $class->start_date = $data['start_date'] ?? Carbon::now();
-            // $class->notes = htmlspecialchars($data['notes']) ?? null;
+            $class->notes = htmlspecialchars(nl2br($data['notes'])) ?? null;
 
             if($class->save()) {
                 $result = ['success' => 'Class added successfully.', 'class' => $class];
@@ -213,7 +211,6 @@ class Classes extends Model
         try {
             $class = $this->find($id);
             $class->category_id = (int)$data['category_id'];
-            $class->venue_id = (int)$data['venue_id'];
             $class->name = $data['name'];
             $class->short_description = htmlspecialchars($data['short_description']);
             $class->description = htmlspecialchars($data['description'] ?? null);
@@ -221,7 +218,7 @@ class Classes extends Model
             $class->image_description = htmlspecialchars($data['image_description'] ?? null);
             $class->status = ($data['start_date'] && $data['start_date'] > Carbon::now()) ? 'inactive' : 'active';
             $class->start_date = $data['start_date'] ?? Carbon::now();
-            // $class->notes = htmlspecialchars($data['notes']) ?? null;
+            $class->notes = htmlspecialchars(nl2br($data['notes'])) ?? null;
 
             // dd($class);
             if($class->update()) {

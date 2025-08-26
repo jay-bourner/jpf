@@ -68,29 +68,11 @@
             @endif
         </div>
         <div class="admin-content__form--input">
-            <label for="">Venue</label>
-            @if(!empty($attributes['venues']))
-                <select class="" name="venue_id" id="venue_id">
-                    @foreach($attributes['venues'] as $venue)
-                        <option value="{{ $venue['id'] }}" {{ (isset($attributes['class']['venue_id']) && $attributes['class']['venue_id'] == $venue['id']) ? 'selected' : '' }}>
-                            {{ $venue['name'] }}
-                        </option>
-                    @endforeach
-                </select>
-            @else
-                <p>No venues available.</p>
-            @endif
-        </div>
-        {{-- <div class="admin-content__form--input">
-            <label for="">Title</label>
-            <input type="text" class="" name="title" id="title" value="{{ $attributes['class']['title'] ?? old('title') }}" placeholder="">
-        </div> --}}
-        {{-- <div class="admin-content__form--input">
             <label for="">Notes</label>
-            <textarea class="jp-input" rows="20" placeholder="" name="notes" id="notes">{{ $attributes['class']['notes'] ?? old('notes') }}</textarea>
+            <textarea class="jp-input" rows="10" placeholder="" name="notes" id="notes">{{ $attributes['class']['notes'] ?? old('notes') }}</textarea>
             @if($errors->has('notes'))
                 <span class="invalid-feedback">{{ $errors->first('notes') }}</span>
             @endif
-        </div> --}}
+        </div>
     </form>
 @endsection

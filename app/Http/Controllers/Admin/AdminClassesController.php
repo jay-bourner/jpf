@@ -120,8 +120,6 @@ class AdminClassesController extends Controller
     {
         $inputs = $request->validated();
 
-        // dd($inputs);
-
         $data = $request->safe()
             ->merge($inputs)
             ->except(['_token']);

@@ -25,7 +25,7 @@
                 @if($attributes['class']['notes'] != '')
                     <div>
                         <h3>Notes</h3>
-                        <div>{{ $attributes['class']['notes'] }}</div>
+                        <div>{!! $attributes['class']['notes'] !!}</div>
                     </div>
                 @endif
             </div>
