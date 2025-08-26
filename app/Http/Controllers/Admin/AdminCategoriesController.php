@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AdminCategoriesRequest;
 use App\Models\Categories;
 use Illuminate\Http\Request;
 
@@ -81,23 +82,22 @@ class AdminCategoriesController extends Controller
         return view('admin.categories-form', compact('attributes'));
     }
 
-    public function store(Request $request) {
+    public function store(AdminCategoriesRequest $request) {
         $inputs = $request->validated();
 
-        // dd($inputs);
 
         $data = $request->safe()
             ->merge($inputs)
             ->except(['_token']);
 
-        // $result = $this->categories->createClass($data);
+        $result = $this->categories->createCategory($data);
 
         if (isset($result['warning'])) {
             return redirect()->route('admin.categories.create')
                 ->withErrors($result['warning']);
         }
 
-        return redirect()->route('admin.classes')
+        return redirect()->route('admin.categories')
             ->with('success', 'Category created successfully!');
     }
 
@@ -105,7 +105,7 @@ class AdminCategoriesController extends Controller
         $category = $this->categories->getCategoryById($id);
 
         $attributes = [
-            'title' => 'View Category',
+            'title' => ucwords($category['name']),
             'category' => $category,
             // 'page_actions' => [
             //     [

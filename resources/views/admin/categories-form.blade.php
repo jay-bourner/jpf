@@ -1,6 +1,15 @@
 @extends('layouts.admin')
 
 @section('content')
+@if($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
     <form class="admin-content__form" method="{{ isset($attributes['method']) ? $attributes['method'] : 'POST' }}" action="{{ isset($attributes['action']) ? $attributes['action'] : '' }}" enctype="multipart/form-data">
         @if(isset($attributes['second_method']))
             @method($attributes['second_method'])
@@ -8,7 +17,7 @@
         @csrf
         <div class="admin-content__form--input">
             <label for="name">Category Name</label>
-            <input type="text" class="" value="{{ isset($attributes['class']['name']) ? $attributes['class']['name'] : old('name') }}" placeholder="" name="name" id="name">
+            <input type="text" class="" name="name" value="{{ isset($attributes['class']['name']) ? $attributes['class']['name'] : old('name') }}" placeholder="" name="name" id="name">
             @if($errors->has('name'))
                 <span class="invalid-feedback">{{ $errors->first('name') ?? $warning }}</span>
             @endif

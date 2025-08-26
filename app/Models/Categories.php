@@ -9,6 +9,15 @@ use App\Services\ImageService;
 class Categories extends Model
 {
     use HasFactory;
+    
+    public $timestamps = false;
+
+    protected $fillable = [
+        'name',
+        'image',
+        // 'short_description',
+        // 'image_description',
+    ];
 
     protected $imageService;
 
@@ -53,9 +62,31 @@ class Categories extends Model
                 'name' => $category->name,
                 'filter' => strtolower(str_replace(' ', '-', $category->name)),
                 'image' => $this->imageService->resize($imageString, 300, 300),
-                'alt' => ($category->description) ? $category->description : $category->name . ' Category',
+                'short_description' => ($category->short_description) ? $category->short_description : '',
+                'image_description' => ($category->image_description) ? $category->image_description : $category->name . ' Category',
             ];
         }
         return null;
+    }
+
+    public function createCategory($data)
+    {
+        $result = array();
+
+        try {
+            $category = new self();
+            $category->name = $data['name'];
+            $category->image = $data['image'] ?? null;
+            $category->short_description = $data['short_description'] ?? null;
+            $category->image_description = $data['image_description'] ?? null;
+            
+            if($category->save()) {
+                $result = ['success' => 'Category added successfully.', 'category' => $category];
+            }
+        } catch (\Exception $e) {
+            $result = ['warning' => 'failed to create category'.$e->getMessage()];
+        }
+
+        return $result;
     }
 }

@@ -81,7 +81,6 @@ class Classes extends Model
         return $result;
     }
 
-
     public function getClassesByCategory($categoryId)
     {
         $classes = $this->where('category_id', $categoryId)->get();
