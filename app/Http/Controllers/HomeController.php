@@ -10,10 +10,12 @@ use App\Services\ImageService;
 class HomeController extends Controller
 {
     protected $imageService;
+    protected $prices;
 
-    public function __construct(ImageService $imageService)
+    public function __construct(ImageService $imageService, Prices $prices)
     {
         $this->imageService = $imageService;
+        $this->prices = $prices;
     }
     /**
      * Display the home page.
@@ -21,8 +23,7 @@ class HomeController extends Controller
      * @return \Illuminate\View\View
      */
     public function index() {
-        $payg_price = Prices::where('type', 'payg')->first();
-        // dd($payg_price);
+        $payg_price = $this->prices->getPriceByType('payg');
 
         $data = array(
             'meta_title' => 'Welcome to JP Fitness',
@@ -45,7 +46,7 @@ class HomeController extends Controller
                     'description' => 'Discover effective exercises, nutrition and supplements to support you through all stages of menopause and beyond. Delivered online, you\'ll easily fit these programs into your already busy schedule.',
                 ]
             ],
-            'classes' => [
+            'intro' => [
                 [
                     'left' => [
                         'image' => $this->imageService->resize('instructor/jaime-about-me.jpg', 500, 500),
@@ -57,7 +58,7 @@ class HomeController extends Controller
                             '<b>My offering</b><br> You\'ll find a diverse range of community fitness classes in West and North Norfolk. Online, there are fitness and nutrition programs tailored for both men and women. Browse the timetable to find your perfect class.',
                         ]
                     ],
-                    'middle' => [
+                    'right' => [
                         'header' => 'Classes Include',
                         'class' => 'classes-list',
                         'list' => [
@@ -71,7 +72,7 @@ class HomeController extends Controller
                             'text' => 'View All Classes',
                             'link' => '/classes'
                         ],
-                        'price' => $payg_price,
+                        'price' => $payg_price['price'],
                     ],
                 ]
             ],

@@ -57,6 +57,28 @@ class Prices extends Model
             'notes' => $price->notes,
         );
     }
+    
+    public function getPriceByType($type)
+    {
+        $result = array();
+
+        $price = $this->where('type', $type)->first();
+
+        if (!$price) {
+            return null;
+        }
+
+        $result = [
+            'id' => $price->id,
+            'price' => $price->price,
+            'type' => $price->type,
+            'classes' => $price->classes,
+            'period' => $price->period,
+            'notes' => $price->notes,
+        ];
+
+        return $result;
+    }
 
     public function createPrice($data)
     {

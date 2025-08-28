@@ -17,11 +17,11 @@
         @endforeach
     </div>
 
-    <div class="bottom-section">
-        <div class="bottom-section-inner">
-            @foreach($data['classes'] as $class)
+    <div class="intro-section">
+        <div class="intro-section-inner">
+            @foreach($data['intro'] as $class)
                 @foreach($class as $key => $value)
-                    <div class="bottom-element-{{ $key }}">
+                    <div class="intro-element-{{ $key }}">
                         @if(isset($value['image']))
                             <div class="left-column-image">
                                 <img src="{{ $value['image'] }}" alt="{{ $value['alt'] }}" width="500" height="500">
@@ -33,14 +33,14 @@
                             </div>
                         @endif
                         @if(isset($value['header']))
-                            <div class="bottom-left-header">
+                            <div class="intro-left-header">
                                 <h2>{{ $value['header'] }}</h2>
                             </div>
                         @endif
                         @if(isset($value['paragraphs']))
                             @foreach($value['paragraphs'] as $paragraph)
-                                <div class="bottom-left-content">
-                                    <p>{{ $paragraph }}</p>
+                                <div class="intro-left-content">
+                                    <p>{!! $paragraph !!}</p>
                                 </div>
                             @endforeach
                         @endif
@@ -68,7 +68,7 @@
                             <div class="price-tag">
                                 <img src="image/icons/new-star.png" alt="">
                                 <div class="price-item">
-                                    <span>£{{ $value['price']->price }}</span>
+                                    <span>£{{ $value['price'] }}</span>
                                     <span>per session</span>
                                     <span>
                                         <p>Please ask for term prices.</p>

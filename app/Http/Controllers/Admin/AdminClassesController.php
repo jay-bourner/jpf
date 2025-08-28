@@ -249,6 +249,10 @@ class AdminClassesController extends Controller
             }
         }
 
+        // usort($result, function($a, $b) {
+        //     return strcmp($a[0]['day'], $b[0]['day']);
+        // });
+
         return response()->json($result);
     }
 

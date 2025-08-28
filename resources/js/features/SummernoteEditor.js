@@ -4,6 +4,7 @@ import 'summernote/dist/summernote-lite.js';
 class SummernoteEditor {
     constructor(selector, options = {}) {
         this.selector = selector;
+
         this.defaultOptions = {
             height: 300,
             toolbar: [
@@ -14,7 +15,7 @@ class SummernoteEditor {
                 ['table', ['table']],
                 ['insert', ['link']],
                 ['view', ['fullscreen']]
-            ]
+            ],
         };
         this.options = { ...this.defaultOptions, ...options };
         this.init();

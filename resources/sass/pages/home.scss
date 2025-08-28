@@ -26,12 +26,12 @@
     }
 }
 
-.bottom-section {
+.intro-section {
     padding: 20px 0;
     margin: 0 0 20px;
     background-color: theme.colours(--bg-lt-grey);
 
-    .bottom-section-inner {
+    .intro-section-inner {
         max-width: 1000px;
         margin: 0 auto;
         display: grid;
@@ -56,7 +56,7 @@
         }
     }
 
-    .bottom-element-left {
+    .intro-element-left {
         margin: 0 10px;
         padding: 20px;
         background-color: theme.colours(--bg-dk-green);
@@ -91,7 +91,7 @@
         }
     }
 
-    .bottom-element-middle {
+    .intro-element-right {
         margin: 0 10px;
         padding: 20px;
         position: relative;
