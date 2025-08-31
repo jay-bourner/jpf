@@ -4,6 +4,7 @@ import { Header } from '../admin/Header';
 import { Textarea } from '../forms/Textarea';
 import { Classes } from '../admin/classes/Classes';
 import { ContactForm } from '../forms/ContactForm';
+import { SideBar } from '../admin/common/SideBar';
 
 class Modules {
     constructor() {
@@ -14,6 +15,7 @@ class Modules {
             { class: Textarea },
             { class: Classes },
             { class: ContactForm },
+            { class: SideBar },
         ];
 
         modules.forEach((Module) => {

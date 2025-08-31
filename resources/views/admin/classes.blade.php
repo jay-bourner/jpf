@@ -2,12 +2,14 @@
 
 @section('content')
     {{-- <div id="classesMenu"></div> --}}
-    <div class="admin-content__content--list">
+    <div class="admin-content__content--list" id="classesList">
         @if(isset($attributes['classes']))
             @foreach($attributes['classes'] as $class)
                 <div class="content-list__item">
                     <div class="content-list__item--info">
-                        <div class="class-select"><input type="checkbox"></div>
+                        <div class="class-select">
+                            <input type="checkbox" name="selected_classes[]" value="{{ $class['id'] }}">
+                        </div>
                         <div class="class-name">{{ $class['name'] }}</div>
                     </div>
                     <div class="content-list__item--buttons">

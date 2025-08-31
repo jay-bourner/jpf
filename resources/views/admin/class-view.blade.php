@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="class-view__heading" data-class-id="{{ $attributes['class']['id'] }}">
+    <div class="class-view__heading" data-class-id="{{ $attributes['class']['id'] }}" id="classes-view">
         @csrf
         <div class="class-view__heading--desc">
             <h2>{{ $attributes['class']['short_description']}}</h2>

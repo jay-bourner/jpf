@@ -36,7 +36,7 @@ class AdminContent extends Component
                 'label' => 'Delete', 
                 'class' => 'delete jp-btn-red', 
                 'icon' => 'trash', 
-                'action' => $this->componentAttributes['page_action_delete'] ?? ''
+                'dataset' => $this->componentAttributes['page_action_delete'] ?? ''
             ],
         ];
     }
