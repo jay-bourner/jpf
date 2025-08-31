@@ -11,6 +11,7 @@ use App\Models\ClassOptions;
 use App\Models\Categories;
 use App\Models\Venues;
 use App\Services\ImageService;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 // use Illuminate\Support\Facades\DB;
 
@@ -123,6 +124,12 @@ class AdminClassesController extends Controller
         $data = $request->safe()
             ->merge($inputs)
             ->except(['_token']);
+            
+        if($data['image']) {
+            $filename = $data['image']->getClientOriginalName();
+            $data['image']->move('image/uploads', $filename);
+            $data['image'] = '/image/uploads/' . $filename;
+        }
 
         $result = $this->classes->createClass($data);
 
@@ -181,6 +188,12 @@ class AdminClassesController extends Controller
         $data = $request->safe()
             ->merge($inputs)
             ->except(['_token', '_method']);
+
+        if($data['image']) {
+            $filename = $data['image']->getClientOriginalName();
+            $data['image']->move('image/uploads', $filename);
+            $data['image'] = '/image/uploads/' . $filename;
+        }
 
         $result = $this->classes->updateClass($id, $data);
 

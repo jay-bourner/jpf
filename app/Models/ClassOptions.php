@@ -142,4 +142,32 @@ class ClassOptions extends Model
 
         return ['error' => 'Failed to update class option.'];
     }
+
+    public function getSchedules($class_id) {
+        $result = array();
+
+        $classOptions = $this->getClassOptions($class_id);
+        $result = $classOptions;
+        // // foreach($venues as $venue) {
+        //     $schedules = $this->classOptions->getSchedulesByVenueId($venue['id']);
+            
+        //     if(!empty($schedules)) {
+        //         foreach($schedules as $key => $schedule) {
+        //             $result[$venue['name']][] = [
+        //                 'event' => $this->classes->getClassById($schedule['class_id'])['name'],
+        //                 'starts' => $schedule['start_time'],
+        //                 'ends' => $schedule['end_time'],
+        //                 'frequency' => $schedule['frequency'],
+        //                 'day' => $schedule['day'],
+        //             ];
+        //         }
+        //     }
+        // }
+
+        // usort($result, function($a, $b) {
+        //     return strcmp($a[0]['day'], $b[0]['day']);
+        // });
+
+        return $result;
+    }
 }

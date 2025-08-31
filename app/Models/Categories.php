@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Services\ImageService;
 
 class Categories extends Model
 {
@@ -19,12 +18,9 @@ class Categories extends Model
         // 'image_description',
     ];
 
-    protected $imageService;
-
     public function __construct($attributes = array())
     {
         parent::__construct($attributes);
-        $this->imageService = app(ImageService::class);
     }
 
     public function getAllCategories()
@@ -41,7 +37,7 @@ class Categories extends Model
                 'id' => $category->id,
                 'name' => $category->name,
                 'filter' => strtolower(str_replace(' ', '-', $category->name)),
-                'image' => $this->imageService->resize($imageString, 300, 300),
+                'image' => $category->image,
                 'alt' => ($category->description) ? $category->description : $category->name . ' Category',
             ];
         }
@@ -61,7 +57,7 @@ class Categories extends Model
                 'id' => $category->id,
                 'name' => $category->name,
                 'filter' => strtolower(str_replace(' ', '-', $category->name)),
-                'image' => $this->imageService->resize($imageString, 300, 300),
+                'image' => $category->image,
                 'short_description' => ($category->short_description) ? $category->short_description : '',
                 'image_description' => ($category->image_description) ? $category->image_description : $category->name . ' Category',
             ];

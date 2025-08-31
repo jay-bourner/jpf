@@ -36,15 +36,17 @@
         </div>
         <div class="admin-content__form--input">
             <label for="">Image</label>
-            <input type="file" class="" name="image" id="image">
-            @if(isset($class_image) && $class_image != '')
-                <div class="jp-image-preview">
-                    <img src="" alt="" />
-                </div>
-            @endif
-            @if($errors->has('image'))
-                <span class="invalid-feedback">{{ $errors->first('image') }}</span>
-            @endif
+            <div class="image-upload">
+                <input type="file" class="" name="image" id="image">
+                @if(isset($attributes['class']['image']) && $attributes['class']['image'] != '')
+                    <div class="jp-image-preview">
+                        <img src="{{ $attributes['class']['image'] }}" alt="" />
+                    </div>
+                @endif
+                @if($errors->has('image'))
+                    <span class="invalid-feedback">{{ $errors->first('image') }}</span>
+                @endif
+            </div>
         <div>
         <div class="admin-content__form--input">
             <label for="">Image Description</label>

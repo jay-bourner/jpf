@@ -223,6 +223,22 @@
                     border-radius: theme.elements(--border-radius-md);
                     // background-color: theme.colours(--bg-lt-grey);
                 }
+
+                .image-upload {
+                    display: flex;
+                    height: 100px;
+
+                    .jp-image-preview {
+                        max-width: 100px;
+                        height: auto;
+                        margin-right: 20px;
+
+                        img {
+                            width: 100%;
+                            height: auto;
+                        }
+                    }
+                }
             }
         }
     } 

@@ -90,6 +90,12 @@ class AdminCategoriesController extends Controller
             ->merge($inputs)
             ->except(['_token']);
 
+        if($data['image']) {
+            $filename = $data['image']->getClientOriginalName();
+            $data['image']->move('image/uploads', $filename);
+            $data['image'] = '/image/uploads/' . $filename;
+        }
+
         $result = $this->categories->createCategory($data);
 
         if (isset($result['warning'])) {

@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Services\ImageService;
 use Illuminate\Support\Str;
 use App\Models\ClassOptions;
 use Carbon\Carbon;
@@ -27,14 +26,12 @@ class Classes extends Model
         'notes',
     ];
 
-    protected $imageService;
     protected $category;
     protected $classOptions;
 
     public function __construct($attributes = array())
     {
         parent::__construct($attributes);
-        $this->imageService = app(ImageService::class);
         $this->category = app(Categories::class);
         $this->classOptions = app(ClassOptions::class);
     }
@@ -69,7 +66,7 @@ class Classes extends Model
                 'url' => $url,
                 'description' => html_entity_decode($class->description ?? ''),
                 'notes' => html_entity_decode($class->notes) ?? '',
-                'image' => ($imageString) ? $this->imageService->resize($imageString, 400, 400) : null,
+                'image' => $class->image,
                 'image_description' => html_entity_decode($class->image_description ?? ''),
                 'start_date' => $class->start_date,
                 'status' => $class->status,
@@ -127,7 +124,7 @@ class Classes extends Model
                     'url' => $url,
                     'description' => html_entity_decode($cl->description ?? ''),
                     'notes' => html_entity_decode($cl->notes ?? ''),
-                    'image' => ($imageString) ? $this->imageService->resize($imageString, 400, 400) : null,
+                    'image' => $cl->image,
                     'image_description' => html_entity_decode($cl->image_description ?? ''),
                     'no_image' => $no_image,
                     'start_date' => $cl->start_date,
@@ -170,7 +167,7 @@ class Classes extends Model
             'url' => $url,
             'description' => html_entity_decode($class->description ?? ''),
             'notes' => html_entity_decode($class->notes) ?? '',
-            'image' => ($imageString) ? $this->imageService->resize($imageString, 400, 400) : null,
+            'image' => $class->image,
             'image_description' => html_entity_decode($class->image_description ?? ''),
             'start_date' => $class->start_date,
             'status' => $class->status,
@@ -188,7 +185,7 @@ class Classes extends Model
             $class->name = $data['name'];
             $class->short_description = htmlspecialchars($data['short_description']);
             $class->description = htmlspecialchars($data['description'] ?? null);
-            $class->image = htmlspecialchars($data['image'] ?? null);
+            $class->image = $data['image'] ?? null;
             $class->image_description = htmlspecialchars($data['image_description'] ?? null);
             $class->status = ($data['start_date'] && $data['start_date'] > Carbon::now()) ? 'inactive' : 'active';
             $class->start_date = $data['start_date'] ?? Carbon::now();
@@ -214,7 +211,7 @@ class Classes extends Model
             $class->name = $data['name'];
             $class->short_description = htmlspecialchars($data['short_description']);
             $class->description = htmlspecialchars($data['description'] ?? null);
-            $class->image = htmlspecialchars($data['image'] ?? null);
+            $class->image = $data['image'] ?? null;
             $class->image_description = htmlspecialchars($data['image_description'] ?? null);
             $class->status = ($data['start_date'] && $data['start_date'] > Carbon::now()) ? 'inactive' : 'active';
             $class->start_date = $data['start_date'] ?? Carbon::now();

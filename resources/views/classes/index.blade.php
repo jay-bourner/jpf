@@ -10,14 +10,14 @@
                 </div>
             </div>
             <main class="category-list">
-                <div class="category-list_filters">
+                {{-- <div class="category-list_filters">
                     @foreach($data['categories'] as $category)
                         <button class="category" id="{{ $category['id'] }}" data-filter="{{ $category['filter'] }}">
                             <img src="{{ $category['image'] }}" alt="{{ $category['alt'] }}" class="category-image">
                             <span class="category-name">{{ $category['name'] }}</span>
                         </button>
                     @endforeach
-                </div>
+                </div> --}}
                 <div class="category-list_items">
                     @foreach($data['classes'] as $class)
                         <a href="{{ $class['url'] }}" class="class-link" id="{{ $class['id'] }}" data-filter="{{ $class['filter'] }}">
@@ -42,40 +42,57 @@
                     @endforeach
                 </div>
             </main>
-        @elseif(isset($data['class']))
-            <div class="classes-page__header {{ (!$data['class']['no_image']) ? 'no_image' : '' }}">
-                @if(!$data['class']['no_image'])
-                    <div class="services-page__header--image">
-                        <img src="{{ $data['class']['image'] }}" alt="{{ $data['class']['image_description'] }}">
+        @elseif($data['single_page'])
+            <div class="classes-page__header">
+                @if(!$data['no_image'])
+                    <div class="classes-page__header--image">
+                        <img src="{{ $data['image'] }}" alt="{{ $data['alt'] }}">
                     </div>
                 @endif
                 <div class="classes-page__header--text">
                     <h1>{{ $data['header'] }}</h1>
-                    <p>{{ $data['short_description'] }}</p>
+                    <h2>{{ $data['short_description'] }}</h2>
+                    {{-- <div>
+                        {!! $data['description'] !!}
+                    </div> --}}
                 </div>
             </div>
-            {{-- <main class="class-details">
-                <h2>{{ $data['class']['header'] }}</h2>
-                <p>{{ $data['class']['description'] }}</p>
-                <img src="{{ $data['class']['image'] }}" alt="{{ $data['class']['image_description'] }}">
-            </main> --}}
+            <div class="classes-page__content">
+                <div class="classes-page__content--left">
+                    <div>{!! $data['description'] !!}</div>
+                </div>
+                <div class="classes-page__content--right">
+                    @if(isset($data['schedule']) && count($data['schedule']) > 0)
+                        <div class="schedule">
+                            <h3>Upcoming Schedule:</h3>
+                            @foreach($data['schedule'] as $venue => $sessions)
+                                <div class="venue-schedule">
+                                    <h4>{{ $venue }}</h4>
+                                    @foreach($sessions as $session)
+                                        <div class="session">
+                                            <span class="session-date">{{ \Carbon\Carbon::parse($session['date'])->format('F j, Y') }} ({{ $session['day'] }})</span>
+                                            <span class="session-time">{{ \Carbon\Carbon::parse($session['starts'])->format('g:i A') }} - {{ \Carbon\Carbon::parse($session['ends'])->format('g:i A') }}</span>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
+                    
+                    @if(isset($data['notes']) && $data['notes'] != '')
+                        <div class="notes">
+                            <h3>Notes:</h3>
+                            {!! $data['notes'] !!}
+                        </div>
+                    @endif
+                </div>
+            </div>
         @else
             <main class="no-services">
                 <h2>Sorry, no services available at the moment.</h2>
                 <p>Please check back later or <a href="/contact" style="text-decoration: underline">contact me</a> for more information.</p>
             </main>
         @endif
-            
-        {{-- @if(isset($data['categories']) && count($data['categories']) > 0)
-            <div class="classes-page__categories">
-                @foreach($data['categories'] as $category)
-                    <div class="classes-page__category">
-                        <h2>{{ $category->name }}</h2>
-                        <p>{{ $category->description }}</p>
-                    </div>
-                @endforeach
-            </div>
-        @endif --}}
         </div>
     </div>
 @endsection
