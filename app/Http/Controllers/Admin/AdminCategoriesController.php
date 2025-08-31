@@ -21,10 +21,21 @@ class AdminCategoriesController extends Controller
 
         $attributes = [
             'title' => 'Categories',
-            'page_action_create' => route('admin.categories.create'),
-            // 'page_action_disable' => 'disable-categories',
-            // 'page_action_delete' => route('admin.categories.delete'),
             'categories' => $categories,
+            'page_actions' => [
+                [
+                    'label' => 'Create',
+                    'class' => 'add jp-btn-gry',
+                    'icon' => 'plus',
+                    'action' => route('admin.categories.create')
+                ],
+                [
+                    'label' => 'Delete', 
+                    'class' => 'delete jp-btn-red', 
+                    'icon' => 'trash', 
+                    'dataset' => 'delete-categories'
+                ],
+            ]
         ];
         return view('admin.categories', compact('attributes'));
     }
@@ -39,7 +50,6 @@ class AdminCategoriesController extends Controller
                     'label' => 'Save',
                     'class' => 'save jp-btn-gry',
                     'icon' => 'save',
-                    // 'action' => ''
                     'dataset' => 'submit-form'
                 ],
                 [

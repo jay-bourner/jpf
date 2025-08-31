@@ -26,5 +26,7 @@
     </main>
     
     <x-footer></x-footer>
+    
+    <div id="modals"></div>
 </body>
 </html>

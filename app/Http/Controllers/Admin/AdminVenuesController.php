@@ -26,10 +26,21 @@ class AdminVenuesController extends Controller
     {
         $attributes = [
             'title' => 'Venues',
-            'page_action_create' => route('admin.venues.create'),
-            // 'page_action_disable' => 'disable-venues',
-            // 'page_action_delete' => route('admin.venues.delete'),
             'venues' => $this->venues->getAllVenues(),
+            'page_actions' => [
+                [
+                    'label' => 'Create',
+                    'class' => 'add jp-btn-gry',
+                    'icon' => 'plus',
+                    'action' => route('admin.venues.create')
+                ],
+                [
+                    'label' => 'Delete', 
+                    'class' => 'delete jp-btn-red', 
+                    'icon' => 'trash', 
+                    'dataset' => 'delete-venues'
+                ],
+            ],
         ];
         return view('admin.venues', compact('attributes'));
     }
@@ -46,7 +57,6 @@ class AdminVenuesController extends Controller
                     'label' => 'Save',
                     'class' => 'save jp-btn-gry',
                     'icon' => 'save',
-                    'method' => 'POST',
                     'dataset' => 'submit-form'
                 ],
                 [

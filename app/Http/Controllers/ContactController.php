@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\ContactFormRequest;
 use App\Services\ImageService;
+use App\Mail\ContactEmail;
 
 class ContactController extends Controller
 {
@@ -37,47 +39,19 @@ class ContactController extends Controller
      */
     public function submit(ContactFormRequest $request)
     {
+        $inputs = $request->validated();
+
+        // Send email
+        $contactData = [
+            'name' => $inputs['name'],
+            'email' => $inputs['email'],
+            'number' => $inputs['number'] ?? 'N/A',
+            'message' => nl2br($inputs['message']),
+        ];
+
+        Mail::send(new ContactEmail($contactData));
+
         return redirect()->route('contact.index')
             ->with('success', 'Your message has been sent successfully!');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }

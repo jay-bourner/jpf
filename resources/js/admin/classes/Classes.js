@@ -2,7 +2,6 @@
 
 import { createApp } from 'vue';
 
-// import ClassesOptions from '../components/ClassesOptions.vue';
 import EditOptions from '../components/EditOptions.vue';
 
 

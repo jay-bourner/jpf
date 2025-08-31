@@ -42,8 +42,8 @@ class AdminClassesController extends Controller
         $attributes = [
             'title' => 'Classes',
             'page_action_create' => route('admin.classes.create'),
-            // 'page_action_disable' => 'disable-classes',
-            // 'page_action_delete' => route('admin.classes.delete'),
+            'page_action_disable' => 'disable-classes',
+            'page_action_delete' => 'delete-classes',
             'classes' => $classes,
         ];
 
@@ -65,7 +65,6 @@ class AdminClassesController extends Controller
                     'label' => 'Save',
                     'class' => 'save jp-btn-gry',
                     'icon' => 'save',
-                    // 'action' => ''
                     'dataset' => 'submit-form'
                 ],
                 [
@@ -262,9 +261,9 @@ class AdminClassesController extends Controller
             }
         }
 
-        // usort($result, function($a, $b) {
-        //     return strcmp($a[0]['day'], $b[0]['day']);
-        // });
+        uasort($result, function($a, $b) {
+            return strcmp($a[0]['day'], $b[0]['day']);
+        });
 
         return response()->json($result);
     }

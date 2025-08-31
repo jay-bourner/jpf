@@ -13,11 +13,15 @@ class ImageService
         return $image->store('images', 'public');
     }
 
+    /**
+     * Resize an image to the specified width and height.
+     * -- NEED TO RE-WRITE FOR LARAVEL SPECIFIC
+     */
     public function resize($imagePath, $width, $height, $type = 'contain') {
         $image_old = 'image/'.$imagePath;
 
         if(!is_file(public_path($image_old))) {
-            $image_old = 'image/icons/no_image.png';
+            return;
         }
 
         $new_image_path = str_replace('image/', '', $image_old);
