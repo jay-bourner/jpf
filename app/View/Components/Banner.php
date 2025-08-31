@@ -41,13 +41,13 @@ class Banner extends Component
                     'height' => $hero_image_height,
                 ],
                 [
-                    'src' => $this->imageService->resize('instructor/instructor-10.jpg', 300, 300),
+                    'src' => $this->imageService->resize('instructor/instructor-9.jpg', 300, 300),
                     'alt' => 'Instructor 9',
                     'width' => $hero_image_width,
                     'height' => $hero_image_height,
                 ],
                 [
-                    'src' => $this->imageService->resize('instructor/instructor-10.jpg', 300, 300),
+                    'src' => $this->imageService->resize('instructor/instructor-13.jpg', 300, 300),
                     'alt' => 'Instructor 13',
                     'width' => $hero_image_width,
                     'height' => $hero_image_height,

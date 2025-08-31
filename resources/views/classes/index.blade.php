@@ -70,8 +70,7 @@
                                     <h4>{{ $venue }}</h4>
                                     @foreach($sessions as $session)
                                         <div class="session">
-                                            <span class="session-date">{{ \Carbon\Carbon::parse($session['date'])->format('F j, Y') }} ({{ $session['day'] }})</span>
-                                            <span class="session-time">{{ \Carbon\Carbon::parse($session['starts'])->format('g:i A') }} - {{ \Carbon\Carbon::parse($session['ends'])->format('g:i A') }}</span>
+                                            <span class="session-date-time">{{ $session['date'] }} {{ $session['time'] }}</span>
                                         </div>
                                     @endforeach
                                 </div>

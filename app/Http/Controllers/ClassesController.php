@@ -7,6 +7,8 @@ use App\Models\Classes;
 use App\Models\ClassOptions;
 use App\Models\Categories;
 use App\Services\ImageService;
+use Carbon\Carbon;
+use DateTime;
 
 class ClassesController extends Controller
 {
@@ -35,7 +37,6 @@ class ClassesController extends Controller
             "meta_title" => "Welcome to JP Fitness",
             "meta_description" => "JP Fitness, Move With Me. We are a fitness company that offers a variety of services to help you reach your fitness goals.",
             'header' => 'Classes',
-            // 'description' => 'I have a range of classes available to you, both in person and online. See below for timetables of what\'s available. Please visit my contact page if you have any questions.',
             'description' => 'There are a range of classes available to you, Check them out below.',
         );
 
@@ -114,14 +115,15 @@ class ClassesController extends Controller
 
     /**
      * Make a schedule for a class based on options frequency, day and start/end time.
+     * --NEEDS TO BE MOVED TO A SERVICE CLASS--
      */
     public function makeSchedule($start_date, $classOptions, $limit = 4)
     {
         $schedule = array();
 
         // start date of the class
-        $beginning = new \DateTime($start_date);
-        $today_date = new \DateTime();
+        $beginning = new DateTime($start_date);
+        $today_date = new DateTime();
 
         $beginningDate = '';
         $beginningDay = '';
@@ -134,7 +136,7 @@ class ClassesController extends Controller
         }
         $beginningDay = $beginningDate->format('l');
 
-        foreach($classOptions as $key => $option) {
+        foreach($classOptions as $option) {
             $dayOfWeek = $option['day'];        // e.g., 'Monday'
             $startTime = $option['start_time']; // e.g., '10:00:00'
             $endTime = $option['end_time'];     // e.g., '11:00:00'
@@ -150,10 +152,8 @@ class ClassesController extends Controller
 
             // create first instance of schedule
             $schedule[$option['venue']][] = [
-                'date' => $nextDate->format('Y-m-d'),
-                'day' => $nextDate->format('l'),
-                'starts' => $startTime,
-                'ends' => $endTime,
+                'date' => Carbon::parse($nextDate)->format('F j, Y') . " (". $nextDate->format('l') .")",
+                'time' => Carbon::parse($startTime)->format('g:i A') . " - " . Carbon::parse($endTime)->format('g:i A')
             ];
 
             // Generate subsequent dates based on frequency and $limit variable passed into function
@@ -181,10 +181,8 @@ class ClassesController extends Controller
                 }
                 
                 $schedule[$option['venue']][] = [
-                    'date' => $date->format('Y-m-d'),
-                    'day' => $date->format('l'),
-                    'starts' => $startTime,
-                    'ends' => $endTime,
+                    'date' => Carbon::parse($date)->format('F j, Y') . " (". $date->format('l') .")",
+                    'time' => Carbon::parse($startTime)->format('g:i A') . " - " . Carbon::parse($endTime)->format('g:i A')
                 ];
             }
         }
@@ -193,7 +191,7 @@ class ClassesController extends Controller
     }
 
     function getNextDate($start, $dayOfWeek) {
-        $date = new \DateTime($start);
+        $date = new DateTime($start);
         $date->modify('next ' . $dayOfWeek);
         return $date;
     }
