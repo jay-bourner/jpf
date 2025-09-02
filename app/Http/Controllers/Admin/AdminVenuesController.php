@@ -43,20 +43,11 @@ class AdminVenuesController extends Controller
         $attributes = [
             'title' => 'Create New Venue',
             'action' => route('admin.venues.store'),
-            'page_actions' => [
-                [
-                    'label' => 'Save',
-                    'class' => 'save jp-btn-gry',
-                    'icon' => 'save',
-                    'dataset' => 'submit-form'
-                ],
-                [
-                    'label' => 'Cancel',
-                    'class' => 'cancel jp-btn-red',
-                    'icon' => 'x',
-                    'action' => route('admin.venues')
-                ]
-            ],
+            'action_create' => ['hide' => true],
+            'action_disable' => ['hide' => true],
+            'action_save' => ['dataset' => 'submit-form'],
+            'action_cancel' => ['action' => route('admin.venues')],
+            'action_delete' => ['hide' => true],
         ];
         return view('admin.venues-form', compact('attributes'));
     }
@@ -79,20 +70,11 @@ class AdminVenuesController extends Controller
             'method' => 'POST',
             'second_method' => 'PUT',
             'action' => route('admin.venues.update', $id),
-            'page_actions' => [
-                [
-                    'label' => 'Save',
-                    'class' => 'save jp-btn-gry',
-                    'icon' => 'save',
-                    'dataset' => 'submit-form'
-                ],
-                [
-                    'label' => 'Cancel',
-                    'class' => 'cancel jp-btn-red',
-                    'icon' => 'x',
-                    'action' => route('admin.venues')
-                ]
-            ],
+            'action_create' => ['hide' => true],
+            'action_disable' => ['hide' => true],
+            'action_save' => ['dataset' => 'submit-form'],
+            'action_cancel' => ['action' => route('admin.venues')],
+            'action_delete' => ['hide' => true],
         ];
         return view('admin.venues-form', compact('attributes'));
     }

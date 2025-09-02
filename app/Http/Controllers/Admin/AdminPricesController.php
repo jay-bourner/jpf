@@ -43,21 +43,11 @@ class AdminPricesController extends Controller
         $attributes = [
             'title' => 'Create New Price',
             'action' => route('admin.prices.store'),
-            'page_actions' => [
-                [
-                    'label' => 'Save',
-                    'class' => 'save jp-btn-gry',
-                    'icon' => 'save',
-                    'method' => 'POST',
-                    'dataset' => 'submit-form'
-                ],
-                [
-                    'label' => 'Cancel',
-                    'class' => 'cancel jp-btn-red',
-                    'icon' => 'x',
-                    'action' => route('admin.prices')
-                ]
-            ],
+            'action_create' => ['hide' => true],
+            'action_disable' => ['hide' => true],
+            'action_save' => ['dataset' => 'submit-form'],
+            'action_cancel' => ['action' => route('admin.prices')],
+            'action_delete' => ['hide' => true],
         ];
 
         return view('admin.prices-form', compact('attributes'));
@@ -80,20 +70,11 @@ class AdminPricesController extends Controller
             'method' => 'POST',
             'second_method' => 'PUT',
             'action' => route('admin.prices.update', $id),
-            'page_actions' => [
-                [
-                    'label' => 'Save',
-                    'class' => 'save jp-btn-gry',
-                    'icon' => 'save',
-                    'dataset' => 'submit-form'
-                ],
-                [
-                    'label' => 'Cancel',
-                    'class' => 'cancel jp-btn-red',
-                    'icon' => 'x',
-                    'action' => route('admin.prices')
-                ]
-            ],
+            'action_create' => ['hide' => true],
+            'action_disable' => ['hide' => true],
+            'action_save' => ['dataset' => 'submit-form'],
+            'action_cancel' => ['action' => route('admin.prices')],
+            'action_delete' => ['hide' => true],
         ];
         return view('admin.prices-form', compact('attributes'));
     }

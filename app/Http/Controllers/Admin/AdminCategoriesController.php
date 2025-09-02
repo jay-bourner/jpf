@@ -36,20 +36,11 @@ class AdminCategoriesController extends Controller
             'title' => 'Create New Category',
             'action' => route('admin.categories.store'),
             'method' => 'POST',
-            'page_actions' => [
-                [
-                    'label' => 'Save',
-                    'class' => 'save jp-btn-gry',
-                    'icon' => 'save',
-                    'dataset' => 'submit-form'
-                ],
-                [
-                    'label' => 'Cancel',
-                    'class' => 'cancel jp-btn-red',
-                    'icon' => 'x',
-                    'action' => route('admin.categories')
-                ]
-            ],
+            'action_create' => ['hide' => true],
+            'action_disable' => ['hide' => true],
+            'action_save' => ['dataset' => 'submit-form'],
+            'action_cancel' => ['action' => route('admin.categories')],
+            'action_delete' => ['hide' => true],
         ];
 
         return view('admin.categories-form', compact('attributes'));
@@ -64,20 +55,11 @@ class AdminCategoriesController extends Controller
             'method' => 'POST',
             'second_method' => 'PUT',
             'action' => route('admin.categories.update', $id),
-            'page_actions' => [
-                [
-                    'label' => 'Save',
-                    'class' => 'save jp-btn-gry',
-                    'icon' => 'save',
-                    'dataset' => 'submit-form'
-                ],
-                [
-                    'label' => 'Cancel',
-                    'class' => 'cancel jp-btn-red',
-                    'icon' => 'x',
-                    'action' => route('admin.categories')
-                ]
-            ],
+            'action_create' => ['hide' => true],
+            'action_disable' => ['hide' => true],
+            'action_save' => ['dataset' => 'submit-form'],
+            'action_cancel' => ['action' => route('admin.categories')],
+            'action_delete' => ['hide' => true],
         ];
 
         return view('admin.categories-form', compact('attributes'));

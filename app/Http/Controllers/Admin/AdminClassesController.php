@@ -62,20 +62,11 @@ class AdminClassesController extends Controller
             'venues' => $venues ?? [],
             'action' => route('admin.classes.store'),
             'method' => 'POST',
-            'page_actions' => [
-                [
-                    'label' => 'Save',
-                    'class' => 'save jp-btn-gry',
-                    'icon' => 'save',
-                    'dataset' => 'submit-form'
-                ],
-                [
-                    'label' => 'Cancel',
-                    'class' => 'cancel jp-btn-red',
-                    'icon' => 'x',
-                    'action' => route('admin.classes')
-                ],
-            ],
+            'action_create' => ['hide' => true],
+            'action_disable' => ['hide' => true],
+            'action_save' => ['dataset' => 'submit-form'],
+            'action_cancel' => ['action' => route('admin.classes')],
+            'action_delete' => ['hide' => true],
         ];
         return view('admin.classes-form', compact('attributes'));
     }
@@ -97,20 +88,11 @@ class AdminClassesController extends Controller
             'method' => 'POST',
             'second_method' => 'PUT',
             'action' => route('admin.classes.update', $id),
-            'page_actions' => [
-                [
-                    'label' => 'Save',
-                    'class' => 'save jp-btn-gry',
-                    'icon' => 'save',
-                    'dataset' => 'submit-form'
-                ],
-                [
-                    'label' => 'Cancel',
-                    'class' => 'cancel jp-btn-red',
-                    'icon' => 'x',
-                    'action' => route('admin.classes')
-                ]
-            ],
+            'action_create' => ['hide' => true],
+            'action_disable' => ['hide' => true],
+            'action_save' => ['dataset' => 'submit-form'],
+            'action_cancel' => ['action' => route('admin.classes')],
+            'action_delete' => ['hide' => true],
         ];
         return view('admin.classes-form', compact('attributes'));
     }
