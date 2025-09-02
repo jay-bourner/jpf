@@ -26,20 +26,11 @@ class AdminPricesController extends Controller
         $attributes = [
             'title' => 'Prices',
             'prices' => $this->prices->getAllPrices(),
-            'page_actions' => [
-                [
-                    'label' => 'Create',
-                    'class' => 'add jp-btn-gry',
-                    'icon' => 'plus',
-                    'action' => route('admin.prices.create')
-                ],
-                [
-                    'label' => 'Delete', 
-                    'class' => 'delete jp-btn-red', 
-                    'icon' => 'trash', 
-                    'dataset' => 'delete-prices'
-                ],
-            ]
+            'action_create' => ['action' => route('admin.prices.create')],
+            'action_disable' => ['dataset' => 'disable-prices'],
+            'action_save' => ['hide' => true],
+            'action_cancel' => ['hide' => true],
+            'action_delete' => ['dataset' => 'delete-prices'],
         ];
 
         return view('admin.prices', compact('attributes'));

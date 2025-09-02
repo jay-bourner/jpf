@@ -27,20 +27,11 @@ class AdminVenuesController extends Controller
         $attributes = [
             'title' => 'Venues',
             'venues' => $this->venues->getAllVenues(),
-            'page_actions' => [
-                [
-                    'label' => 'Create',
-                    'class' => 'add jp-btn-gry',
-                    'icon' => 'plus',
-                    'action' => route('admin.venues.create')
-                ],
-                [
-                    'label' => 'Delete', 
-                    'class' => 'delete jp-btn-red', 
-                    'icon' => 'trash', 
-                    'dataset' => 'delete-venues'
-                ],
-            ],
+            'action_create' => ['action' => route('admin.venues.create')],
+            'action_disable' => ['dataset' => 'disable-venues'],
+            'action_save' => ['hide' => true],
+            'action_cancel' => ['hide' => true],
+            'action_delete' => ['dataset' => 'delete-venues'],
         ];
         return view('admin.venues', compact('attributes'));
     }

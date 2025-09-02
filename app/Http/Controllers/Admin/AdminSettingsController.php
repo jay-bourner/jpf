@@ -17,7 +17,11 @@ class AdminSettingsController extends Controller
     public function index() {
         $attributes = [
             'title' => 'Settings',
-            'page_actions' => [],
+            'action_create' => ['hide' => true],
+            'action_disable' => ['hide' => true],
+            'action_save' => ['hide' => true],
+            'action_cancel' => ['hide' => true],
+            'action_delete' => ['hide' => true],
         ];
 
         return view('admin.settings', compact('attributes'));

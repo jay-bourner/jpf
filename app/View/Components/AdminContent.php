@@ -13,30 +13,60 @@ class AdminContent extends Component
     public array $actions = [];
     
     /**
-     * Create a new component instance.
+     *  Create a new component instance.
      */
     public function __construct(array $attributes = [])
     {
         $this->componentAttributes = $attributes;
         $this->title = $attributes['title'] ?? 'Admin Content';
-        $this->actions = $this->componentAttributes['page_actions'] ?? [
+        $this->actions = [
             [
                 'label' => 'Create',
+                'button' => true,
+                'hide' => $this->componentAttributes['action_create']['hide']  ?? false,
                 'class' => 'add jp-btn-gry',
                 'icon' => 'plus',
-                'action' => $this->componentAttributes['page_action_create'] ?? ''
+                'action' => $this->componentAttributes['action_create']['action']  ?? ''
             ],
             [
                 'label' => 'Disable',
+                'button' => true,
+                'hide' => $this->componentAttributes['action_disable']['hide']  ?? false,
                 'class' => 'add jp-btn-gry',
                 'icon' => 'prohibit',
-                'dataset' => $this->componentAttributes['page_action_disable'] ?? ''
+                'dataset' => $this->componentAttributes['action_disable']['dataset']  ?? ''
             ],
             [
-                'label' => 'Delete', 
+                'label' => 'Save',
+                'button' => true,
+                'hide' => $this->componentAttributes['action_save']['hide']  ?? false,
+                'class' => 'save jp-btn-gry',
+                'icon' => 'save',
+                'dataset' => $this->componentAttributes['action_save']['action']  ?? '', //'submit-form'
+            ],
+            [
+                'label' => 'Cancel',
+                'button' => true,
+                'hide' => $this->componentAttributes['action_cancel']['hide']  ?? false,
+                'class' => 'cancel jp-btn-red',
+                'icon' => 'x',
+                'action' => $this->componentAttributes['action_cancel']['action']  ?? '', //route('admin.classes')
+            ],
+            [
+                'label' => 'Delete',
+                'button' => true, 
+                'hide' => $this->componentAttributes['action_delete']['hide']  ?? false,
                 'class' => 'delete jp-btn-red', 
                 'icon' => 'trash', 
-                'dataset' => $this->componentAttributes['page_action_delete'] ?? ''
+                'dataset' => $this->componentAttributes['action_delete']['dataset'] ?? ''
+            ],
+            [
+                'label' => 'Logout',
+                'button' => false, 
+                'hide' => false,
+                'class' => 'logout', 
+                'icon' => 'sign-out', 
+                'action' =>  ''
             ],
         ];
     }

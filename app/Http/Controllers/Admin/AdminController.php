@@ -8,13 +8,27 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    /**
      * Display a listing of the resource.
      */
     public function index()
     {
         $attributes = [
             'title' => 'Dashboard',
-            'page_actions' => [],
+            'action_create' => ['hide' => true],
+            'action_disable' => ['hide' => true],
+            'action_save' => ['hide' => true],
+            'action_cancel' => ['hide' => true],
+            'action_delete' => ['hide' => true],
         ];
 
         return view('admin.index', compact('attributes'));

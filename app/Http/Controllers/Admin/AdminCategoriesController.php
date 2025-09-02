@@ -22,20 +22,11 @@ class AdminCategoriesController extends Controller
         $attributes = [
             'title' => 'Categories',
             'categories' => $categories,
-            'page_actions' => [
-                [
-                    'label' => 'Create',
-                    'class' => 'add jp-btn-gry',
-                    'icon' => 'plus',
-                    'action' => route('admin.categories.create')
-                ],
-                [
-                    'label' => 'Delete', 
-                    'class' => 'delete jp-btn-red', 
-                    'icon' => 'trash', 
-                    'dataset' => 'delete-categories'
-                ],
-            ]
+            'action_create' => ['action' => route('admin.categories.create')],
+            'action_disable' => ['dataset' => 'disable-categories'],
+            'action_save' => ['hide' => true],
+            'action_cancel' => ['hide' => true],
+            'action_delete' => ['dataset' => 'delete-categories'],
         ];
         return view('admin.categories', compact('attributes'));
     }

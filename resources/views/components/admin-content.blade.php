@@ -22,7 +22,10 @@
         <div class="admin-content__header--actions" id="admin-actions">
             @if(isset($actions))
                 @foreach($actions as $key => $action)
-                    <a class="jp-btn jp-btn--sm {{ $action['class'] }}" {{ isset($action['action']) ? 'href=' . $action['action'] . '' : '' }} {{ isset($action['dataset']) ? 'data-action=' . $action['dataset'] : '' }}>
+                    @if($action['hide'])
+                        @continue
+                    @endif
+                    <a class="{{ (isset($action['button']) && $action['button']) ? 'jp-btn jp-btn--sm' : ''}}  {{ $action['class'] }}" {{ isset($action['action']) ? 'href=' . $action['action'] . '' : '' }} {{ isset($action['dataset']) ? 'data-action=' . $action['dataset'] : '' }}>
                         <span class="svg-icon svg-icon--{{ $action['icon'] }}"></span>
                     </a>
                 @endforeach

@@ -1,8 +1,21 @@
 @use '../mixins/mixins' as mixin;
 @use '../theme/theme' as theme;
+.login-banner {
+    width: 100%;
+
+    .hero-logo {
+        display: flex;
+        justify-content: center;
+        
+        img {
+            width: 350px;
+            height: auto;
+        }
+    }
+}
 
 .login-section {
-    max-width: 1400px;
+    max-width: 500px;
     margin: 20px auto;
     padding: 20px;
     border: 1px solid black;
@@ -15,60 +28,60 @@
     }
 
     .login-form-section {
-        padding: 20px 0;
+        padding: 40px;
         display: grid;
         grid-template-columns: 1fr;
 
-        form.login-form {
-            width: 30%;
-            margin: auto;
-
-            legend {
-                font-size: 1.5rem;
-                font-weight: bold;
-                text-align: center;
-            }
-
-            fieldset {
-                margin: 2em auto;
-
-                > div:nth-last-child(2) {
-                    display: flex;
-                    justify-content: center;
-                }
-            }
-            
-            label[for="remember"] {
-                cursor: pointer;
-            }
+        .submit-btn {
+            display:flex;
+            justify-content: end;
+            margin: 10px 0;
 
             button {
-                cursor: pointer;
-                border: 1px solid black;
-                border-radius: 5px;
-                background-color: theme.colours(--green);
-                float: center;
                 width: 200px;
 
                 &:hover {
                     background-color: theme.colours(--bg-dk-green);
                 }
             }
+        }
+        
+        .login-form-footer {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
             
-            .login-form-footer {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
+            div:first-of-type {
+                justify-self: start;
             }
 
-            @include mixin.breakpoint(lg_1) {
-                width: 65%;
+            div:last-of-type {
+                justify-self: end;
             }
             
-            @include mixin.breakpoint(sm_400) {
-                width: 100%;
+            label[for="remember"] {
+                cursor: pointer;
+                display: grid;
+                width: 200px;
+                grid-template-columns: 20% auto;
+                align-items: center;
+
+                input {
+                    width: 20px;
+                    height: 20px;
+                    margin: 0;
+                    cursor: pointer;
+                }
             }
         }
+
+        // @include mixin.breakpoint(lg_1) {
+        //     width: 65%;
+        // }
+        
+        // @include mixin.breakpoint(sm_400) {
+        //     width: 100%;
+        // }
 
         .section-name {
             font-size: 1.5rem;

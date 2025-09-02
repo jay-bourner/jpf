@@ -41,9 +41,11 @@ class AdminClassesController extends Controller
         $classes = $this->classes->getAllClasses();
         $attributes = [
             'title' => 'Classes',
-            'page_action_create' => route('admin.classes.create'),
-            'page_action_disable' => 'disable-classes',
-            'page_action_delete' => 'delete-classes',
+            'action_create' => ['action' => route('admin.classes.create')],
+            'action_disable' => ['dataset' => 'disable-classes'],
+            'action_save' => ['hide' => true],
+            'action_cancel' => ['hide' => true],
+            'action_delete' => ['dataset' => 'delete-classes'],
             'classes' => $classes,
         ];
 
@@ -72,7 +74,7 @@ class AdminClassesController extends Controller
                     'class' => 'cancel jp-btn-red',
                     'icon' => 'x',
                     'action' => route('admin.classes')
-                ]
+                ],
             ],
         ];
         return view('admin.classes-form', compact('attributes'));
