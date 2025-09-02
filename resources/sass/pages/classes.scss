@@ -172,17 +172,17 @@
 
         
         &_items {
-            display: flex;
-            flex-wrap: wrap;
             gap: 20px;
             padding: 20px 0 0;
             margin: auto;
-            width: 97%;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
         }
 
         .class-link {
             display: flex;
-            width: 640px;
+            max-width: 600px;
             height: 200px;
             position: relative;
             border-radius: theme.elements(--border-radius-md);
@@ -201,7 +201,7 @@
                     height: auto;
                     width: 200px;
                     position: absolute;
-                    right: 10px;
+                    right: 7px;
                     top: 40%;
                     transform: translate(50%, 50%) rotate(-90deg) scaleY(-1);
                     fill: theme.colours(--bg-lt-green);
@@ -381,6 +381,12 @@
 
                 .venue-schedule{
                     padding: 5px 15px;
+
+                    .session {
+                        margin: 5px;
+                        padding: 5px;
+                        border-bottom: 1px solid black;
+                    }
                 }
 
                 h3 {
