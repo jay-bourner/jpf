@@ -149,7 +149,7 @@ class AdminClassesController extends Controller
             ->merge($inputs)
             ->except(['_token', '_method']);
 
-        if($data['image']) {
+        if(isset($data['image'])) {
             $filename = $data['image']->getClientOriginalName();
             $data['image']->move('image/uploads', $filename);
             $data['image'] = '/image/uploads/' . $filename;

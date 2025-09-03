@@ -25,6 +25,11 @@ ul {
     list-style-type: none;
 }
 
+.note-edited ul {
+    padding-inline-start: 40px;
+    list-style-type: unset;
+}
+
 button {
     cursor: pointer;
     // background: transparent;

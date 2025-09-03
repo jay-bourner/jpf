@@ -5,17 +5,10 @@ namespace App\View\Components;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
+use Illuminate\Support\Facades\Auth;
 
 class Navigation extends Component
 {
-    /**
-     * Create a new component instance.
-     */
-    public function __construct()
-    {
-        //
-    }
-
     /**
      * Get the view / contents that represent the component.
      */
@@ -27,25 +20,24 @@ class Navigation extends Component
                 [
                     'name' => 'Home',
                     'href' => '/',
-                    // 'is_active' => true,
                 ],
                 [
                     'name' => 'Classes',
                     'href' => '/classes',
-                    // 'is_active' => true,
                 ],
                 [
                     'name' => 'Contact',
                     'href' => '/contact',
-                    // 'is_active' => true,
-                ], 
-                [
-                    'name' => 'Admin',
-                    'href' => '/admin',
-                    // 'is_active' => ($isLogged) ? true : false,
-                ] 
+                ],
             ],
         );
+
+        if(Auth::check()) {
+            $header['navigation'][] = [
+                'name' => 'Admin',
+                'href' => '/admin',
+            ];
+        }
 
         return view('components.navigation', compact('header'));
     }

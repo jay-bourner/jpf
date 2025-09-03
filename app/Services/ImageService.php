@@ -8,11 +8,6 @@ use Illuminate\Support\Facades\Storage;
 
 class ImageService
 {
-    public function storeImage($image) {
-        // Logic to store the image
-        return $image->store('images', 'public');
-    }
-
     /**
      * Resize an image to the specified width and height.
      * -- NEED TO RE-WRITE FOR LARAVEL SPECIFIC
@@ -24,49 +19,51 @@ class ImageService
             return;
         }
 
-        $new_image_path = str_replace('image/', '', $image_old);
-        $image_old = public_path($image_old);
-
         $image_size_text = '-'. $width . 'x' . $height;
-        $manager = ImageManager::gd();
-        $image = $manager->read($image_old);
 
-        // Get dimensions
-        $originalWidth = $image->width();
-        $originalHeight = $image->height();
+        $new_image = 'image/cache/' . substr($imagePath, 0, strrpos($imagePath, '.')) . $image_size_text . '.webp';
+        $webpPath = $new_image;
 
-        if($originalWidth != $width || $originalHeight != $height) {
+        if(!is_file('/storage/'.$webpPath)) {
+            $manager = ImageManager::gd();
+            $image = $manager->read($image_old);
+            
+            // Get dimensions
+            $originalWidth = $image->width();
+            $originalHeight = $image->height();
 
-            $scale_dimension = 'w';
+            if($originalWidth != $width || $originalHeight != $height) {
 
-            $resize_aspect_ratio = $width / $height;
-            $image_aspect_ratio = $originalWidth / $originalHeight;
+                $scale_dimension = 'w';
 
-            if($resize_aspect_ratio < $image_aspect_ratio) {
-                $scale_dimension = 'h';
-            }
+                $resize_aspect_ratio = $width / $height;
+                $image_aspect_ratio = $originalWidth / $originalHeight;
 
-            if($type == 'contain') {
-                $width = min($width, $originalWidth);
-                $height = min($height, $originalHeight);
+                if($resize_aspect_ratio < $image_aspect_ratio) {
+                    $scale_dimension = 'h';
+                }
 
-                $scale_dimension = ($scale_dimension == 'w') ? 'h' : 'w';
+                if($type == 'contain') {
+                    $width = min($width, $originalWidth);
+                    $height = min($height, $originalHeight);
 
-                if($scale_dimension == 'w') {
-                    $height = round($width / $image_aspect_ratio);
-                } else {
-                    $width = round($height * $image_aspect_ratio);
+                    $scale_dimension = ($scale_dimension == 'w') ? 'h' : 'w';
+
+                    if($scale_dimension == 'w') {
+                        $height = round($width / $image_aspect_ratio);
+                    } else {
+                        $width = round($height * $image_aspect_ratio);
+                    }
                 }
             }
+
+            $image->resize($width, $height);
+            // Encode with specific format settings
+            $encoded = $image->toWebp(80);
+
+            // Save to cache directory
+            Storage::disk('public')->put($webpPath, $encoded);
         }
-
-        $image->resize($width, $height);
-        // Encode with specific format settings
-        $encoded = $image->toWebp(80);
-
-        // Save to cache directory
-        $webpPath = 'image/cache' . substr($new_image_path, 0, strrpos($new_image_path, '.')) . $image_size_text . '.webp';
-        Storage::disk('public')->put($webpPath, $encoded);
 
         return '/storage/'.$webpPath;
     }

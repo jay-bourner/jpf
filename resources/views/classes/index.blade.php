@@ -59,7 +59,7 @@
             </div>
             <div class="classes-page__content">
                 <div class="classes-page__content--left">
-                    <div>{!! $data['description'] !!}</div>
+                    <div class="note-edited">{!! $data['description'] !!}</div>
                 </div>
                 <div class="classes-page__content--right">
                     @if(isset($data['schedule']) && count($data['schedule']) > 0)
