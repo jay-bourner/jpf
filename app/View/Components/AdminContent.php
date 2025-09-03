@@ -23,15 +23,23 @@ class AdminContent extends Component
             [
                 'label' => 'Create',
                 'button' => true,
-                'hide' => $this->componentAttributes['action_create']['hide']  ?? false,
+                'hide' => $this->componentAttributes['action_create']['hide'] ?? true,
                 'class' => 'add jp-btn-gry',
                 'icon' => 'plus',
                 'action' => $this->componentAttributes['action_create']['action']  ?? ''
             ],
             [
+                'label' => 'Edit',
+                'button' => true,
+                'hide' => $this->componentAttributes['action_edit']['hide'] ?? true,
+                'class' => 'add jp-btn-gry',
+                'icon' => 'pencil',
+                'action' => $this->componentAttributes['action_edit']['action']  ?? ''
+            ],
+            [
                 'label' => 'Disable',
                 'button' => true,
-                'hide' => $this->componentAttributes['action_disable']['hide']  ?? false,
+                'hide' => $this->componentAttributes['action_disable']['hide'] ?? true,
                 'class' => 'add jp-btn-gry',
                 'icon' => 'prohibit',
                 'dataset' => $this->componentAttributes['action_disable']['dataset']  ?? ''
@@ -39,25 +47,26 @@ class AdminContent extends Component
             [
                 'label' => 'Save',
                 'button' => true,
-                'hide' => $this->componentAttributes['action_save']['hide']  ?? false,
+                'hide' => $this->componentAttributes['action_save']['hide'] ?? true,
                 'class' => 'save jp-btn-gry',
                 'icon' => 'save',
-                'dataset' => $this->componentAttributes['action_save']['action']  ?? '', //'submit-form'
+                'dataset' => $this->componentAttributes['action_save']['action']  ?? 'submit-form',
             ],
             [
                 'label' => 'Cancel',
                 'button' => true,
-                'hide' => $this->componentAttributes['action_cancel']['hide']  ?? false,
+                'hide' => $this->componentAttributes['action_cancel']['hide'] ?? true,
                 'class' => 'cancel jp-btn-red',
                 'icon' => 'x',
-                'action' => $this->componentAttributes['action_cancel']['action']  ?? '', //route('admin.classes')
+                'action' => $this->componentAttributes['action_cancel']['action']  ?? '',
             ],
             [
                 'label' => 'Delete',
                 'button' => true, 
-                'hide' => $this->componentAttributes['action_delete']['hide']  ?? false,
+                'hide' => $this->componentAttributes['action_delete']['hide'] ?? true,
                 'class' => 'delete jp-btn-red', 
                 'icon' => 'trash', 
+                // 'action' => $this->componentAttributes['action_delete']['action']  ?? '',
                 'dataset' => $this->componentAttributes['action_delete']['dataset'] ?? ''
             ],
             [
@@ -66,7 +75,7 @@ class AdminContent extends Component
                 'hide' => false,
                 'class' => 'logout', 
                 'icon' => 'sign-out', 
-                'action' =>  ''
+                'action' =>  route('logout'),
             ],
         ];
     }

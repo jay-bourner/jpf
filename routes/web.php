@@ -161,3 +161,4 @@ Route::group(['prefix' => 'api'], function () {
 });
 
 Auth::routes();
+Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');

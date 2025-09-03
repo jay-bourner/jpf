@@ -14,6 +14,7 @@ class AdminPricesController extends Controller
     protected $prices;
 
     public function __construct(ImageService $imageService, Prices $prices) {
+        $this->middleware('auth');
         $this->imageService = $imageService;
         $this->prices = $prices;
     }
@@ -26,11 +27,9 @@ class AdminPricesController extends Controller
         $attributes = [
             'title' => 'Prices',
             'prices' => $this->prices->getAllPrices(),
-            'action_create' => ['action' => route('admin.prices.create')],
-            'action_disable' => ['dataset' => 'disable-prices'],
-            'action_save' => ['hide' => true],
-            'action_cancel' => ['hide' => true],
-            'action_delete' => ['dataset' => 'delete-prices'],
+            'action_create' => ['hide' => false, 'action' => route('admin.prices.create')],
+            'action_disable' => ['hide' => false, 'dataset' => 'disable-prices'],
+            'action_delete' => ['hide' => false, 'dataset' => 'delete-prices'],
         ];
 
         return view('admin.prices', compact('attributes'));
@@ -43,11 +42,8 @@ class AdminPricesController extends Controller
         $attributes = [
             'title' => 'Create New Price',
             'action' => route('admin.prices.store'),
-            'action_create' => ['hide' => true],
-            'action_disable' => ['hide' => true],
-            'action_save' => ['dataset' => 'submit-form'],
-            'action_cancel' => ['action' => route('admin.prices')],
-            'action_delete' => ['hide' => true],
+            'action_save' => ['hide' => false, 'dataset' => 'submit-form'],
+            'action_cancel' => ['hide' => false, 'action' => route('admin.prices')],
         ];
 
         return view('admin.prices-form', compact('attributes'));
@@ -70,11 +66,8 @@ class AdminPricesController extends Controller
             'method' => 'POST',
             'second_method' => 'PUT',
             'action' => route('admin.prices.update', $id),
-            'action_create' => ['hide' => true],
-            'action_disable' => ['hide' => true],
-            'action_save' => ['dataset' => 'submit-form'],
-            'action_cancel' => ['action' => route('admin.prices')],
-            'action_delete' => ['hide' => true],
+            'action_save' => ['hide' => false, 'dataset' => 'submit-form'],
+            'action_cancel' => ['hide' => false, 'action' => route('admin.prices')],
         ];
         return view('admin.prices-form', compact('attributes'));
     }
@@ -113,21 +106,9 @@ class AdminPricesController extends Controller
 
         $attributes = [
             'title' => ucwords($price['type']) . ' Price',
+            'action_edit' => ['hide' => false, 'action' => route('admin.prices.edit', $id)],
+            'action_delete' => ['hide' => false, 'action' => route('admin.prices.delete', $id)],
             'price' => $price,
-            // 'page_actions' => [
-            //     [
-            //         'label' => 'Edit',
-            //         'class' => 'edit jp-btn-gry',
-            //         'icon' => 'pencil',
-            //         'action' => route('admin.prices.edit', $price['id'])
-            //     ],
-            //     [
-            //         'label' => 'Delete',
-            //         'class' => 'delete jp-btn-red',
-            //         'icon' => 'trash',
-            //         'action' => route('admin.prices.delete', $price['id'])
-            //     ]
-            // ],
         ];
         return view('admin.price-view', compact('attributes'));
     }

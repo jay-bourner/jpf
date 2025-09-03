@@ -13,7 +13,6 @@ use App\Models\Venues;
 use App\Services\ImageService;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
-// use Illuminate\Support\Facades\DB;
 
 class AdminClassesController extends Controller
 {
@@ -30,6 +29,7 @@ class AdminClassesController extends Controller
         ClassOptions $classOptions,
         Venues $venues
     ) {
+        $this->middleware('auth');
         $this->categories = $categories;
         $this->imageService = $imageService;
         $this->classes = $classes;
@@ -41,11 +41,9 @@ class AdminClassesController extends Controller
         $classes = $this->classes->getAllClasses();
         $attributes = [
             'title' => 'Classes',
-            'action_create' => ['action' => route('admin.classes.create')],
-            'action_disable' => ['dataset' => 'disable-classes'],
-            'action_save' => ['hide' => true],
-            'action_cancel' => ['hide' => true],
-            'action_delete' => ['dataset' => 'delete-classes'],
+            'action_create' => ['hide' => false, 'action' => route('admin.classes.create')],
+            'action_disable' => ['hide' => false, 'dataset' => 'disable-classes'],
+            'action_delete' => ['hide' => false, 'dataset' => 'delete-classes'],
             'classes' => $classes,
         ];
 
@@ -62,11 +60,8 @@ class AdminClassesController extends Controller
             'venues' => $venues ?? [],
             'action' => route('admin.classes.store'),
             'method' => 'POST',
-            'action_create' => ['hide' => true],
-            'action_disable' => ['hide' => true],
-            'action_save' => ['dataset' => 'submit-form'],
-            'action_cancel' => ['action' => route('admin.classes')],
-            'action_delete' => ['hide' => true],
+            'action_save' => ['hide' => false, 'dataset' => 'submit-form'],
+            'action_cancel' => ['hide' => false, 'action' => route('admin.classes')],
         ];
         return view('admin.classes-form', compact('attributes'));
     }
@@ -88,11 +83,8 @@ class AdminClassesController extends Controller
             'method' => 'POST',
             'second_method' => 'PUT',
             'action' => route('admin.classes.update', $id),
-            'action_create' => ['hide' => true],
-            'action_disable' => ['hide' => true],
-            'action_save' => ['dataset' => 'submit-form'],
-            'action_cancel' => ['action' => route('admin.classes')],
-            'action_delete' => ['hide' => true],
+            'action_save' => ['hide' => false, 'dataset' => 'submit-form'],
+            'action_cancel' => ['hide' => false, 'action' => route('admin.classes')],
         ];
         return view('admin.classes-form', compact('attributes'));
     }
@@ -132,31 +124,16 @@ class AdminClassesController extends Controller
     {
         $class = $this->classes->getClassById($id);
 
-        // dd($class['options']);
         if(!$class) {
             return redirect()->route('admin.classes')->with('error', 'Class not found.');
         }
 
         $attributes = [
             'title' => ucwords($class['name']),
+            'action_edit' => ['hide' => false, 'action' => route('admin.classes.edit', $id)],
+            'action_delete' => ['hide' => false, 'action' => route('admin.classes.delete', $id)],
             'class' => $class,
-            // 'page_actions' => [
-            //     [
-            //         'label' => 'Save',
-            //         'class' => 'save jp-btn-gry',
-            //         'icon' => 'save',
-            //         'action' => ''
-            //     ],
-            //     [
-            //         'label' => 'Cancel',
-            //         'class' => 'cancel jp-btn-red',
-            //         'icon' => 'x',
-            //         'action' => route('admin.classes')
-            //     ]
-            // ],
         ];
-
-        // dd(count($class['options']));
 
         return view('admin.class-view', compact('attributes'));
     }

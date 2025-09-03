@@ -123,6 +123,7 @@
                     height: 15px;
                     cursor: pointer;
                     padding: 10px;
+                    position: relative;
                     border-radius: theme.elements(--border-radius-md);
 
                     .svg-icon {
@@ -131,6 +132,17 @@
                         display: flex;
                         justify-content: center;
                         align-items: center;
+                    }
+                }
+
+                a.logout {
+                    &:after {
+                        content: 'Logout';
+                        font-size: 0.7rem;
+                        margin-left: 5px;
+                        position: absolute;
+                        right: -35px;
+                        top: 14px;
                     }
                 }
             }

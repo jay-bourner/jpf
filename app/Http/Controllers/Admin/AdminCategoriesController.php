@@ -12,6 +12,7 @@ class AdminCategoriesController extends Controller
     protected $categories;
 
     public function __construct(Categories $categories) {
+        $this->middleware('auth');
         $this->categories = $categories;
     }
 
@@ -22,11 +23,9 @@ class AdminCategoriesController extends Controller
         $attributes = [
             'title' => 'Categories',
             'categories' => $categories,
-            'action_create' => ['action' => route('admin.categories.create')],
-            'action_disable' => ['dataset' => 'disable-categories'],
-            'action_save' => ['hide' => true],
-            'action_cancel' => ['hide' => true],
-            'action_delete' => ['dataset' => 'delete-categories'],
+            'action_create' => ['hide' => false, 'action' => route('admin.categories.create')],
+            'action_disable' => ['hide' => false, 'dataset' => 'disable-categories'],
+            'action_delete' => ['hide' => false, 'dataset' => 'delete-categories'],
         ];
         return view('admin.categories', compact('attributes'));
     }
@@ -36,11 +35,8 @@ class AdminCategoriesController extends Controller
             'title' => 'Create New Category',
             'action' => route('admin.categories.store'),
             'method' => 'POST',
-            'action_create' => ['hide' => true],
-            'action_disable' => ['hide' => true],
-            'action_save' => ['dataset' => 'submit-form'],
-            'action_cancel' => ['action' => route('admin.categories')],
-            'action_delete' => ['hide' => true],
+            'action_save' => ['hide' => false, 'dataset' => 'submit-form'],
+            'action_cancel' => ['hide' => false, 'action' => route('admin.categories')],
         ];
 
         return view('admin.categories-form', compact('attributes'));
@@ -55,11 +51,8 @@ class AdminCategoriesController extends Controller
             'method' => 'POST',
             'second_method' => 'PUT',
             'action' => route('admin.categories.update', $id),
-            'action_create' => ['hide' => true],
-            'action_disable' => ['hide' => true],
-            'action_save' => ['dataset' => 'submit-form'],
-            'action_cancel' => ['action' => route('admin.categories')],
-            'action_delete' => ['hide' => true],
+            'action_save' => ['hide' => false, 'dataset' => 'submit-form'],
+            'action_cancel' => ['hide' => false, 'action' => route('admin.categories')],
         ];
 
         return view('admin.categories-form', compact('attributes'));
@@ -95,21 +88,9 @@ class AdminCategoriesController extends Controller
 
         $attributes = [
             'title' => ucwords($category['name']),
+            'action_edit' => ['hide' => false, 'action' => route('admin.categories.edit', $id)],
+            'action_delete' => ['hide' => false, 'action' => route('admin.categories.delete', $id)],
             'category' => $category,
-            // 'page_actions' => [
-            //     [
-            //         'label' => 'Save',
-            //         'class' => 'save jp-btn-gry',
-            //         'icon' => 'save',
-            //         'action' => ''
-            //     ],
-            //     [
-            //         'label' => 'Cancel',
-            //         'class' => 'cancel jp-btn-red',
-            //         'icon' => 'x',
-            //         'action' => route('admin.classes')
-            //     ]
-            // ],
         ];
 
         return view('admin.category-view', compact('attributes'));

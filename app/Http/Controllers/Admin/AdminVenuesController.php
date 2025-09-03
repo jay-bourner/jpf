@@ -15,6 +15,7 @@ class AdminVenuesController extends Controller
     
 
     public function __construct(ImageService $imageService, Venues $venues) {
+        $this->middleware('auth');
         $this->imageService = $imageService;
         $this->venues = $venues;
     }
@@ -27,11 +28,9 @@ class AdminVenuesController extends Controller
         $attributes = [
             'title' => 'Venues',
             'venues' => $this->venues->getAllVenues(),
-            'action_create' => ['action' => route('admin.venues.create')],
-            'action_disable' => ['dataset' => 'disable-venues'],
-            'action_save' => ['hide' => true],
-            'action_cancel' => ['hide' => true],
-            'action_delete' => ['dataset' => 'delete-venues'],
+            'action_create' => ['hide' => false, 'action' => route('admin.venues.create')],
+            'action_disable' => ['hide' => false, 'dataset' => 'disable-venues'],
+            'action_delete' => ['hide' => false, 'dataset' => 'delete-venues'],
         ];
         return view('admin.venues', compact('attributes'));
     }
@@ -43,11 +42,8 @@ class AdminVenuesController extends Controller
         $attributes = [
             'title' => 'Create New Venue',
             'action' => route('admin.venues.store'),
-            'action_create' => ['hide' => true],
-            'action_disable' => ['hide' => true],
-            'action_save' => ['dataset' => 'submit-form'],
-            'action_cancel' => ['action' => route('admin.venues')],
-            'action_delete' => ['hide' => true],
+            'action_save' => ['hide' => false, 'dataset' => 'submit-form'],
+            'action_cancel' => ['hide' => false, 'action' => route('admin.venues')],
         ];
         return view('admin.venues-form', compact('attributes'));
     }
@@ -70,11 +66,8 @@ class AdminVenuesController extends Controller
             'method' => 'POST',
             'second_method' => 'PUT',
             'action' => route('admin.venues.update', $id),
-            'action_create' => ['hide' => true],
-            'action_disable' => ['hide' => true],
-            'action_save' => ['dataset' => 'submit-form'],
-            'action_cancel' => ['action' => route('admin.venues')],
-            'action_delete' => ['hide' => true],
+            'action_save' => ['hide' => false, 'dataset' => 'submit-form'],
+            'action_cancel' => ['hide' => false, 'action' => route('admin.venues')],
         ];
         return view('admin.venues-form', compact('attributes'));
     }
@@ -114,24 +107,11 @@ class AdminVenuesController extends Controller
 
         $attributes = [
             'title' => ucwords($venue['name']),
+            'action_edit' => ['hide' => false, 'action' => route('admin.venues.edit', $id)],
+            'action_delete' => ['hide' => false, 'action' => route('admin.venues.delete', $id)],
             'venue' => $venue,
-            // 'page_actions' => [
-            //     [
-            //         'label' => 'Save',
-            //         'class' => 'save jp-btn-gry',
-            //         'icon' => 'save',
-            //         'action' => ''
-            //     ],
-            //     [
-            //         'label' => 'Cancel',
-            //         'class' => 'cancel jp-btn-red',
-            //         'icon' => 'x',
-            //         'action' => route('admin.venues')
-            //     ]
-            // ],
         ];
 
-        // dd($attributes);
         return view('admin.venue-view', compact('attributes'));
     }
 

@@ -11,6 +11,7 @@ class AdminSettingsController extends Controller
     protected $imageService;
 
     public function __construct(ImageService $imageService) {
+        $this->middleware('auth');
         $this->imageService = $imageService;
     }
 
