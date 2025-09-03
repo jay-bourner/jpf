@@ -63,12 +63,13 @@
                 cursor: pointer;
                 display: grid;
                 width: 200px;
-                grid-template-columns: 20% auto;
+                grid-template-columns: 30px auto;
+                
                 align-items: center;
 
                 input {
-                    width: 20px;
-                    height: 20px;
+                    width: 15px;
+                    height: 15px;
                     margin: 0;
                     cursor: pointer;
                 }

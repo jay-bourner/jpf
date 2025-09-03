@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome </title>
+    <title>Log in to your JPF account</title>
+    <script type="text/javascript" src="https://www.termsfeed.com/public/cookie-consent/4.2.0/cookie-consent.js" charset="UTF-8"></script>
+
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body>
