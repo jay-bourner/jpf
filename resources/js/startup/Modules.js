@@ -5,6 +5,7 @@ import { Textarea } from '../forms/Textarea';
 import { Classes } from '../admin/classes/Classes';
 import { ContactForm } from '../forms/ContactForm';
 import { SideBar } from '../admin/common/SideBar';
+import { Navigation } from '../common/Navigation';
 
 class Modules {
     constructor() {
@@ -16,6 +17,7 @@ class Modules {
             { class: Classes },
             { class: ContactForm },
             { class: SideBar },
+            { class: Navigation },
         ];
 
         modules.forEach((Module) => {

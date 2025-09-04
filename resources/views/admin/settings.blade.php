@@ -3,10 +3,11 @@
 @section('content')
     <div class="admin-content__content--list">
         <h2>Oops...</h2>
-        <h3>Something has gone wrong, please try again later</h3>
+        <h3>Still under development, Sorry for the inconvenience.</h3>
 
         {{-- <ul>
             <li>cancel date</li>
+            <li>Global message</li>
             <li>add discount</li>
             <li>Add Video content?</li>
             <li>Change prices</li>

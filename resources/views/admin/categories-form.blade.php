@@ -17,31 +17,28 @@
         @csrf
         <div class="admin-content__form--input">
             <label for="name">Category Name</label>
-            <input type="text" class="" name="name" value="{{ isset($attributes['class']['name']) ? $attributes['class']['name'] : old('name') }}" placeholder="" name="name" id="name">
+            <input type="text" class="" name="name" value="{{ isset($attributes['category']['name']) ? $attributes['category']['name'] : old('name') }}" placeholder="" name="name" id="name">
             @if($errors->has('name'))
                 <span class="invalid-feedback">{{ $errors->first('name') ?? $warning }}</span>
             @endif
         </div>
         <div class="admin-content__form--input">
             <label for="">Short Description</label>
-            <input type="text" class="" name="short_description" id="short_description" value="{{ $attributes['class']['short_description'] ?? old('short_description') }}" placeholder="">
+            <input type="text" class="" name="short_description" id="short_description" value="{{ $attributes['category']['short_description'] ?? old('short_description') }}" placeholder="">
             @if($errors->has('short_description'))
                 <span class="invalid-feedback">{{ $errors->first('short_description') }}</span>
             @endif
         </div>
         <div class="admin-content__form--input">
             <label for="">Image</label>
-            <input type="file" class="" name="image" id="image" value="{{ $attributes['class']['image'] ?? old('image') }}" placeholder="">
+            <input type="file" class="" name="image" id="image" value="{{ $attributes['category']['image'] ?? old('image') }}" placeholder="">
             @if($errors->has('image'))
                 <span class="invalid-feedback">{{ $errors->first('image') }}</span>
             @endif
         </div>
         <div class="admin-content__form--input">
             <label for="">Image Description</label>
-            <input type="text" class="" name="image_description" id="image_description" value="{{ $attributes['class']['image_description'] ?? old('image') }}" placeholder="">
-            @if($errors->has('image'))
-                <span class="invalid-feedback">{{ $errors->first('image_description') }}</span>
-            @endif
+            <input type="text" class="" name="image_description" id="image_description" value="{{ $attributes['category']['image_description'] ?? old('image_description') }}" placeholder="">
         </div>
     </form>
 @endsection

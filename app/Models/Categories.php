@@ -85,4 +85,30 @@ class Categories extends Model
 
         return $result;
     }
+
+    public function updateCategory($id, $data)
+    {
+        $result = array();
+
+        try {
+            $category = $this->find($id);
+
+            if ($category) {
+                $category->name = $data['name'];
+                $category->short_description = $data['short_description'];
+                $category->image = $data['image'] ?? $category->image;
+                $category->image_description = $data['image_description'];
+                
+                if ($category->update()) {
+                    $result = ['success' => 'Category updated successfully.', 'category' => $category];
+                }
+            } else {
+                $result = ['warning' => 'Category not found.'];
+            }
+        } catch (\Exception $e) {
+            $result = ['warning' => 'Failed to update category: ' . $e->getMessage()];
+        }
+
+        return $result;
+    }
 }

@@ -62,12 +62,12 @@ class Classes extends Model
                 'category' => $category['name'],
                 'name' => $class->name,
                 'filter' => $filter,
-                'short_description' => html_entity_decode($class->short_description ?? ''),
+                'short_description' => html_entity_decode($class->short_description),
                 'url' => $url,
-                'description' => html_entity_decode($class->description ?? ''),
-                'notes' => html_entity_decode($class->notes) ?? '',
+                'description' => html_entity_decode($class->description),
+                'notes' => $class->notes,
                 'image' => $class->image,
-                'image_description' => html_entity_decode($class->image_description ?? ''),
+                'image_description' => html_entity_decode($class->image_description),
                 'start_date' => $class->start_date,
                 'status' => $class->status,
                 'options' => $this->classOptions->getClassOptions($class->id),
@@ -120,12 +120,12 @@ class Classes extends Model
                     'category_id' => $cl->category_id,
                     'category' => $category['name'],
                     'filter' => $filter,
-                    'short_description' => html_entity_decode($cl->short_description ?? ''),
+                    'short_description' => html_entity_decode($cl->short_description),
                     'url' => $url,
-                    'description' => html_entity_decode($cl->description ?? ''),
-                    'notes' => html_entity_decode($cl->notes ?? ''),
+                    'description' => html_entity_decode($cl->description),
+                    'notes' => $cl->notes,
                     'image' => $cl->image,
-                    'image_description' => html_entity_decode($cl->image_description ?? ''),
+                    'image_description' => html_entity_decode($cl->image_description),
                     'no_image' => $no_image,
                     'start_date' => $cl->start_date,
                     'status' => $cl->status,
@@ -163,12 +163,12 @@ class Classes extends Model
             'category_id' => $class->category_id,
             'category' => $category['name'],
             'filter' => $filter,
-            'short_description' => html_entity_decode($class->short_description ?? ''),
+            'short_description' => html_entity_decode($class->short_description),
             'url' => $url,
-            'description' => html_entity_decode($class->description ?? ''),
-            'notes' => html_entity_decode($class->notes) ?? '',
+            'description' => html_entity_decode($class->description),
+            'notes' => strip_tags($class->notes),
             'image' => $class->image,
-            'image_description' => html_entity_decode($class->image_description ?? ''),
+            'image_description' => html_entity_decode($class->image_description),
             'start_date' => $class->start_date,
             'status' => $class->status,
             'options' => $this->classOptions->getClassOptions($class->id),
@@ -189,7 +189,7 @@ class Classes extends Model
             $class->image_description = htmlspecialchars($data['image_description'] ?? null);
             $class->status = ($data['start_date'] && $data['start_date'] > Carbon::now()) ? 'inactive' : 'active';
             $class->start_date = $data['start_date'] ?? Carbon::now();
-            $class->notes = htmlspecialchars(nl2br($data['notes'])) ?? null;
+            $class->notes = $data['notes'] ?? null;
 
             if($class->save()) {
                 $result = ['success' => 'Class added successfully.', 'class' => $class];
@@ -211,13 +211,12 @@ class Classes extends Model
             $class->name = $data['name'];
             $class->short_description = htmlspecialchars($data['short_description']);
             $class->description = htmlspecialchars($data['description'] ?? null);
-            $class->image = $data['image'] ?? null;
+            $class->image = $data['image'] ?? $class->image;
             $class->image_description = htmlspecialchars($data['image_description'] ?? null);
             $class->status = ($data['start_date'] && $data['start_date'] > Carbon::now()) ? 'inactive' : 'active';
             $class->start_date = $data['start_date'] ?? Carbon::now();
-            $class->notes = htmlspecialchars(nl2br($data['notes'])) ?? null;
+            $class->notes = $data['notes'] ?? null;
 
-            // dd($class);
             if($class->update()) {
                 $result = ['success' => 'Class added successfully.', 'class' => $class];
             } 

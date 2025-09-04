@@ -96,8 +96,22 @@ class AdminCategoriesController extends Controller
         return view('admin.category-view', compact('attributes'));
     }
 
-    public function update($id) {
-        // code to update category
+    public function update(AdminCategoriesRequest $request, string $id) {
+        $inputs = $request->validated();
+
+        $data = $request->safe()
+            ->merge($inputs)
+            ->except(['_token', '_method']);
+
+        $result = $this->categories->updateCategory($id, $data);
+
+        if(isset($result['warning'])) {
+            return redirect()->route('admin.categories.edit', $id)
+                ->withErrors($result['warning']);
+        }
+
+        return redirect()->route('admin.categories')
+            ->with($result['success']);
     }
 
     public function destroy($id) {

@@ -25,7 +25,8 @@ ul {
     list-style-type: none;
 }
 
-.note-edited ul {
+.note-edited ul,
+.note-editable ul {
     padding-inline-start: 40px;
     list-style-type: unset;
 }
