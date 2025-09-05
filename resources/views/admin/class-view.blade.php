@@ -5,7 +5,7 @@
         @csrf
         <div class="class-view__heading--desc">
             <h2>{{ $attributes['class']['short_description']}}</h2>
-            <div>
+            <div class="note-edited">
                 {!! $attributes['class']['description'] !!}
             </div>
         </div>

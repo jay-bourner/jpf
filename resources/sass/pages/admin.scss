@@ -144,6 +144,15 @@
                         top: 14px;
                     }
                 }
+                
+                @include mixin.breakpoint(sm) {
+                    margin-top: 20px;
+                }
+            }
+
+            @include mixin.breakpoint(sm) {
+                flex-direction: column;
+                justify-content: center;
             }
         }
 
@@ -179,7 +188,8 @@
             }
 
             &--buttons {
-                display: flex;
+                display: grid;
+                grid-template-columns: repeat(3, auto);
                 gap: 10px;
 
                 .view-button,
@@ -200,10 +210,19 @@
 
                 .delete-button {
                     background-color: theme.colours(--btn-red);
+                    
+                    @include mixin.breakpoint(lg) {
+                        grid-column: span 2;
+                        
+                    }
                 }
 
                 .edit-button, .view-button {
                     background-color: theme.colours(--btn-grey);
+                }
+                
+                @include mixin.breakpoint(lg) {
+                    grid-template-columns: repeat(2, auto);
                 }
             }
         }
