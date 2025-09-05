@@ -115,6 +115,14 @@ class AdminCategoriesController extends Controller
     }
 
     public function destroy($id) {
-        // code to delete category
+        $result = $this->categories->deleteCategory($id);
+        
+        if (isset($result['warning'])) {
+            return redirect()->route('admin.categories')
+                ->withErrors($result['warning']);
+        }
+
+        return redirect()->route('admin.categories')
+            ->with('success', 'Class created successfully!');
     }
 }

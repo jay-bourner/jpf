@@ -140,6 +140,14 @@ class AdminPricesController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $result = $this->prices->deletePrice($id);
+        
+        if (isset($result['warning'])) {
+            return redirect()->route('admin.prices')
+                ->withErrors($result['warning']);
+        }
+
+        return redirect()->route('admin.prices')
+            ->with('success', 'Class created successfully!');
     }
 }

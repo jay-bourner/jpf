@@ -127,4 +127,24 @@ class Prices extends Model
 
         return $result;
     }
+
+    public function deletePrice($id)
+    {
+        $result = array();
+
+        try {
+            $price = $this->find($id);
+            if (!$price) {
+                return ['warning' => 'Price not found.'];
+            }
+
+            if ($price->delete()) {
+                $result = ['success' => 'Price deleted successfully.'];
+            }
+        } catch (\Exception $e) {
+            $result = ['warning' => 'Failed to delete price. ' . $e->getMessage()];
+        }
+
+        return $result;
+    }
 }

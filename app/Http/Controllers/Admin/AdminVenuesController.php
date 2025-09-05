@@ -142,7 +142,15 @@ class AdminVenuesController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $result = $this->venues->deleteVenue($id);
+        
+        if (isset($result['warning'])) {
+            return redirect()->route('admin.venues')
+                ->withErrors($result['warning']);
+        }
+
+        return redirect()->route('admin.venues')
+            ->with('success', 'Class created successfully!');
     }
 
     /**

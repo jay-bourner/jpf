@@ -45,6 +45,10 @@ Route::group(['prefix' => 'contact'], function() {
         ->name('contact.submit');
 });
 
+Route::get('/privacy-policy', function() {
+    return view('privacy-policy.index');
+});
+
 Route::group(['prefix' => 'admin'], function() {
     Route::get('/', [AdminController::class, 'index'])
         ->name('admin.index');

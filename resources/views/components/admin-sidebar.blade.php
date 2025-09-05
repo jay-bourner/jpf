@@ -1,4 +1,7 @@
 <nav class="admin-sidebar">
+    <div class="admin-sidebar__expend-btn">
+        <span class="svg-icon svg-icon--caret-right"></span>
+    </div>
     <h2>{{ $data['heading'] }}</h2>
     <ul>
         @foreach($data['links'] as $link)

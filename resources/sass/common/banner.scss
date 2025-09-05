@@ -95,12 +95,12 @@
 
         .mobile-nav-links {
             position: absolute;
-            left: 0;
+            left: -1px;
             padding: 20px 0;
             width: 100%;
             z-index: 9;
             background-color: theme.colours(--green);
-            top: -85px;
+            top: -145px;
             opacity: 0;
             transition: all 0.5s ease-in-out;
 

@@ -111,4 +111,25 @@ class Categories extends Model
 
         return $result;
     }
+
+    public function deleteCategory($id)
+    {
+        $result = array();
+
+        try {
+            $category = $this->find($id);
+
+            if (!$category) {
+                return ['warning' => 'Category not found.'];
+            }
+
+            if ($category->delete()) {
+                $result = ['success' => 'Category deleted successfully.'];
+            }
+        } catch (\Exception $e) {
+            $result = ['warning' => 'Failed to delete category. ' . $e->getMessage()];
+        }
+
+        return $result;
+    }
 }

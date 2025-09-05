@@ -14,7 +14,9 @@
             <h2>Class Schedule</h2>
             <div class="schedule"  :style="`--grid-column-count: ${Object.keys(schedules).length}`">
                 <div v-for="(schedule, key) in schedules" :key="key" class="schedule__column">
-                    <div class="schedule__column--header">{{ key }}</div>
+                    <div class="schedule__column--header">
+                        <span>{{ key }}</span>
+                    </div>
                     <div v-for="(classItem, index) in schedule" :key="index"  class="schedule__column--list">
                         <div class="schedule__column--item">
                             <h3>{{ classItem.event }}</h3>

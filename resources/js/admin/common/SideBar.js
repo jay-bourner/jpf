@@ -12,6 +12,11 @@ class SideBar {
             this.sidebarDropdownHeading.classList.toggle('active');
             this.sidebarDropdownList.classList.toggle('open');
         });
+
+        this.expandBtn = this.adminSideBar.querySelector('.admin-sidebar__expend-btn');
+        this.expandBtn.addEventListener('click', () => {
+            this.adminSideBar.classList.toggle('expanded');
+        });
     }
 }
 

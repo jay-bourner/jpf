@@ -132,4 +132,24 @@ class Venues extends Model
 
         return $result;
     }
+
+    public function deleteVenue($id)
+    {
+        $result = array();
+
+        try {
+            $venue = $this->find($id);
+            if (!$venue) {
+                return ['warning' => 'Venue not found.'];
+            }
+
+            if ($venue->delete()) {
+                $result = ['success' => 'Venue deleted successfully.'];
+            }
+        } catch (\Exception $e) {
+            $result = ['warning' => 'Failed to delete venue. ' . $e->getMessage()];
+        }
+
+        return $result;
+    }
 }
