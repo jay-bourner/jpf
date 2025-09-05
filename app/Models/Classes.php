@@ -65,7 +65,7 @@ class Classes extends Model
                 'short_description' => html_entity_decode($class->short_description),
                 'url' => $url,
                 'description' => html_entity_decode($class->description),
-                'notes' => $class->notes,
+                'notes' => html_entity_decode($class->notes),
                 'image' => $class->image,
                 'image_description' => html_entity_decode($class->image_description),
                 'start_date' => $class->start_date,
@@ -123,7 +123,7 @@ class Classes extends Model
                     'short_description' => html_entity_decode($cl->short_description),
                     'url' => $url,
                     'description' => html_entity_decode($cl->description),
-                    'notes' => $cl->notes,
+                    'notes' => html_entity_decode($cl->notes),
                     'image' => $cl->image,
                     'image_description' => html_entity_decode($cl->image_description),
                     'no_image' => $no_image,
@@ -166,7 +166,7 @@ class Classes extends Model
             'short_description' => html_entity_decode($class->short_description),
             'url' => $url,
             'description' => html_entity_decode($class->description),
-            'notes' => strip_tags($class->notes),
+            'notes' => html_entity_decode($class->notes),
             'image' => $class->image,
             'image_description' => html_entity_decode($class->image_description),
             'start_date' => $class->start_date,
@@ -184,12 +184,12 @@ class Classes extends Model
             $class->category_id = (int)$data['category_id'];
             $class->name = $data['name'];
             $class->short_description = htmlspecialchars($data['short_description']);
-            $class->description = htmlspecialchars($data['description'] ?? null);
-            $class->image = $data['image'] ?? null;
-            $class->image_description = htmlspecialchars($data['image_description'] ?? null);
+            $class->description = htmlspecialchars($data['description']);
+            $class->image = $data['image'];
+            $class->image_description = htmlspecialchars($data['image_description']);
             $class->status = ($data['start_date'] && $data['start_date'] > Carbon::now()) ? 'inactive' : 'active';
             $class->start_date = $data['start_date'] ?? Carbon::now();
-            $class->notes = $data['notes'] ?? null;
+            $class->notes = nl2br(htmlspecialchars($data['notes']));
 
             if($class->save()) {
                 $result = ['success' => 'Class added successfully.', 'class' => $class];
@@ -210,12 +210,12 @@ class Classes extends Model
             $class->category_id = (int)$data['category_id'];
             $class->name = $data['name'];
             $class->short_description = htmlspecialchars($data['short_description']);
-            $class->description = htmlspecialchars($data['description'] ?? null);
+            $class->description = htmlspecialchars($data['description']);
             $class->image = $data['image'] ?? $class->image;
-            $class->image_description = htmlspecialchars($data['image_description'] ?? null);
+            $class->image_description = htmlspecialchars($data['image_description']);
             $class->status = ($data['start_date'] && $data['start_date'] > Carbon::now()) ? 'inactive' : 'active';
             $class->start_date = $data['start_date'] ?? Carbon::now();
-            $class->notes = $data['notes'] ?? null;
+            $class->notes = nl2br(htmlspecialchars($data['notes']));
 
             if($class->update()) {
                 $result = ['success' => 'Class added successfully.', 'class' => $class];

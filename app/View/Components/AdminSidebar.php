@@ -5,15 +5,17 @@ namespace App\View\Components;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
+use App\Models\User;
 
 class AdminSidebar extends Component
 {
+    protected $user;
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public function __construct(User $user)
     {
-        //
+        $this->user = $user->getAdminUser();
     }
 
     /**
@@ -21,8 +23,10 @@ class AdminSidebar extends Component
      */
     public function render(): View|Closure|string
     {
+        $user_name = $this->user['name'];
+
         $data = array(
-            'heading' => 'Welcome, Janet',
+            'heading' => 'Welcome, ' . $user_name,
             'links' => [
                 [
                     'name' => 'Dashboard', 

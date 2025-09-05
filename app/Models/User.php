@@ -41,4 +41,17 @@ class User extends Authenticatable
     protected $casts = [
         // 'email_verified_at' => 'datetime',
     ];
+
+    public function getAdminUser() {
+        $result = array();
+
+        $user = $this->where('account_type', 'admin')->first();
+        $result = [
+            'id' => $user['id'],
+            'name' => $user['name'],
+            'email' => $user['email'],
+        ];
+        return $result;
+    }
+
 }
