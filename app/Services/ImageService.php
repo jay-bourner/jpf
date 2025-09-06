@@ -13,7 +13,7 @@ class ImageService
      * -- NEED TO RE-WRITE FOR LARAVEL SPECIFIC
      */
     public function resize($imagePath, $width, $height, $type = 'contain') {
-        $image_old = 'image/'.$imagePath;
+        $image_old = '/image/'.$imagePath;
         return $image_old;
 
         if(!is_file(public_path($image_old))) {
