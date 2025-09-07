@@ -12,6 +12,7 @@ use App\Http\Controllers\ClassesController;
 use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 /*
 |--------------------------------------------------------------------------
@@ -165,4 +166,10 @@ Route::group(['prefix' => 'api'], function () {
 });
 
 Auth::routes();
+
 Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
+
+// sitemap
+Route::get('/sitemap.xml', function() {
+    return Redirect::to('sitemap.xml');
+});
