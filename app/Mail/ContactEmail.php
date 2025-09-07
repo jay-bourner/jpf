@@ -40,7 +40,7 @@ class ContactEmail extends Mailable
     {
         return new Envelope(
             to: 'jaime@jpf-movewithme.co.uk',
-            from: $this->email,
+            from: 'jaime@jpf-movewithme.co.uk',
             subject: 'Message from ' . $this->contactData['name'],
         );
     }

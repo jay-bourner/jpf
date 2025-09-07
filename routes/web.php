@@ -42,6 +42,7 @@ Route::group(['prefix' => 'classes'], function() {
 Route::group(['prefix' => 'contact'], function() {
     Route::get('/', [ContactController::class, 'index'])
         ->name('contact.index');
+        
     Route::post('/submit', [ContactController::class, 'submit'])
         ->name('contact.submit');
 });
