@@ -23,8 +23,8 @@ class ContactController extends Controller
     public function index()
     {
         $data = array(
-            "meta_title" => "Welcome to JP Fitness",
-            "meta_description" => "JP Fitness, Move With Me. We are a fitness company that offers a variety of services to help you reach your fitness goals.",
+            "meta_title" => "Contact JP Fitness for More Information or to Book a Class",
+            // "meta_description" => "JP Fitness, Move With Me. We are a fitness company that offers a variety of services to help you reach your fitness goals.",
             'image' => [
                 'src' => $this->imageService->resize('contact/Jaime-chilling.jpg', 750, 750),
                 'alt' => 'Contact Us'

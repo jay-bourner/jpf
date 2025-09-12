@@ -29,8 +29,8 @@ class HomeController extends Controller
         $payg_price = $this->prices->getPriceByType('payg');
 
         $data = array(
-            'meta_title' => 'Welcome to JP Fitness',
-            'meta_description' => 'Welcome to JP Fitness',
+            'meta_title' => 'Get Active and Have Fun! Fitness Classes for Everyone around Fakenham',
+            // 'meta_description' => '',
             "title" => "Home",
             'mission_cards' => [
                 [
@@ -162,11 +162,11 @@ class HomeController extends Controller
                 'images' => [
                     [
                         'src' => $this->imageService->resize('certificates/fitness-pilates-2025.png', 500, 500),
-                        'alt' => 'Qualifications' ,
+                        'alt' => 'Qualifications',
                     ],
                     [
                         'src' => $this->imageService->resize('certificates/lift-lean-cert.jpeg', 500, 500),
-                        'alt' => 'Qualifications' ,
+                        'alt' => 'Qualifications',
                     ],
                 ]
             ]

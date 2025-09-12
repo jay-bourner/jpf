@@ -42,8 +42,8 @@ class ClassesController extends Controller
     public function index()
     {
         $data = array(
-            "meta_title" => "Welcome to JP Fitness",
-            "meta_description" => "JP Fitness, Move With Me. We are a fitness company that offers a variety of services to help you reach your fitness goals.",
+            "meta_title" => "Fun Fitness Sessions for All Ages in the Fakenham Area",
+            // "meta_description" => "",
             'header' => 'Classes',
             'description' => 'There are a range of classes available to you, Check them out below.',
         );
