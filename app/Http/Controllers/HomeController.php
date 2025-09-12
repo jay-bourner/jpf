@@ -6,16 +6,19 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Prices;
 use App\Services\ImageService;
+use App\Services\schema;
 
 class HomeController extends Controller
 {
     protected $imageService;
     protected $prices;
+    protected $schema;
 
-    public function __construct(ImageService $imageService, Prices $prices)
+    public function __construct(ImageService $imageService, Prices $prices, schema $schema)
     {
         $this->imageService = $imageService;
         $this->prices = $prices;
+        $this->schema = $schema;
     }
     /**
      * Display the home page.
@@ -168,7 +171,43 @@ class HomeController extends Controller
                 ]
             ]
         );
-        
+
+        $schema_data = [
+            [
+                '@type' => 'LocalBusiness',
+                'name' => 'JP Fitness',
+                'image' => 'https://www.jpf-movewithme.co.uk/public/image/logos/jpfitnesslogo2025-black-bg.png',
+                'url' => 'https://www.jpf-movewithme.co.uk/',
+                'telephone' => '07765 433100',
+                'address' => [
+                    '@type' => 'PostalAddress',
+                    'streetAddress' => "Rudham's District Village Hall",
+                    'addressLocality' => 'East Rudham',
+                    'postalCode' => 'PE31 8RF',
+                    'addressCountry' => 'GB'
+                ],
+                'geo' => [
+                    '@type' => 'GeoCoordinates',
+                    'latitude' => '52.841259',
+                    'longitude' => '0.637594'
+                ],
+                'priceRange' => '£9.00',
+                'openingHoursSpecification' => 'Mo,Tu,We,Th,Fr 09:00-17:00',
+                'paymentAccepted' => 'Cash',
+                'areaServed' => [
+                    'East Rudham',
+                    'North Norfolk',
+                    'West Norfolk',
+                    'King\'s Lynn',
+                    'Fakenham',
+                    'Wells-next-the-Sea',
+                    'Hunstanton'
+                ],
+            ]
+        ];
+
+        $schema = $this->schema->build($schema_data);
+        $data['schema'] = $schema;
 
         return view('home.index', compact('data'));
     }

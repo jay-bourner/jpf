@@ -18,7 +18,23 @@ class schema
     }
 }
 
-
+// {
+//   "@context": "https://schema.org",
+//   "@type": "LocalBusiness",
+//   "name": "JP Fitness",
+//   "image": "https://www.jpf-movewithme.co.uk/public/image/logos/jpfitnesslogo2025-black-bg.png",
+//   "@id": "",
+//   "url": "https://www.jpf-movewithme.co.uk/",
+//   "telephone": "07765 433100",
+//   "priceRange": "9.00",
+//   "address": {
+//     "@type": "PostalAddress",
+//     "streetAddress": "Rudham's District Village Hall",
+//     "addressLocality": "East Rudham",
+//     "postalCode": "PE31 8RF",
+//     "addressCountry": "GB"
+//   }  
+// }
 
 // {
 //     "@context": "http://schema.org",

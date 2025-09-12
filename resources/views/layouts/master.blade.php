@@ -5,13 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="/image/icons/jpfitnesslogoicon.png">
     
-    @if(isset($data['meta_description']))
-        <meta name="description" content="{{ $data['meta_description'] }}">
-    @endif
+@if(isset($data['meta_description']))
+    <meta name="description" content="{{ $data['meta_description'] }}">
+@endif
 
-    @if(isset($data['meta_title']))
-        <title>{{  $data['meta_title'] }}</title>
-    @endif
+@if(isset($data['meta_title']))
+    <title>{{  $data['meta_title'] }}</title>
+@endif
+
+@if(isset($data['canonical']))
+    <link rel="canonical" href="{{ $data['canonical'] }}" />
+@endif
+
+@if(isset($data['schema']))
+    {!! $data['schema'] !!}
+@endif
     
     <script type="text/javascript" src="https://www.termsfeed.com/public/cookie-consent/4.2.0/cookie-consent.js" charset="UTF-8"></script>
 
