@@ -181,27 +181,23 @@ class HomeController extends Controller
                 'telephone' => '07765 433100',
                 'address' => [
                     '@type' => 'PostalAddress',
-                    'streetAddress' => "Rudham's District Village Hall",
+                    'streetAddress' => "18 Eye Lane",
                     'addressLocality' => 'East Rudham',
-                    'postalCode' => 'PE31 8RF',
+                    'postalCode' => 'PE31 8RJ',
                     'addressCountry' => 'GB'
                 ],
                 'geo' => [
                     '@type' => 'GeoCoordinates',
-                    'latitude' => '52.841259',
-                    'longitude' => '0.637594'
+                    'latitude' => '52.82336888694812',
+                    'longitude' => '0.7174094617305428'
                 ],
                 'priceRange' => '£9.00',
                 'openingHoursSpecification' => 'Mo,Tu,We,Th,Fr 09:00-17:00',
                 'paymentAccepted' => 'Cash',
                 'areaServed' => [
                     'East Rudham',
-                    'North Norfolk',
-                    'West Norfolk',
-                    'King\'s Lynn',
-                    'Fakenham',
-                    'Wells-next-the-Sea',
-                    'Hunstanton'
+                    'Ingoldisthorpe',
+                    'Heacham',
                 ],
             ]
         ];

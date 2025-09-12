@@ -9,7 +9,6 @@ use App\Models\Categories;
 use App\Services\ImageService;
 use App\Services\ScheduleService;
 use Carbon\Carbon;
-use DateTime;
 use App\Services\schema;
 
 class ClassesController extends Controller
@@ -84,6 +83,8 @@ class ClassesController extends Controller
             $class['image'] = $this->imageService->resize($image, 1000, 1000);
         }
 
+        $data['schedule'] = $this->scheduleService->makeSchedule($class['start_date'], $class['options']);
+
         $data = array(
             'single_page' => true,
             "meta_title" => $class['name'] . " | JP Fitness",
@@ -100,11 +101,13 @@ class ClassesController extends Controller
             'status' => $class['status'],
         );
 
+        $openingTimes = $this->schema->createAddressSchema($class['options']);
+
         $schema_data = [
             [
                 '@type' => 'LocalBusiness',
                 'name' => 'JP Fitness',
-                'description' => $class['description'],
+                'description' => $class['short_description'],
                 'address' => [
                     '@type' => 'PostalAddress',
                     'streetAddress' => "Rudham's District Village Hall",
@@ -114,7 +117,7 @@ class ClassesController extends Controller
                 ],
                 'telephone' => '07765 433100',
                 'url' => 'https://www.jpf-movewithme.co.uk/',
-                'openingHoursSpecification' => 'Mo,Tu,We,Th,Fr 09:00-17:00',
+                'openingHoursSpecification' => $openingTimes,
                 'makesOffer' => [
                     [
                         '@type' => 'Offer',
@@ -131,47 +134,6 @@ class ClassesController extends Controller
         $schema = $this->schema->build($schema_data);
         $data['schema'] = $schema;
 
-        $data['schedule'] = $this->scheduleService->makeSchedule($class['start_date'], $class['options']);
-
         return view('classes.index', compact('data'));
     }
 }
-
-
-// *** a variation of opening times and dates when they vary ***
-// {
-//   "@context": "https://schema.org",
-//   "@type": "LocalBusiness",
-//   "name": "Your Business Name",
-//   "openingHoursSpecification": [
-//     {
-//       "@type": "OpeningHoursSpecification",
-//       "dayOfWeek": [
-//         "Monday",
-//         "Tuesday",
-//         "Wednesday",
-//         "Thursday",
-//         "Friday"
-//       ],
-//       "opens": "09:00",
-//       "closes": "21:00"
-//     },
-//     {
-//       "@type": "OpeningHoursSpecification",
-//       "dayOfWeek": [
-//         "Saturday",
-//         "Sunday"
-//       ],
-//       "opens": "10:00",
-//       "closes": "23:00"
-//     },
-//     {
-//       "@type": "OpeningHoursSpecification",
-//       "dayOfWeek": "Saturday",
-//       "opens": "18:00",
-//       "closes": "03:00",
-//       "validFrom": "2025-12-21", // Example start date for holiday hours
-//       "validThrough": "2025-12-27"  // Example end date for holiday hours
-//     }
-//   ]
-// }
