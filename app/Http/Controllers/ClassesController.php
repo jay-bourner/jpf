@@ -83,8 +83,6 @@ class ClassesController extends Controller
             $class['image'] = $this->imageService->resize($image, 1000, 1000);
         }
 
-        $data['schedule'] = $this->scheduleService->makeSchedule($class['start_date'], $class['options']);
-
         $data = array(
             'single_page' => true,
             "meta_title" => $class['name'] . " | JP Fitness",
@@ -130,6 +128,8 @@ class ClassesController extends Controller
                 ]
             ]
         ];
+
+        $data['schedule'] = $this->scheduleService->makeSchedule($class['start_date'], $class['options']);
 
         $schema = $this->schema->build($schema_data);
         $data['schema'] = $schema;
