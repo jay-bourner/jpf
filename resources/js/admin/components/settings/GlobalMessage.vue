@@ -46,7 +46,7 @@ export default {
 <style lang="scss" scoped>
 .switch {
     --secondary-container: #3a4b39;
-    --primary: #7bb4a5;
+    --primary: #bfe9de;
     font-size: 17px;
     position: relative;
     display: inline-block;
