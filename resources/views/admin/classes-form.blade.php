@@ -71,7 +71,7 @@
         </div>
         <div class="admin-content__form--input">
             <label for="">Notes</label>
-            <textarea class="jp-input" rows="10" placeholder="" name="notes" id="notes">{{ strip_tags($attributes['class']['notes']) }}</textarea>
+            <textarea class="jp-input" rows="10" placeholder="" name="notes" id="notes">{{ (isset($attributes['class']['notes'])) ? strip_tags($attributes['class']['notes']) : ''}}</textarea>
             @if($errors->has('notes'))
                 <span class="invalid-feedback">{{ $errors->first('notes') }}</span>
             @endif

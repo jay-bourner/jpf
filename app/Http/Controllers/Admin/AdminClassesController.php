@@ -45,6 +45,7 @@ class AdminClassesController extends Controller
             'action_disable' => ['hide' => false, 'dataset' => 'disable-classes'],
             'action_delete' => ['hide' => false, 'dataset' => 'delete-classes'],
             'classes' => $classes,
+
         ];
 
         return view('admin.classes', compact('attributes'));

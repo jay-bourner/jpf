@@ -16,7 +16,7 @@
     "src": "node_modules/summernote/dist/font/summernote.woff2"
   },
   "resources/js/app.css": {
-    "file": "assets/app-54ead34e.css",
+    "file": "assets/app-48df45d0.css",
     "src": "resources/js/app.css"
   },
   "resources/js/app.js": {
@@ -27,10 +27,10 @@
       "assets/summernote-8c19737f.ttf"
     ],
     "css": [
-      "assets/app-54ead34e.css",
+      "assets/app-48df45d0.css",
       "assets/app-7bfd2543.css"
     ],
-    "file": "assets/app-5ee4d255.js",
+    "file": "assets/app-b5a4cb58.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   },
@@ -38,5 +38,21 @@
     "file": "assets/app-7bfd2543.css",
     "isEntry": true,
     "src": "resources/sass/app.scss"
+  },
+  "summernote.eot": {
+    "file": "assets/summernote-a7142d8f.eot",
+    "src": "summernote.eot"
+  },
+  "summernote.ttf": {
+    "file": "assets/summernote-8c19737f.ttf",
+    "src": "summernote.ttf"
+  },
+  "summernote.woff": {
+    "file": "assets/summernote-f9d40b38.woff",
+    "src": "summernote.woff"
+  },
+  "summernote.woff2": {
+    "file": "assets/summernote-9c7cb1a4.woff2",
+    "src": "summernote.woff2"
   }
 }

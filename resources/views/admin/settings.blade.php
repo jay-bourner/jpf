@@ -6,8 +6,9 @@
         <h3>Still under development, Sorry for the inconvenience.</h3>
 
         {{-- <ul>
-            <li>cancel date</li>
             <li>Global message</li>
+
+            <li>cancel date</li>
             <li>add discount</li>
             <li>Add Video content?</li>
             <li>Change prices</li>

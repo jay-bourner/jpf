@@ -15,6 +15,8 @@ new StartUp();
 import { createApp } from 'vue';
 import Dashboard from './admin/components/Dashboard.vue'
 import ClassesOptions from './admin/components/ClassesOptions.vue';
+import Settings from './admin/components/settings/Settings.vue';
 
 createApp(Dashboard).mount('#dashboard');
 createApp(ClassesOptions).mount('#classesOptions');
+createApp(Settings).mount('#settings');
