@@ -3,10 +3,27 @@
         <h2>My details</h2>
         <div v-for="element in elements" :key="element.name" class="element">
             <Switch @switched="chengeStateOfSwitch(element)" :parent="'Change ' +element.name" />
-            <div class="my-details-input" v-if="element.checked">
+            <div class="my-details-input" v-if="(element.name !== 'Password' && element.checked)">
                 <label for="">{{ element.name }}</label>
                 <input :type="element.type" :placeholder="element.placeholder">
                 <button class="jp-btn jp-btn--md jp-btn-grn">Save</button>
+            </div>
+            <div class="my-details-input change-password" v-if="(element.name === 'Password' && element.checked)">
+                <div>
+                    <label for="">Old Password</label>
+                    <input :type="element.type" :placeholder="element.placeholder">
+                </div>
+                <div>
+                    <label for="">New Password</label>
+                    <input :type="element.type" :placeholder="element.placeholder">
+                </div>
+                <div>
+                    <label for="">Confirm Password</label>
+                    <input :type="element.type" :placeholder="element.placeholder">
+                </div>
+                <div>
+                    <button class="jp-btn jp-btn--md jp-btn-grn">Save</button>
+                </div>
             </div>
         </div>
     </div>
@@ -62,9 +79,15 @@ export default {
 
     .element {
         display: flex;
+        position: relative;
         align-items: center;
         gap: 1em;
         height: 50px;
+
+        &:last-of-type {
+            align-items: start;
+            height: fit-content;
+        }
     }
 
     .my-details-input {
@@ -73,21 +96,41 @@ export default {
         justify-content: space-between;
         gap: 1em;
         width: 350px;
+        animation: fadeIn 0.3s ease-in-out forwards;
 
         input {
             width: 300px;
         }
     }
 
-    // .my-details-form {
-    //     display: grid;
-    //     grid-template-columns: 1fr 1fr;
-    //     gap: 1em;
+    .my-details-input.change-password {
+        flex-direction: column;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1em;
+        width: 500px;
 
-    //     input {
-    //         margin-top: .5em;
+        & > div {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1em;
+            width: 500px;
 
-    //     }
-    // }
+            input {
+                width: 300px;
+            }
+
+            &:last-of-type {
+                justify-content: end;
+            }
+        }
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 </style>
