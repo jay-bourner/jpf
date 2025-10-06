@@ -4,7 +4,7 @@
         <Switch @switched="chengeStateOfSwitch" parent="Global Message"/>
         <div v-if="checked" class="globalMessageForm">
             <div class="globalMessage">
-                <label for="">Choose Message</label>
+                <label for="">Set Message</label>
                 <input type="text" placeholder="Type your message here...">
             </div>
             <div class="globalMessageDates">

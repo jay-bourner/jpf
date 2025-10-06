@@ -2,7 +2,7 @@
     <div class="switch-wrapper">
         <div v-if="parent" class="switch-parent">
             {{ parent }}
-            <small><b>{{ checked ? ' On' : ' Off' }}</b></small>
+            
             </div>
         <label class="switch">
             <input type="checkbox" @change.self="switchChecked" :checked="checked">

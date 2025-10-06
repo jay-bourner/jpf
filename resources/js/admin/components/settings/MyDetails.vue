@@ -2,29 +2,36 @@
     <div class="my-details-wrapper">
         <h2>My details</h2>
         <div v-for="element in elements" :key="element.name" class="element">
-            <Switch @switched="chengeStateOfSwitch(element)" :parent="'Change ' +element.name" />
-            <div class="my-details-input" v-if="(element.name !== 'Password' && element.checked)">
-                <label for="">{{ element.name }}</label>
-                <input :type="element.type" :placeholder="element.placeholder">
-                <button class="jp-btn jp-btn--md jp-btn-grn">Save</button>
+            <div>{{ element.name }}</div>
+            <div v-if="!element.setInput">
+                <span>{{ element.value }}</span>
             </div>
-            <div class="my-details-input change-password" v-if="(element.name === 'Password' && element.checked)">
-                <div>
-                    <label for="">Old Password</label>
-                    <input :type="element.type" :placeholder="element.placeholder">
+            <div v-else>
+                <div v-if="(element.name !== 'Password')">
+                    <input :type="element.type" :placeholder="element.placeholder" :value="element.value">
                 </div>
-                <div>
-                    <label for="">New Password</label>
-                    <input :type="element.type" :placeholder="element.placeholder">
-                </div>
-                <div>
-                    <label for="">Confirm Password</label>
-                    <input :type="element.type" :placeholder="element.placeholder">
-                </div>
-                <div>
-                    <button class="jp-btn jp-btn--md jp-btn-grn">Save</button>
+                <div v-else class="change-password">
+                    <teleport to="#modals">
+                        <Model @close="(element.setInput = !element.setInput)">
+                            <h2>Change Password</h2>
+                            <div>
+                                <input :type="element.type" placeholder="Old Password">
+                            </div>
+                            <div>
+                                <input :type="element.type" placeholder="New Password">
+                            </div>
+                            <div>
+                                <input :type="element.type" placeholder="Confirm Password">
+                            </div>
+                            <div style="text-align: right; margin-top: 1em;">
+                                <button class="jp-btn jp-btn--sm jp-btn-grn" @click="(element.setInput = !element.setInput)">Save</button>
+                            </div>
+                        </Model>
+                    </teleport> 
                 </div>
             </div>
+            <button v-if="!element.setInput || element.type == 'password'" class="jp-btn jp-btn--sm jp-btn-grn" @click="(element.setInput = !element.setInput)">Change</button>
+            <button v-else class="jp-btn jp-btn--sm jp-btn-grn" @click="(element.setInput = !element.setInput)">Save</button>
         </div>
     </div>
 </template>
@@ -33,31 +40,39 @@
 import { ref } from 'vue';
 
 import Switch from '../Switch.vue';
+import Model from '../../../components/Modal.vue';
 
 export default {
     name: 'MyDetails',
     components: {
-        Switch
+        Switch,
+        Model
     },
     setup() {
         const elements = ref([
             {
                 name: 'Name',
-                type: 'text', 
+                type: 'text',
+                value: 'jaime',
                 placeholder: 'Type your first name here...',
-                checked: ref(false)
+                checked: false,
+                setInput: false
             },
             {
                 name: 'Email',
                 type: 'email', 
+                value: 'jlhgkfhg@ljfkhgfhkf.com',
                 placeholder: 'Type your email here...',
-                checked: ref(false)
+                checked: false,
+                setInput: false
             },
             {
                 name: 'Password',
-                type: 'password', 
+                type: 'password',
+                value: '********',
                 placeholder: 'Type your password here...',
-                checked: ref(false)
+                checked: false,
+                setInput: false
             }
         ])
         
@@ -81,52 +96,74 @@ export default {
         display: flex;
         position: relative;
         align-items: center;
+        justify-content: space-between;
         gap: 1em;
         height: 50px;
+        width: 400px;
 
-        &:last-of-type {
-            align-items: start;
-            height: fit-content;
+        > div:first-of-type {
+            font-weight: bold;
+        }
+
+        > div:nth-of-type(2) {
+            width: 100%;
+
+            span, input {
+                width: 100%;
+                text-align: right;
+                display: block;
+            }
+        }
+
+        button {
+            border-radius: 5px;
+            width: 75px;
         }
     }
 
-    .my-details-input {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1em;
-        width: 350px;
-        animation: fadeIn 0.3s ease-in-out forwards;
-
+    .change-password {
         input {
-            width: 300px;
+            margin-bottom: 0.5em;
         }
     }
 
-    .my-details-input.change-password {
-        flex-direction: column;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1em;
-        width: 500px;
+    // .my-details-input {
+    //     display: flex;
+    //     align-items: center;
+    //     justify-content: space-between;
+    //     gap: 1em;
+    //     width: 350px;
+    //     animation: fadeIn 0.3s ease-in-out forwards;
 
-        & > div {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1em;
-            width: 500px;
+    //     input {
+    //         width: 300px;
+    //     }
+    // }
 
-            input {
-                width: 300px;
-            }
+    // .my-details-input.change-password {
+    //     flex-direction: column;
+    //     display: flex;
+    //     align-items: center;
+    //     justify-content: space-between;
+    //     gap: 1em;
+    //     width: 500px;
 
-            &:last-of-type {
-                justify-content: end;
-            }
-        }
-    }
+    //     & > div {
+    //         display: flex;
+    //         align-items: center;
+    //         justify-content: space-between;
+    //         gap: 1em;
+    //         width: 500px;
+
+    //         input {
+    //             width: 300px;
+    //         }
+
+    //         &:last-of-type {
+    //             justify-content: end;
+    //         }
+    //     }
+    // }
 }
 
 @keyframes fadeIn {
