@@ -12,20 +12,22 @@
                 </div>
                 <div v-else class="change-password">
                     <teleport to="#modals">
-                        <Model @close="(element.setInput = !element.setInput)">
-                            <h2>Change Password</h2>
-                            <div>
-                                <input :type="element.type" placeholder="Old Password">
-                            </div>
-                            <div>
-                                <input :type="element.type" placeholder="New Password">
-                            </div>
-                            <div>
-                                <input :type="element.type" placeholder="Confirm Password">
-                            </div>
-                            <div style="text-align: right; margin-top: 1em;">
-                                <button class="jp-btn jp-btn--sm jp-btn-grn" @click="(element.setInput = !element.setInput)">Save</button>
-                            </div>
+                        <Model @close="() => close(element)">
+                            <form action="">
+                                <h2>Change Password</h2>
+                                <div>
+                                    <input :type="element.type" placeholder="Old Password">
+                                </div>
+                                <div>
+                                    <input :type="element.type" placeholder="New Password">
+                                </div>
+                                <div>
+                                    <input :type="element.type" placeholder="Confirm Password">
+                                </div>
+                                <div style="text-align: right; margin-top: 1em;">
+                                    <button class="jp-btn jp-btn--sm jp-btn-grn" @click="(element.setInput = !element.setInput)">Save</button>
+                                </div>
+                            </form>
                         </Model>
                     </teleport> 
                 </div>
@@ -75,6 +77,10 @@ export default {
                 setInput: false
             }
         ])
+
+        const close = (element) => {
+            element.setInput = !element.setInput
+        }
         
         const chengeStateOfSwitch = (elem) => {
             elem.checked = !elem.checked
@@ -82,7 +88,8 @@ export default {
 
         return {
             elements,
-            chengeStateOfSwitch
+            chengeStateOfSwitch,
+            close
         };
     }
 }
