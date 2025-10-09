@@ -76,7 +76,8 @@ class Footer extends Component
                             'href' => '/privacy-policy',
                         ],
                         [
-                            'text' => 'Web site designed by Jason Bourner',
+                            'sprintf' => 'Web site designed by %s',
+                            'link' => '<a href="https://www.jason-bourner.co.uk" target="_blank" rel="noopener noreferrer">Jason Bourner</a>',
                         ],
                         [
                             'text' => '&copy; Copyright all rights reserved JP Fitness '. date('Y'),

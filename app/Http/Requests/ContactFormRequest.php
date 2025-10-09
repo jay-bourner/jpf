@@ -24,7 +24,7 @@ class ContactFormRequest extends FormRequest
         return [
             'name' => 'required|min:2|max:200|regex:/^[\pL\s\-]+$/u',
             'email' => 'required|unique:users|email:rfc,dns',
-            'message' => 'required|min:10|max:500|regex:/^[\pL\s\-]+$/u',
+            'message' => 'required|min:10|max:500',
         ];
     }
 }
